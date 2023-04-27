@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.idea",
+    "\\.idea\\.idea.Solution2\\.idea",
+    "\\ClassLibrary1",
+    "\\ClassLibrary1\\NewFolder",
+    "\\ConsoleApp1",
+    "\\ConsoleApp1\\Domain",
+    "\\ConsoleApp1\\Domain\\Associacao",
+    "\\ConsoleApp1\\Domain\\Nacionalidade",
+    "\\ConsoleApp1\\Domain\\PaisNascenca"
+  ],
+  "SelectedNode": "\\ConsoleApp1\\Domain\\PaisNascenca\\PaisNascenca.cs",
+  "PreviewInSolutionExplorer": false
+}
