@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1.Domain.Forms;
 
-public class Nome
+public class Nome: IValueObject
 {
     public string Nomee { get; set; }
 

@@ -8,7 +8,7 @@ public abstract class EntityId : IEquatable<EntityId>, IComparable<EntityId>
     {
         get
         {
-            if (this.ObjValue.GetType() == typeof(String))
+            if (this.ObjValue is string)
                 return (String)this.ObjValue;
             return AsString();
         }
@@ -16,7 +16,7 @@ public abstract class EntityId : IEquatable<EntityId>, IComparable<EntityId>
 
     protected EntityId(Object value)
     {
-        if (value.GetType() == typeof(String))
+        if (value is string)
             this.ObjValue = createFromString((String)value);
         else
             this.ObjValue = value;
@@ -28,7 +28,7 @@ public abstract class EntityId : IEquatable<EntityId>, IComparable<EntityId>
     public abstract String AsString();
 
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         return obj is EntityId other && Equals(other);
@@ -52,7 +52,7 @@ public abstract class EntityId : IEquatable<EntityId>, IComparable<EntityId>
     {
         if (other == null)
             return -1;
-        return this.Value.CompareTo(other.Value);
+        return String.Compare(Value, other.Value, StringComparison.Ordinal);
     }
 
     public static bool operator ==(EntityId obj1, EntityId obj2)

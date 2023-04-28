@@ -7,7 +7,6 @@ namespace ConsoleApp1.Domain.Forms;
 
 public class DocIdentificacao: Entity<Identifier>
 {
-    public Identifier Id { get; set; }
     public NrIdentificacao NrIdentificacao { get; set; }
     public LetrasDoc LetrasDoc { get; set; }
     public CheckDigit CheckDigit { get; set; }
@@ -28,40 +27,40 @@ public class DocIdentificacao: Entity<Identifier>
         Active = true;
     }
 
-    public void changeNrIdentificacao(string newId)
+    public void ChangeNrIdentificacao(string newId)
     {
         if (newId == null)
             throw new NoNullAllowedException("O 'Número de Identificação' necessita de ser preenchido!");
         NrIdentificacao = new NrIdentificacao(newId);
     }
     
-    public void changeLetrasDoc(string newId)
+    public void ChangeLetrasDoc(string newId)
     {
         if (newId == null)
             throw new NoNullAllowedException("As 'Letras do Documento de Identificação' necessitam de ser preenchidas!");
         LetrasDoc = new LetrasDoc(newId);
     }
     
-    public void changeCheckDigit(string newId)
+    public void ChangeCheckDigit(string newId)
     {
         if (newId == null)
             throw new NoNullAllowedException("O 'CheckDigit' necessita de ser preenchido!");
         CheckDigit = new CheckDigit(newId);
     }
     
-    public void changeValidadeDoc(string newId)
+    public void ChangeValidadeDoc(string newId)
     {
         if (newId == null)
             throw new NoNullAllowedException("O 'Validade do Documento de Identificação' necessita de ser preenchida!");
         ValidadeDoc = new ValidadeDoc(newId);
     }
     
-    public void changeNif(string newId)
+    public void ChangeNif(string newId)
     {
         ValidadeDoc = new ValidadeDoc(newId);
     }
     
-    public void changeNumUtente(string newId)
+    public void ChangeNumUtente(string newId)
     {
         NrUtente = new NrUtente(newId);
     }
@@ -88,6 +87,6 @@ public class DocIdentificacao: Entity<Identifier>
     
     public override string ToString()
     {
-        return NrIdentificacao.ToString()+ '/' + LetrasDoc + '[' + CheckDigit + ']' ;
+        return NrIdentificacao.ToString()+ '/' + '[' + CheckDigit + ']' + LetrasDoc ;
     }
 }

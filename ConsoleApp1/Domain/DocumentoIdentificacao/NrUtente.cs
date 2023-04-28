@@ -6,18 +6,14 @@ public class NrUtente: IValueObject
 {
     public string NumUtente { get; set; }
 
-    public NrUtente(string numUtente)
+    public NrUtente(string? numUtente)
     {
-        NumUtente = validateNumUtente(numUtente);
+        NumUtente = validateNumUtente(numUtente)!= null ? numUtente: " ";
     }
     
     private string validateNumUtente(string nrId)
     {
         int nr = SharedMethods.onlyNumbers(nrId);
-        if (nrId == null)
-        {
-            throw new BusinessRuleValidationException("Preencha o campo referente aos 'Números de Utente'!");
-        }
 
         if (nr.ToString().Length != 9)
         {

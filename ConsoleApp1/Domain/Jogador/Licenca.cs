@@ -4,25 +4,32 @@ namespace ConsoleApp1.Domain.Forms;
 
 public class Licenca
 {
-    public int Lic { get; set; }
+    public string Lic { get; set; }
+    public int nr;
+    
 
     public Licenca(string licenca)
     {
         Lic = validateLicenca(licenca);
     }
 
-    private int validateLicenca(string licenca)
+    public Licenca()
+    {
+        Lic = (nr++).ToString();
+    }
+    
+    private string validateLicenca(string licenca)
     {
         if (licenca == null)
         {
             throw new BusinessRuleValidationException("Preencha o campo referente ao 'Número de Licença da FPF'!");
         }
 
-        return SharedMethods.onlyNumbers(licenca);
+        return SharedMethods.onlyNumbers(licenca).ToString();
     }
 
     public override string ToString()
     {
-        return Lic.ToString();
+        return Lic;
     }
 }

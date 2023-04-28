@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Domain.Genero;
+﻿using System.Data;
+using ConsoleApp1.Domain.Genero;
 using ConsoleApp1.Domain.Pais;
 using ConsoleApp1.Shared;
 
@@ -7,8 +8,6 @@ namespace ConsoleApp1.Domain.Forms;
 
 public class Pessoa : Entity<Identifier>
 {
-
-    public Identifier Id { get; set; }
     public Nome Nome { get; set; }
     public DataNascimento DataNascimento{ get; set; }
     public Telefone Telefone { get; set; }
@@ -18,6 +17,7 @@ public class Pessoa : Entity<Identifier>
     public NrIdentificacao NrIdentificacao { get; set; }
     public NomePais NomePais { get; set; }
     public NacionalidadePais NacionalidadePais{ get; set; }
+    public bool Active { get; set; }
 
 
     public Pessoa(string nome, string dataNascimento, string? telefone, string? email, string? concelhoResidencia,
@@ -33,5 +33,55 @@ public class Pessoa : Entity<Identifier>
         NrIdentificacao = new NrIdentificacao(docId);
         NomePais = new NomePais(paisNascenca);
         NacionalidadePais = new NacionalidadePais(nacionalidade);
+        Active = true;
+    }
+
+    public void ChangeNome(string nome)
+    {
+        if (nome == null)
+        {
+            throw new NoNullAllowedException("O 'Nome' necessita de ser preenchido!");
+        }
+
+        Nome = new Nome(nome);
+    }
+
+    public void ChangeDataNascimento(string data)
+    {
+        if (data == null)
+        {
+            throw new NoNullAllowedException("A 'Data de Nascimento' necessita de ser preenchida!");
+        }
+
+        DataNascimento = new DataNascimento(data);
+    }
+
+    public void ChangeTelefone(string? telefone)
+    {
+        Telefone = new Telefone(telefone);
+    }
+
+    public void ChangeEmail(string? email)
+    {
+        Email = new Email(email);
+    }
+
+    public void ChangeConcelhoResidencia(string concelho)
+    {
+        ConcelhoResidência = new ConcelhoResidência(concelho);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

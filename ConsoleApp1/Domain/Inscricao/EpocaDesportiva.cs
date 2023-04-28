@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1.Domain.Forms;
 
-public class EpocaDesportiva
+public class EpocaDesportiva: IValueObject
 {
 
     public string Epoca { get; set; }

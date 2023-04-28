@@ -1,6 +1,8 @@
-﻿namespace ConsoleApp1.Domain.Forms;
+﻿using ConsoleApp1.Shared;
 
-public class DataSubscricaoInscricao
+namespace ConsoleApp1.Domain.Forms;
+
+public class DataSubscricaoInscricao: IValueObject
 {
     public string DataSubs { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1.Domain.Forms;
 
-public class CodOperacao
+public class CodOperacao: IValueObject
 {
     public int CodOpe { get; set; }
 

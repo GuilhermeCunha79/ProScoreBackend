@@ -1,6 +1,6 @@
 ﻿using ConsoleApp1.Shared;
 using System.Globalization;
-using System.Resources;
+
 
 namespace ConsoleApp1.Domain.Forms;
 
@@ -32,24 +32,21 @@ public class PaisNascenca
         var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
         var englishRegion = regions.FirstOrDefault(region => region.EnglishName.Contains(n));
         var countryAbbrev = englishRegion?.ThreeLetterISORegionName;
-        return countryAbbrev;
+        return countryAbbrev ?? throw new BusinessRuleValidationException("Verifique o 'Código/País' introduzido!");
     }
 
     public string paisCod(string pais)
     {
         
-        string twoLetterCode = null;
+        string twoLetterCode="";
 
         foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.AllCultures))
         {
-            RegionInfo region = null;
-            try
-            {
+            RegionInfo region;
+           
                 region = new RegionInfo(culture.Name);
-            }
-            catch { }
-
-            if (region != null && region.ThreeLetterISORegionName.Equals(pais, StringComparison.OrdinalIgnoreCase))
+                
+            if (region.ThreeLetterISORegionName.Equals(pais, StringComparison.OrdinalIgnoreCase))
             {
                 twoLetterCode = region.TwoLetterISORegionName;
                 break;
@@ -69,7 +66,7 @@ public class PaisNascenca
     {
 
         int minDistance = int.MaxValue;
-        string mostSimilarCountry = null;
+        string mostSimilarCountry = "";
 
         foreach (string country in countries)
         {

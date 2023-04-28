@@ -5,17 +5,15 @@ namespace ConsoleApp1.Domain.Forms;
 
 public class Email: IValueObject
 {
-    public string Emaill { get; set; }
+    public string? Emaill { get; set; }
 
     public Email(string? email)
     {
         Emaill = validateEmail(email)!= null ? email:" ";
     }
-
-    //VERIFICAR////////////////////////////////////////////////////////////
-    private string validateEmail(string email)
+    
+    private string validateEmail(string? email)
     {
-        string email1 = " ";
         try
         {
             var mailAdd = new MailAddress(email);
@@ -27,7 +25,7 @@ public class Email: IValueObject
         }
     }
 
-    public override string ToString()
+    public override string? ToString()
     {
         return Emaill;
     }

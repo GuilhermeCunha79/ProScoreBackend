@@ -9,7 +9,7 @@ public class Nif: IValueObject
 
     public Nif(string? numIdFis)
     {
-        NumIdFis = validateNumIdFis(numIdFis) != null ? numIdFis:" ";
+        NumIdFis = validateNumIdFis(numIdFis) != null ? numIdFis:"";
     }
     
     private string validateNumIdFis(string nrId)
