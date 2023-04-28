@@ -8247,11 +8247,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\ConsoleApp1\\ConsoleApp1.csproj",
-      "projectName": "ConsoleApp1",
-      "projectPath": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\DDDNetCore\\DDDNetCore.csproj",
+      "projectName": "DDDNetCore",
+      "projectPath": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\DDDNetCore\\DDDNetCore.csproj",
       "packagesPath": "C:\\Users\\Guilherme Cunha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\ConsoleApp1\\obj\\",
+      "outputPath": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\DDDNetCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Guilherme Cunha\\AppData\\Roaming\\NuGet\\NuGet.Config",

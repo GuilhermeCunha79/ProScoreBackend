@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ulSh3p+/epGvpjCxN8r4RhH/Esc5CzWOcNuJc3C/HnpBKSLGj3F/X3HpP2T4pcrNueedXZ7xXLvWj98MRJtoAQ==",
+  "dgSpecHash": "WHnfnrafdMCOvDrTiCO8MLxB+oIG/P6k6M+EykqtEquyuTBn5ErGbPpXC8SvxTEW90cnWTd4ODJcqHHZ9hVWxQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\ConsoleApp1\\ConsoleApp1.csproj",
+  "projectFilePath": "C:\\Users\\Guilherme Cunha\\RiderProjects\\Solution2\\DDDNetCore\\DDDNetCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Guilherme Cunha\\.nuget\\packages\\azure.ai.formrecognizer\\4.0.0\\azure.ai.formrecognizer.4.0.0.nupkg.sha512",
     "C:\\Users\\Guilherme Cunha\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
