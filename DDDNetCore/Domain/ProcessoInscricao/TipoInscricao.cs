@@ -1,0 +1,9 @@
+﻿namespace ConsoleApp1.Domain.Forms;
+
+public enum TipoProcesso
+{
+    PRIMEIRA,
+    REVALIDACAO,
+    INSCRICAO_TRANSFERENCIA_NACIONAL,
+    INSCRICAO_TRANSFERENCIA_INTERNACIONAL
+}

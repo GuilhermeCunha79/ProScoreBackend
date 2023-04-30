@@ -1,4 +1,21 @@
-﻿using Azure;
+﻿/*using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+
+namespace ConsoleApp1;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateWebHostBuilder(args).Build().Run();
+    }
+
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>();
+}
+*/
+using Azure;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
 
 namespace ConsoleApp1;
@@ -23,16 +40,13 @@ public class Tas
         var credential = new AzureKeyCredential(apiKey);
         var client = new DocumentAnalysisClient(new Uri(endpoint), credential);
 
-        
+        string filePath = "C:/Users/Guilherme Cunha/Downloads/225075521-b30eb6e6-7b70-4106-9e53-c1cecb10a04e.jpeg";
         
         string modelId = "ef1da940-cf12-4858-a4e3-c3d01c222a3e";
 
-        Uri fileUri =
-            new Uri(
-                "https://user-images.githubusercontent.com/127695615/225075521-b30eb6e6-7b70-4106-9e53-c1cecb10a04e.jpeg");
+        using var stream = new FileStream(filePath, FileMode.Open);
 
-        AnalyzeDocumentOperation operation =
-            await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, modelId, fileUri);
+        AnalyzeDocumentOperation operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, modelId, stream);
         AnalyzeResult result = operation.Value;
 
         Console.WriteLine($"Document was analyzed with model with ID: {result.ModelId}");

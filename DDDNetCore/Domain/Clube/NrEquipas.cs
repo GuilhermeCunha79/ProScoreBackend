@@ -4,17 +4,17 @@ namespace ConsoleApp1.Domain.Forms;
 
 public class NrEquipas: IValueObject
 {
-    public int NumeroEquipas { get; set; }
+    public string NumeroEquipas { get; set; }
 
     public int nr;
 
     public NrEquipas()
     {
-        NumeroEquipas = nr++;
+        NumeroEquipas = (nr++).ToString();
     }
 
     public override string ToString()
     {
-        return NumeroEquipas.ToString();
+        return NumeroEquipas;
     }
 }
