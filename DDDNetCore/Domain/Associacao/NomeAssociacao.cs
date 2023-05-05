@@ -1,11 +1,15 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Associacao;
 
 public class NomeAssociacao : IValueObject
 {
     public string NomeAss { get; set; }
 
+    public NomeAssociacao()
+    {
+        
+    }
     public NomeAssociacao(string nome)
     {
         NomeAss = validateNomeAss(nome);

@@ -1,22 +1,28 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Associacao;
 
-public class Associacao : Entity<Identifier>
+public class Associacao : Entity<Identifier>,IAggregateRoot
 {
-    public NomeAssociacao AssociacaoDesportiva { get; set; }
-    
+    public NomeAssociacao NomeAssociacao { get; set; }
+
+    public ICollection<Clube.Clube> Clubes { get; set; }
+
     public bool Active { get; set; }
 
+    public Associacao()
+    {
+        
+    }
     public Associacao(string associacaoDesportiva)
     {
         Id = new Identifier(Guid.NewGuid());
-        AssociacaoDesportiva = new NomeAssociacao(associacaoDesportiva);
+        NomeAssociacao = new NomeAssociacao(associacaoDesportiva);
         Active = true;
     }
 
     public override string ToString()
     {
-        return AssociacaoDesportiva.ToString();
+        return NomeAssociacao.ToString();
     }
 }

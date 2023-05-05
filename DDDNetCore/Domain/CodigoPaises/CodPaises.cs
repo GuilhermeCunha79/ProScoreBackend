@@ -1,16 +1,31 @@
-﻿namespace ConsoleApp1.Domain.CodigoPaises;
+﻿using System.Globalization;
+using ConsoleApp1.Shared;
 
-public class CodPaises
+namespace ConsoleApp1.Domain.CodigoPaises;
+
+public class CodPaises:IValueObject
 {
-    public string CodPais { get; set; }
 
-    public CodPaises(string pais)
+    public string CodigoPais { get; set; }
+
+    public CodPaises()
     {
-        CodPais = codigoPaises(pais);
+        
+    }
+    public CodPaises(string nome)
+    {
+        CodigoPais = validateCodPais(nome);
+    }
+    
+    public string validateCodPais(string codPais)
+    {
+        ResourceHelper.ChangeLanguage("en");
+        string n= SharedMethods.onlyLetters(ResourceHelper.GetString(codPais));
+
+        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
+        var englishRegion = regions.FirstOrDefault(region => region.EnglishName.Contains(n));
+        var countryAbbrev = englishRegion?.ThreeLetterISORegionName;
+        return countryAbbrev ?? throw new BusinessRuleValidationException("Verifique o 'Código/País' introduzido!");
     }
 
-    public string codigoPaises(string pais)
-    {
-        return pais;
-    }
 }

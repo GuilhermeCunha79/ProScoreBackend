@@ -1,12 +1,15 @@
-﻿using ConsoleApp1.Domain.Forms;
+﻿using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Infraestructure.Jogador;
+using ConsoleApp1.Infraestructure.Shared;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.Hosting;
 
 namespace ConsoleApp1;
 
@@ -24,14 +27,26 @@ namespace ConsoleApp1;
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<DDDSample1DbContext>(options =>
-               // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                  //  .ReplaceService<IValueConverterSelector, Strongly>()
-           // );
+           
 
-         //   ConfigureMyServices(services);
+/*
+                 services.AddDbContext<DDDSample1DbContext>(opt =>
+                     opt.UseInMemoryDatabase("DDDSample1DB")
+                         .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());*/
+            
+            
+            services.AddDbContext<DDDSample1DbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("jdbc:jtds:sqlserver://192.168.1.72:80;instance=EstagioGuilherme;TrustServerCertificate=True;")) .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
+            ConfigureMyServices(services);
+            
+            services.AddDbContext<DDDSample1DbContext>(opt =>
+                opt.UseInMemoryDatabase("DDDSample1DB")
+                    .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
+        
 
-            //services.AddControllers().AddNewtonsoftJson();
+            ConfigureMyServices(services);
+
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll",
@@ -41,7 +56,7 @@ namespace ConsoleApp1;
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-       /* public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -77,6 +92,6 @@ namespace ConsoleApp1;
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient<IJogadorRepository, JogadorRepository>();
-  
-        }*/
+            services.AddTransient<IJogadorService, JogadorService>();
+        }
     }

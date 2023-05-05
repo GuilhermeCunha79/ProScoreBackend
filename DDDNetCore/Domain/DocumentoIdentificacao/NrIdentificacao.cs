@@ -1,12 +1,16 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
 public class NrIdentificacao: IValueObject
 {
 
     public int NumeroId { get; set; }
 
+    public NrIdentificacao()
+    {
+        
+    }
     public NrIdentificacao(string nrId)
     {
         NumeroId = validateNrIdentificacao(nrId);

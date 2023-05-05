@@ -1,14 +1,20 @@
-﻿using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Infraestructure;
+using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Clube;
 
 public class CodigoClube: IValueObject
 {
-    public string CodClube { get; set; }
+    public int CodClube { get; set; }
 
     public CodigoClube()
     {
-        CodClube = new Identifier(Guid.NewGuid()).ToString();
+        var options = SharedMethods.connection();
+        using (var context = new DDDSample1DbContext(options))
+        {
+            var numeroDeTipos = context.ObterNumeroDeClubes()+1;
+            CodClube += numeroDeTipos;
+        }
     }
     
     public CodigoClube(string codigo)
@@ -16,7 +22,7 @@ public class CodigoClube: IValueObject
         CodClube = validateCod(codigo);
     }
 
-    public string validateCod(string codigo)
+    public int validateCod(string codigo)
     {
         if (codigo == null)
         {
@@ -29,6 +35,6 @@ public class CodigoClube: IValueObject
             throw new BusinessRuleValidationException("O 'Código do Clube' deve apenas conter caracteres numéricos!");
         }
 
-        return codigo;
+        return SharedMethods.onlyNumbers(codigo);
     }
 }

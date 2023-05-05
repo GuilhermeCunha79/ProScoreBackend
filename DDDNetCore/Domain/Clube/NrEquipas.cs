@@ -1,20 +1,24 @@
-﻿using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Infraestructure;
+using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Clube;
 
 public class NrEquipas: IValueObject
 {
-    public string NumeroEquipas { get; set; }
-
-    public int nr;
+    public int NumeroEquipas { get; set; }
 
     public NrEquipas()
     {
-        NumeroEquipas = (nr++).ToString();
+        var options = SharedMethods.connection();
+        using (var context = new DDDSample1DbContext(options))
+        {
+            var numeroDeTipos = context.ObterNumeroDeEquipas()+1;
+            NumeroEquipas += numeroDeTipos;
+        }
     }
 
     public override string ToString()
     {
-        return NumeroEquipas;
+        return NumeroEquipas.ToString();
     }
 }

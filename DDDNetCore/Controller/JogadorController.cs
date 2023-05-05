@@ -1,5 +1,4 @@
-﻿
-using ConsoleApp1.Domain.Forms;
+﻿using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,10 +59,10 @@ namespace ConsoleApp1.Controller
             {
                 foreach (var jogadorDto in list)
                 {
-                    if (jogadorDto.Licenca.Equals(dto.Licenca))
+                    if (jogadorDto.Licenca.Equals(dto.Licenca)| jogadorDto.IdentificadorPessoa.Equals(dto.IdentificadorPessoa))
                     {
                         return BadRequest(new
-                            { Message = "Já existe um 'Jogador registado com esta licenca'." });
+                            { Message = "Já existe um 'Jogador' registado com esta 'Licenca'." });
                     }
                 }
             }
@@ -72,7 +71,7 @@ namespace ConsoleApp1.Controller
             {
                 var jogador = await _service.AddAsync(dto);
 
-                return CreatedAtAction(nameof(GetById), new { id = jogador.Licenca }, jogador);
+                return CreatedAtAction(nameof(GetById), new { id = jogador.Id }, jogador);
             }
             catch (BusinessRuleValidationException ex)
             {
@@ -116,7 +115,7 @@ namespace ConsoleApp1.Controller
         public async Task<ActionResult<JogadorDTO>> UpdateByLicencaAsync(string licenca,
             JogadorDTO dto)
         {
-            dto.Licenca = licenca;
+            dto.Licenca = new Licenca();
 
             try
             {

@@ -9,18 +9,40 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Azure.AI.FormRecognizer" Version="4.0.0" />
-      <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.3.23174.2" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.3.23174.2" />
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.3.23174.8" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0-preview.3.23174.2" />
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+        <PackageReference Include="Azure.AI.FormRecognizer" Version="4.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.3.23174.2" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.3.23174.8" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.Lolita.SqlServer" Version="6.0.5" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Domain\Arbitro" />
+        <Folder Include="Domain\Arbitro" />
+        <Folder Include="Migrations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Migrations\20230503190909_AddBlogCreatedTimestamp.cs" />
+      <Compile Remove="Migrations\20230503190909_AddBlogCreatedTimestamp.Designer.cs" />
+      <Compile Remove="Migrations\20230502143335_InitialCreate.cs" />
+      <Compile Remove="Migrations\20230502143335_InitialCreate.Designer.cs" />
+      <Compile Remove="Migrations\DDDSample1DbContextModelSnapshot.cs" />
+      <Compile Remove="Migrations\20230503211645_AddBlogCreatedTimestamp.cs" />
+      <Compile Remove="Migrations\20230503211645_AddBlogCreatedTimestamp.Designer.cs" />
+      <Compile Remove="Migrations\20230503211956_AddBlogCreatedTimestamp.cs" />
+      <Compile Remove="Migrations\20230503211956_AddBlogCreatedTimestamp.Designer.cs" />
+      <Compile Remove="Migrations\20230503212845_AddBlogCreatedTimestamp.cs" />
+      <Compile Remove="Migrations\20230503212845_AddBlogCreatedTimestamp.Designer.cs" />
     </ItemGroup>
 
 </Project>

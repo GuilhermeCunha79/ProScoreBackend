@@ -1,6 +1,6 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
 public class Nif: IValueObject
 {

@@ -1,31 +1,48 @@
-﻿using System.Data;
+﻿
+using System.Data;
 using ConsoleApp1.Domain.Categoria;
-using ConsoleApp1.Domain.Forms;
+using ConsoleApp1.Domain.Clube;
 using ConsoleApp1.Domain.Genero;
 using ConsoleApp1.Domain.Modalidade;
 using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.Equipa;
 
-public class Equipa: Entity<Identifier>
+public class Equipa: Entity<Identifier>,IAggregateRoot
 {
+    public Identifier Id { get; set; }
     public IdentificadorEquipa IdentificadorEquipa { get; set; }
     public Divisao Divisao { get; set; }
+
     public CodigoClube CodigoClube { get; set; }
     public TipoCategoria TipoCategoria { get; set; }
     public TipoModalidade TipoModalidade { set; get; }
     public TipoGenero TipoGenero { set; get; }
     public bool Active { get; set; }
+    public ICollection<Jogador.Jogador> Jogadores { get; set; }
 
+    public Clube.Clube Clube { get; set; }
+    public Genero.Genero Genero { get; set; }
+    public Categoria.Categoria Categoria{ get; set; }
+    public Modalidade.Modalidade Modalidade { get; set; }
+
+    public ICollection<InscricaoProvisoriaClubeEquipa.InscricaoProvisoriaClubeEquipa> InscricaoProvisoriaClubeEquipa { get; set; }
+    public ICollection<InscricaoDefinitivaAssociacaoEquipa.InscricaoDefinitivaAssociacaoEquipa> InscricaoDefinitivaAssociacaoEquipa { get; set; }
+
+
+    public Equipa()
+    {
+        
+    }
     public Equipa(string divisao, string codClube, string tipoCategoria, string tipoModalidade, string tipoGenero)
     {
         Id = new Identifier(Guid.NewGuid());
         IdentificadorEquipa = new IdentificadorEquipa();
         Divisao = new Divisao(divisao);
         CodigoClube = new CodigoClube(codClube);
-        TipoCategoria=(TipoCategoria)Enum.Parse(typeof(TipoCategoria), tipoCategoria);
-        TipoModalidade=(TipoModalidade)Enum.Parse(typeof(TipoModalidade), tipoModalidade);
-        TipoGenero=(TipoGenero)Enum.Parse(typeof(TipoGenero), tipoGenero);
+        TipoCategoria=new TipoCategoria(tipoCategoria);
+        TipoModalidade=new TipoModalidade(tipoModalidade);
+        TipoGenero=new TipoGenero(tipoGenero);
         Active = true;
     }
 
@@ -56,7 +73,7 @@ public class Equipa: Entity<Identifier>
             throw new NoNullAllowedException("A 'Categoria' da Equipa deve ser preenchida!");
         }
         
-        TipoCategoria= (TipoCategoria)Enum.Parse(typeof(TipoCategoria), categoria);
+        TipoCategoria= new TipoCategoria(categoria);
     }
     
     public void ChangeTipoModalidade(string modalidade)
@@ -66,7 +83,7 @@ public class Equipa: Entity<Identifier>
             throw new NoNullAllowedException("A 'Modalidade' da Equipa deve ser preenchida!");
         }
         
-        TipoModalidade= (TipoModalidade)Enum.Parse(typeof(TipoModalidade), modalidade);
+        TipoModalidade= new TipoModalidade(modalidade);
     }
     
     public void ChangeTipoGenero(string genero)
@@ -76,7 +93,7 @@ public class Equipa: Entity<Identifier>
             throw new NoNullAllowedException("O 'Género' da Equipa deve ser preenchido!");
         }
         
-        TipoGenero= (TipoGenero)Enum.Parse(typeof(TipoGenero), genero);
+        TipoGenero= new TipoGenero(genero);
     }
     
     public void MarkAsInative()

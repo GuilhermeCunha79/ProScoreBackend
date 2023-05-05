@@ -1,11 +1,13 @@
-﻿using ConsoleApp1.Shared;
-
-namespace ConsoleApp1.Domain.Forms;
+﻿namespace ConsoleApp1.Domain.Jogador;
 
 public class EstatutoFpF
 {
     public string Estatuto { get; set; }
 
+    public EstatutoFpF()
+    {
+        
+    }
     public EstatutoFpF(string pais)
     {
         Estatuto = validateEstatutoFpF(pais);
@@ -19,7 +21,7 @@ public class EstatutoFpF
         {
             "Alemanha", "Áustria", "Bélgica", "Bulgária", "Chipre", "Croácia", "Dinamarca", "Eslováquia", "Eslovênia",
             "Espanha", "Estônia", "Finlândia", "França", "Grécia", "Holanda", "Hungria", "Irlanda", "Itália", "Letônia",
-            "Lituânia", "Luxemburgo", "Malta", "Polônia", "República Tcheca", "Romênia", "Suécia"
+            "Lituânia", "Luxemburgo", "Malta", "Polônia", "República Tcheca", "Romênia", "Suécia", "Portugal"
         };
         
 

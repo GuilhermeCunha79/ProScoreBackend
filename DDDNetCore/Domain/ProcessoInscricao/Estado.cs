@@ -1,8 +1,21 @@
-﻿namespace ConsoleApp1.Domain.Forms;
+﻿namespace ConsoleApp1.Domain.ProcessoInscricao;
 
-public enum Estado
+public class Estado
 {
-    APROVADO,
+
+    public string Status { get; set; }
+    
+
+    public Estado()
+    {
+        Status = "AGUARDAR_APROVACAO_ASSOCIACAO";
+    }
+    
+    public Estado(string estado)
+    {
+        Status = estado;
+    }
+    /*APROVADO,
     REPROVADO,
-    AGUARDAR_APROVACAO_ASSOCIACAO
+    AGUARDAR_APROVACAO_ASSOCIACAO*/
 }

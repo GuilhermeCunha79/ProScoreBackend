@@ -1,11 +1,11 @@
-﻿using ConsoleApp1.Domain.Forms;
+﻿using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Infraestructure.Shared;
 using ConsoleApp1.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp1.Infraestructure.Jogador;
 
-public class JogadorRepository : BaseRepository<Domain.Forms.Jogador, Identifier>, IJogadorRepository
+public class JogadorRepository : BaseRepository<Domain.Jogador.Jogador, Identifier>, IJogadorRepository
 {
     private readonly DDDSample1DbContext _context;
         
@@ -14,9 +14,9 @@ public class JogadorRepository : BaseRepository<Domain.Forms.Jogador, Identifier
         _context = context;
     }
         
-    public async Task<Domain.Forms.Jogador> GetByLicencaAsync(string warehouseIdentifier)
+    public async Task<Domain.Jogador.Jogador> GetByLicencaAsync(string licenca)
     {
-        return await _context.Jogadores.Where(x => warehouseIdentifier.Equals(x.Licenca.Lic)).FirstOrDefaultAsync();
+        return await _context.Jogadores.Where(x => licenca.Equals(x.Licenca.Lic)).FirstOrDefaultAsync();
 
     }
 

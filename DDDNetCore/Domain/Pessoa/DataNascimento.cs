@@ -1,10 +1,15 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Pessoa;
 
 public class DataNascimento : IValueObject
 {
     public string DataNasc { get; set; }
+
+    public DataNascimento()
+    {
+        
+    }
 
     public DataNascimento(string data)
     {

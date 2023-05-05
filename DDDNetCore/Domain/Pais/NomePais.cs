@@ -4,10 +4,14 @@ using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.Pais;
 
-public class NomePais
+public class NomePais: IValueObject
 {
     public string Nome { get; set; }
 
+    public NomePais()
+    {
+        
+    }
     public NomePais(string nomePais)
     {
         Nome = validatePais(nomePais);

@@ -1,12 +1,15 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Clube;
 
-public class TelefoneClube
+public class TelefoneClube:IValueObject
 {
     public string TelefoneClub { get; set; }
-    
 
+    public TelefoneClube()
+    {
+        
+    }
     public TelefoneClube(string? telefone)
     {
         if (telefone != null)

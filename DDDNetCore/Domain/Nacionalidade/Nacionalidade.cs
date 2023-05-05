@@ -1,35 +1,26 @@
-﻿using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Domain.CodigoPaises;
+using ConsoleApp1.Domain.Pais;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Nacionalidade;
 
 public class Nacionalidade
 {
-    public string Nacao { get; set; }
-    public int CodNacionalidade { get; set; }
+    public NacionalidadePais NacionalidadePais { get; set; }
+    
+    public Pessoa.Pessoa Pessoa { get; set; }
+    public PaisCodigo.PaisCodigo PaisCodigo { get; set; }
+    public NomePais NomePais { get; set; }
+    public CodPaises CodPaises{ get; set; }
 
-    public Nacionalidade(string nacao, string codNacionalidade)
+    public Nacionalidade()
     {
-        Nacao = validateNacao(nacao);
-        CodNacionalidade = validateCodNacao(codNacionalidade);
+        
     }
-
-    private string validateNacao(string nacao)
+    public Nacionalidade(string nacao)
     {
-        if (nacao == null)
-        {
-            throw new BusinessRuleValidationException("Preencha o campo referente à 'Nacionalidade'!");
-        }
-
-        return SharedMethods.onlyLettersAndSpace(nacao);
+        NacionalidadePais = new NacionalidadePais(nacao);
     }
+    
 
-    private int validateCodNacao(string codNacionalidade)
-    {
-        if (codNacionalidade == null)
-        {
-            throw new BusinessRuleValidationException("Preencha o campo referente ao 'Código da Nacionalidade'!");
-        }
-
-        return SharedMethods.onlyNumbers(codNacionalidade);
-    }
+   
 }

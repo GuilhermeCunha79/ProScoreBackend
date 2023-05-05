@@ -1,4 +1,4 @@
-﻿/*using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ConsoleApp1;
@@ -14,7 +14,9 @@ public class Program
         WebHost.CreateDefaultBuilder(args)
             .UseStartup<Startup>();
 }
-*/
+
+
+/*
 using Azure;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
 
@@ -61,10 +63,9 @@ public class Tas
                 DocumentField field = fieldKvp.Value;
 
                 Console.WriteLine($"Field '{fieldName}': ");
-
                 Console.WriteLine($"  Content: '{field.Content}'");
                 Console.WriteLine($"  Confidence: '{field.Confidence}'");
             }
         }
     }
-}
+}*/

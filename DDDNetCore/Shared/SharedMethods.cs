@@ -1,4 +1,7 @@
-﻿namespace ConsoleApp1.Shared;
+﻿using ConsoleApp1.Infraestructure;
+using Microsoft.EntityFrameworkCore;
+
+namespace ConsoleApp1.Shared;
 
 public class SharedMethods
 {
@@ -103,8 +106,13 @@ public class SharedMethods
 
         return final;
     }
-    
-    
+
+    public static DbContextOptions<DDDSample1DbContext> connection()
+    {
+        return new DbContextOptionsBuilder<DDDSample1DbContext>()
+            .UseSqlServer("DefaultConnection")
+            .Options;
+    }
     
     
 }

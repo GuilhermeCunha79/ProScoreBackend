@@ -1,11 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
 public class LetrasDoc: IValueObject
 {
     public string LetrasDocumento { get; set; }
+
+    public LetrasDoc()
+    {
+        
+    }
 
     public LetrasDoc(string letras)
     {

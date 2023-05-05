@@ -1,12 +1,16 @@
 ﻿using System.Net.Mail;
 using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Pessoa;
 
 public class Email: IValueObject
 {
     public string? Emaill { get; set; }
 
+    public Email()
+    {
+        
+    }
     public Email(string? email)
     {
         Emaill = validateEmail(email)!= null ? email:" ";

@@ -1,9 +1,33 @@
-﻿namespace ConsoleApp1.Domain.Forms;
+﻿using ConsoleApp1.Shared;
 
-public enum TipoProcesso
+namespace ConsoleApp1.Domain.ProcessoInscricao;
+
+public class TipoProcesso
 {
-    PRIMEIRA,
+
+    public string ProcessoTipo { get; set; }
+
+    public TipoProcesso()
+    {
+        
+    }
+
+    public TipoProcesso(string tipo)
+    {
+        ProcessoTipo = validateTipoProcesso(tipo);
+    }
+
+    public string validateTipoProcesso(string tipo)
+    {
+        if (tipo == null)
+        {
+            throw new BusinessRuleValidationException("O 'Tipo de Processo' necessita de ser preenchido!");
+        }
+
+        return tipo;
+    }
+   /* PRIMEIRA,
     REVALIDACAO,
     INSCRICAO_TRANSFERENCIA_NACIONAL,
-    INSCRICAO_TRANSFERENCIA_INTERNACIONAL
+    INSCRICAO_TRANSFERENCIA_INTERNACIONAL*/
 }

@@ -1,12 +1,12 @@
-﻿using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Infraestructure;
+using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.ProcessoInscricao;
 
 public class CodOperacao: IValueObject
 {
-    public string CodOpe { get; set; }
-
-    public int nr { get; set; }
+    public int CodOpe { get; set; }
+    
 
     public CodOperacao(string codOp)
     {
@@ -15,21 +15,26 @@ public class CodOperacao: IValueObject
     
     public CodOperacao()
     {
-        CodOpe = (nr++).ToString();
+        var options = SharedMethods.connection();
+        using (var context = new DDDSample1DbContext(options))
+        {
+            var numeroDeTipos = context.ObterNumeroDeProcessos()+1;
+            CodOpe += numeroDeTipos;
+        }
     }
     
-    private string validateOperacao(string licenca)
+    private int validateOperacao(string licenca)
     {
         if (licenca == null)
         {
-            throw new BusinessRuleValidationException("Preencha o campo referente ao 'Número da Operação'!");
+            throw new BusinessRuleValidationException("Preencha o campo referente ao 'Código da Operação'!");
         }
 
-        return SharedMethods.onlyNumbers(licenca).ToString();
+        return SharedMethods.onlyNumbers(licenca);
     }
 
     public override string ToString()
     {
-        return CodOpe;
+        return CodOpe.ToString();
     }
 }

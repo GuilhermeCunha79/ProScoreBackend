@@ -1,6 +1,9 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using System.Resources;
+
+namespace ConsoleApp1.Shared;
+
 public class ResourceHelper
 {
     private static ResourceManager _resourceManager;

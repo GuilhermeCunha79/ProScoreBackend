@@ -1,10 +1,15 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Clube;
 
 public class NifClube: IValueObject
 {
     public int ClubeNif { get; set; }
+
+    public NifClube()
+    {
+        
+    }
 
     public NifClube(string nif)
     {

@@ -1,16 +1,35 @@
-﻿namespace ConsoleApp1.Domain.Equipa;
+﻿using ConsoleApp1.Infraestructure;
+using ConsoleApp1.Shared;
 
-public class IdentificadorEquipa
+namespace ConsoleApp1.Domain.Equipa;
+
+public class IdentificadorEquipa: IValueObject
 {
-    public string IdEquipa { get; set; }
-    public int nr;
+    public int IdEquipa { get; set; }
 
     public IdentificadorEquipa()
     {
-        IdEquipa=(nr++).ToString();
+        var options = SharedMethods.connection();
+        using (var context = new DDDSample1DbContext(options))
+        {
+            var numeroDeTipos = context.ObterNumeroDeEquipas()+1;
+            IdEquipa += numeroDeTipos;
+        }
     }
     public IdentificadorEquipa(string idEquipa)
     {
-        IdEquipa = idEquipa;
+        IdEquipa = validateEquipa(idEquipa);
     }
+
+    public int validateEquipa(string id)
+    {
+        if (id == null)
+        {
+            throw new BusinessRuleValidationException("Preencha o campo referente ao 'Identificador da Equipa'!");
+        }
+
+        return SharedMethods.onlyNumbers(id);
+    }
+
+
 }

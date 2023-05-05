@@ -1,21 +1,62 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ConsoleApp1.Domain.Equipa;
+using ConsoleApp1.Domain.Jogador;
+using ConsoleApp1.Domain.Pessoa;
+using ConsoleApp1.Shared;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp1.Infraestructure.Jogador;
 
 
-    internal class JogadorEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Forms.Jogador>
+internal class JogadorEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Jogador.Jogador>
+{
+    public void Configure(EntityTypeBuilder<Domain.Jogador.Jogador> builder)
     {
-        public void Configure(EntityTypeBuilder<Domain.Forms.Jogador> builder)
-        {
-            //builder.ToTable("Jogadores", SchemaNames.DDDSample1);
-            builder.HasKey(b => b.Id);
-            builder.OwnsOne(b => b.Licenca);
-            builder.OwnsOne(b => b.IdentificadorEquipa);
-            builder.OwnsOne(b => b.EstatutoFpF);
-            builder.OwnsOne(b => b.IdentificadorPessoa);
-            //builder.Property<bool>("_active").HasColumnName("Active");
-        }
+        builder.ToTable("Jogador", SchemaNames.DDDSample1);
+        builder.HasKey(b => b.Licenca);
+        builder.OwnsOne(b => b.EstatutoFpF);
+        //builder.Property<bool>("_active").HasColumnName("Active");
+
+        builder.Property(b => b.Id)
+            .HasConversion(
+                v => v.Value,
+                v => new Identifier(Guid.Parse(v)));
+
+        builder.HasOne(j => j.Equipa)
+            .WithMany(e => e.Jogadores)
+            .HasForeignKey(j => j.IdentificadorEquipa);
+        
+       
+        
+        builder.Property(b => b.IdentificadorEquipa)
+            .HasConversion(
+                v => v.IdEquipa,
+                v => new IdentificadorEquipa(v.ToString()));
+        
+        builder.Property(b => b.Licenca)
+            .HasConversion(
+                v => v.Lic,
+                v => new Licenca(v.ToString()));
+        
+        
+        builder.Property(b => b.IdentificadorPessoa)
+            .HasConversion(
+                v => v.IdPessoa,
+                v => new IdentificadorPessoa(v));
+        
+        
+        builder
+            .HasMany(e => e.InscricaoDefinitivaAssociacaoJogador)
+            .WithOne(j => j.Jogador)
+            .HasForeignKey(e=>e.Licenca)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder
+            .HasMany(e => e.InscricaoProvisoriaClubeJogador)
+            .WithOne(j => j.Jogador)
+            .HasForeignKey(e=>e.Licenca)
+            .OnDelete(DeleteBehavior.Restrict);
 
         
     }
+}

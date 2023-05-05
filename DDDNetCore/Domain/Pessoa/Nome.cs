@@ -1,11 +1,15 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.Pessoa;
 
 public class Nome: IValueObject
 {
     public string Nomee { get; set; }
 
+    public Nome()
+    {
+        
+    }
     public Nome(string nome)
     {
         Nomee = validateNome(nome);

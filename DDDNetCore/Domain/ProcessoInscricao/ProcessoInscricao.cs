@@ -1,38 +1,56 @@
 ﻿using System.Data;
 using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.ProcessoInscricao;
 
 public class ProcessoInscricao : Entity<Identifier>
 {
     public CodOperacao CodOperacao { get; set; }
-    public NrProcesso NrProcesso { get; set; }
+
     public TipoProcesso TipoProcesso { get; set; }
     public Estado Estado { get; set; }
     public EpocaDesportiva EpocaDesportiva { get; set; }
     public DataRegisto DataRegisto { get; set; }
 
+    public DataSubscricao DataSubscricao { get; set; }
 
+    public InscricaoProvisoriaClubeEquipa.InscricaoProvisoriaClubeEquipa InscricaoProvisoriaClubeEquipa { get; set;}
+    public InscricaoDefinitivaAssociacaoEquipa.InscricaoDefinitivaAssociacaoEquipa InscricaoDefinitivaAssociacaoEquipa { get; set;}
+    public InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador InscricaoProvisoriaClubeJogador { get; set;}
+    public InscricaoDefinitivaAssociacaoJogador.InscricaoDefinitivaAssociacaoJogador InscricaoDefinitivaAssociacaoJogador { get; set;}
+    
+    public ProcessoInscricao()
+    {
+        
+    }
     public ProcessoInscricao(string tipoProcesso, string epoca)
     {
         Id = new Identifier(Guid.NewGuid());
         CodOperacao = new CodOperacao();
-        NrProcesso = new NrProcesso();
-        Enum.TryParse(tipoProcesso, out TipoProcesso proc);
-        TipoProcesso = proc;
-        Estado = Estado.AGUARDAR_APROVACAO_ASSOCIACAO;
+        TipoProcesso = new TipoProcesso(tipoProcesso);
+        Estado = new Estado();
+        EpocaDesportiva = new EpocaDesportiva(epoca);
+        DataSubscricao = new DataSubscricao();
+    }
+    
+    public ProcessoInscricao(string tipoProcesso, string epoca,string estado)
+    {
+        Id = new Identifier(Guid.NewGuid());
+        CodOperacao = new CodOperacao();
+        TipoProcesso = new TipoProcesso(tipoProcesso);
+        Estado = new Estado(estado);
         EpocaDesportiva = new EpocaDesportiva(epoca);
         DataRegisto = new DataRegisto();
     }
 
     public void ChangeEstadoAprovado()
     {
-        Estado = Estado.APROVADO;
+        Estado = new Estado("Aprovado");
     }
     
     public void ChangeEstadoReprovado()
     {
-        Estado = Estado.REPROVADO;
+        Estado = new Estado("Reprovado");
     }
 
     public void ChangeEpocaDesportiva(string epoca)

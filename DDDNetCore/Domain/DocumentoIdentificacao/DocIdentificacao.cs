@@ -1,9 +1,7 @@
-﻿
-
-using System.Data;
+﻿using System.Data;
 using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
 public class DocIdentificacao: Entity<Identifier>
 {
@@ -14,7 +12,12 @@ public class DocIdentificacao: Entity<Identifier>
     public NrUtente NrUtente { get; set; }
     public Nif Nif { get; set; }
     public bool Active { get; set; }
+    public Pessoa.Pessoa Pessoa { get; set; }
 
+    public DocIdentificacao()
+    {
+        
+    }
     public DocIdentificacao(string nrId, string letrasId, string checkDigit, string validade, string nif, string nrUtente)
     {
         Id = new Identifier(Guid.NewGuid());

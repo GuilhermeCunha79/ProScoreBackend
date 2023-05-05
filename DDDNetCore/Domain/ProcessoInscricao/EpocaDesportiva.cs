@@ -1,11 +1,16 @@
 ﻿using ConsoleApp1.Shared;
 
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.ProcessoInscricao;
 
 public class EpocaDesportiva: IValueObject
 {
 
     public string EpocaDesp { get; set; }
+
+    public EpocaDesportiva()
+    {
+        
+    }
 
     public EpocaDesportiva(string epoca)
     {

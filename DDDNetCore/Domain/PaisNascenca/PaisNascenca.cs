@@ -1,18 +1,30 @@
-﻿using ConsoleApp1.Shared;
-using System.Globalization;
+﻿using System.Globalization;
+using ConsoleApp1.Domain.CodigoPaises;
+using ConsoleApp1.Domain.Pais;
+using ConsoleApp1.Shared;
 
-
-namespace ConsoleApp1.Domain.Forms;
+namespace ConsoleApp1.Domain.PaisNascenca;
 
 public class PaisNascenca
 {
-    public string Pais { get; set; }
-    public string CodPais { get; set; }
+
+    public PaisCodigo.PaisCodigo PaisCodigo { get; set; }
+    public NomePais NomePais { get; set; }
+    public CodPaises CodPaises{ get; set; }
+    public NascencaPais NascencaPais { get; set; }
+
+    public Pessoa.Pessoa Pessoa { get; set; }
+
+    public PaisNascenca()
+    {
+        
+    }
 
     public PaisNascenca(string pais)
     {
-        Pais = validatePais(pais);
-        CodPais = validateCodPais(pais);
+        NascencaPais = new NascencaPais(pais);
+        NomePais = new NomePais(pais);
+        CodPaises = new CodPaises(pais);
     }
 
     private string validatePais(string pais)
@@ -23,17 +35,7 @@ public class PaisNascenca
         }
         return pais;
     }
-
-    private string validateCodPais(string codPais)
-    {
-        ResourceHelper.ChangeLanguage("en");
-        string n= SharedMethods.onlyLetters(ResourceHelper.GetString(codPais));
-
-        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
-        var englishRegion = regions.FirstOrDefault(region => region.EnglishName.Contains(n));
-        var countryAbbrev = englishRegion?.ThreeLetterISORegionName;
-        return countryAbbrev ?? throw new BusinessRuleValidationException("Verifique o 'Código/País' introduzido!");
-    }
+    
 
     public string paisCod(string pais)
     {

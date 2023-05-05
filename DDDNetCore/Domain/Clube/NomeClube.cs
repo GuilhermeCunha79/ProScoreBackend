@@ -1,10 +1,17 @@
 ﻿using ConsoleApp1.Shared;
+using Microsoft.EntityFrameworkCore;
 
-namespace ConsoleApp1.Domain.Forms;
-
+namespace ConsoleApp1.Domain.Clube;
+[Owned]
 public class NomeClube: IValueObject
 {
+
     public string NomeClub { get; set; }
+
+    public NomeClube()
+    {
+        
+    }
 
     public NomeClube(string nome)
     {
