@@ -64,7 +64,7 @@ public class AssociacaoService : IAssociacaoService
 
     public async Task<AssociacaoDTO> AddAsync(AssociacaoDTO dto)
     {
-        var associacao = new Associacao(dto.NomeAsscoicao);
+        var associacao = new Associacao(dto.NomeAssociacao);
 
         await _repo.AddAsync(associacao);
 

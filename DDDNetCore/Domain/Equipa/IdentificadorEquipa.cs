@@ -7,28 +7,20 @@ public class IdentificadorEquipa: IValueObject
 {
     public int IdEquipa { get; set; }
 
-    public IdentificadorEquipa()
-    {
-        var options = SharedMethods.connection();
-        using (var context = new DDDSample1DbContext(options))
-        {
-            var numeroDeTipos = context.ObterNumeroDeEquipas()+1;
-            IdEquipa += numeroDeTipos;
-        }
-    }
-    public IdentificadorEquipa(string idEquipa)
+   
+    public IdentificadorEquipa(int idEquipa)
     {
         IdEquipa = validateEquipa(idEquipa);
     }
 
-    public int validateEquipa(string id)
+    public int validateEquipa(int id)
     {
         if (id == null)
         {
             throw new BusinessRuleValidationException("Preencha o campo referente ao 'Identificador da Equipa'!");
         }
 
-        return SharedMethods.onlyNumbers(id);
+        return id;
     }
 
 

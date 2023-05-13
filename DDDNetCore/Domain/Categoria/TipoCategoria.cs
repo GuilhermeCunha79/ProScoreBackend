@@ -56,6 +56,11 @@ public class TipoCategoria : IValueObject
         {
             return "JuniorA";
         }
+        
+        if (cat.Equals("SENIOR", StringComparison.OrdinalIgnoreCase) | cat.Equals("SÉNIOR", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Sénior";
+        }
 
         return null;
     }

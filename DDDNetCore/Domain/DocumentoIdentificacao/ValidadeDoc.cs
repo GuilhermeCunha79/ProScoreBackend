@@ -4,23 +4,17 @@ namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
 public class ValidadeDoc: IValueObject
 {
-    public int Ano { get; set; }
-    public int Mes { get; set; }
-    public int Dia { get; set; }
+    public string Data { get; set; }
     
 
     public ValidadeDoc()
     {
-        Dia = 0;
-        Mes = 0;
-        Ano = 0;
+        Data = "xxxxxxx";
     }
     
     public ValidadeDoc(string data)
     {
-        Ano = GetYear(validateValidadeDoc(data));
-        Mes = GetMonth(validateValidadeDoc(data));
-        Dia = GetDay(validateValidadeDoc(data));
+        Data=String.Concat(GetYear(validateValidadeDoc(data)),GetMonth(validateValidadeDoc(data)),GetDay(validateValidadeDoc(data)));
         
     }
 
@@ -51,6 +45,6 @@ public class ValidadeDoc: IValueObject
 
     public override string ToString()
     {
-        return Dia + '/' + Mes.ToString() + '/' + Ano;
+        return Data;
     }
 }

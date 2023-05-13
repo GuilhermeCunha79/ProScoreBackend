@@ -7,22 +7,14 @@ public class CodigoClube: IValueObject
 {
     public int CodClube { get; set; }
 
-    public CodigoClube()
-    {
-        var options = SharedMethods.connection();
-        using (var context = new DDDSample1DbContext(options))
-        {
-            var numeroDeTipos = context.ObterNumeroDeClubes()+1;
-            CodClube += numeroDeTipos;
-        }
-    }
+   
     
-    public CodigoClube(string codigo)
+    public CodigoClube(int codigo)
     {
-        CodClube = validateCod(codigo);
+        CodClube = codigo;
     }
 
-    public int validateCod(string codigo)
+  /*  public int validateCod(int codigo)
     {
         if (codigo == null)
         {
@@ -36,5 +28,5 @@ public class CodigoClube: IValueObject
         }
 
         return SharedMethods.onlyNumbers(codigo);
-    }
+    }*/
 }

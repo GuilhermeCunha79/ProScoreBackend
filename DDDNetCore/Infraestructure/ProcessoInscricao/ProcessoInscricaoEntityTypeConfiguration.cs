@@ -14,13 +14,34 @@ namespace ConsoleApp1.Infraestructure.ProcessoInscricao;
         {
             builder.ToTable("ProcessoInscricao", SchemaNames.DDDSample1);
             builder.HasKey(b => b.CodOperacao);
-            builder.OwnsOne(b => b.TipoProcesso);
-            builder.OwnsOne(b => b.Estado);
-            builder.OwnsOne(b => b.EpocaDesportiva);
-            builder.OwnsOne(b => b.DataRegisto);
-            builder.OwnsOne(b => b.DataSubscricao);
+          
 
             //builder.Property<bool>("_active").HasColumnName("Active");
+            
+            builder.Property(b => b.TipoProcesso)
+                .HasConversion(
+                    v => v.ProcessoTipo,
+                    v => new TipoProcesso(v)).IsRequired();
+            
+            builder.Property(b => b.Estado)
+                .HasConversion(
+                    v => v.Status,
+                    v => new Estado(v)).IsRequired();
+            
+            builder.Property(b => b.EpocaDesportiva)
+                .HasConversion(
+                    v => v.EpocaDesp,
+                    v => new EpocaDesportiva(v)).IsRequired();
+            
+            builder.Property(b => b.DataRegisto)
+                .HasConversion(
+                    v => v.DataReg,
+                    v => new DataRegisto()).IsRequired();
+            
+            builder.Property(b => b.DataSubscricao)
+                .HasConversion(
+                    v => v.DataSubs,
+                    v => new DataSubscricao()).IsRequired();
         
             builder
                 .HasOne(e => e.InscricaoDefinitivaAssociacaoEquipa)

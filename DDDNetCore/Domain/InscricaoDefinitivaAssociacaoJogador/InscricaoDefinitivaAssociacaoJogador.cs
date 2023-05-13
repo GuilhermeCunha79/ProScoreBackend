@@ -19,18 +19,13 @@ public class InscricaoDefinitivaAssociacaoJogador
         
     }
     
+
+    
+    //Revalidaçao
     public InscricaoDefinitivaAssociacaoJogador(string nomeAssociacao)
     {
         CodOperacao = new CodOperacao();
         NomeAssociacao = new NomeAssociacao(nomeAssociacao);
         Licenca = new Licenca();
-    }
-    
-    //Revalidaçao
-    public InscricaoDefinitivaAssociacaoJogador(string nomeAssociacao,string licenca)
-    {
-        CodOperacao = new CodOperacao();
-        NomeAssociacao = new NomeAssociacao(nomeAssociacao);
-        Licenca = new Licenca(licenca);
     }
 }

@@ -5,6 +5,8 @@ namespace ConsoleApp1.Domain.Associacao;
 public class Associacao : Entity<Identifier>,IAggregateRoot
 {
     public NomeAssociacao NomeAssociacao { get; set; }
+    
+    //public NomeCurto NomeCurto { get; set; }
 
     public ICollection<Clube.Clube> Clubes { get; set; }
 
@@ -16,8 +18,8 @@ public class Associacao : Entity<Identifier>,IAggregateRoot
     }
     public Associacao(string associacaoDesportiva)
     {
-        Id = new Identifier(Guid.NewGuid());
         NomeAssociacao = new NomeAssociacao(associacaoDesportiva);
+       // NomeCurto = new NomeCurto(nomeCurto);
         Active = true;
     }
 

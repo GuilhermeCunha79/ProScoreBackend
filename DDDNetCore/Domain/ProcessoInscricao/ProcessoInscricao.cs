@@ -12,6 +12,7 @@ public class ProcessoInscricao : Entity<Identifier>
     public EpocaDesportiva EpocaDesportiva { get; set; }
     public DataRegisto DataRegisto { get; set; }
 
+
     public DataSubscricao DataSubscricao { get; set; }
 
     public InscricaoProvisoriaClubeEquipa.InscricaoProvisoriaClubeEquipa InscricaoProvisoriaClubeEquipa { get; set;}
@@ -33,15 +34,6 @@ public class ProcessoInscricao : Entity<Identifier>
         DataSubscricao = new DataSubscricao();
     }
     
-    public ProcessoInscricao(string tipoProcesso, string epoca,string estado)
-    {
-        Id = new Identifier(Guid.NewGuid());
-        CodOperacao = new CodOperacao();
-        TipoProcesso = new TipoProcesso(tipoProcesso);
-        Estado = new Estado(estado);
-        EpocaDesportiva = new EpocaDesportiva(epoca);
-        DataRegisto = new DataRegisto();
-    }
 
     public void ChangeEstadoAprovado()
     {

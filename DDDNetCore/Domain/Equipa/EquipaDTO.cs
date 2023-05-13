@@ -1,22 +1,23 @@
-﻿namespace ConsoleApp1.Domain.Equipa;
+﻿using ConsoleApp1.Domain.Pessoa;
+using Newtonsoft.Json;
+
+namespace ConsoleApp1.Domain.Equipa;
 
 public class EquipaDTO
 {
-    public Guid Id{ get; set; }
-    public IdentificadorEquipa IdentificadorEquipa{ get; set; }
-    public string Divisao{ get; set; }
-    public string CodigoClube{ get; set; }
-    public string Categoria{ get; set; }
-    public string Genero{ get; set; }
-    public string Modalidade{ get; set; }
-    public bool Status{ get; set; }
-
-    public EquipaDTO(Guid guid, IdentificadorEquipa idEquipa, string divisao, string codClube, string categoria,
-        string genero,
-        string modalidade)
+    public Guid Id;
+    public int IdentificadorEquipa { get; set; }
+    public string Divisao { get; set; }
+    public int CodigoClube { get; set; }
+    public string Categoria { get; set; }
+    public string Genero { get; set; }
+    public string Modalidade { get; set; }
+    public bool Status { get; set; }
+    [JsonConstructor]
+    public EquipaDTO(Guid idd,int id,string divisao, int codClube, string categoria, string genero, string modalidade)
     {
-        Id = guid;
-        IdentificadorEquipa = idEquipa;
+        Id = idd;
+        IdentificadorEquipa = id;
         Divisao = divisao;
         CodigoClube = codClube;
         Categoria = categoria;
@@ -24,4 +25,5 @@ public class EquipaDTO
         Modalidade = modalidade;
         Status = true;
     }
+    
 }

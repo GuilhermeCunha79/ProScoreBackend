@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Domain.Equipa;
+﻿using ConsoleApp1.Domain.DocumentoIdentificacao;
+using ConsoleApp1.Domain.Equipa;
 using ConsoleApp1.Infraestructure.Associacao;
 using ConsoleApp1.Infraestructure.Categoria;
 using ConsoleApp1.Infraestructure.Clube;
@@ -27,14 +28,13 @@ public class DDDSample1DbContext : DbContext
     public DbSet<Domain.Jogador.Jogador> Jogadores { get; set; }
     public DbSet<Domain.Equipa.Equipa> Equipas { get; set; }
     
+    public DbSet<Domain.Nacionalidade.Nacionalidade> Nacionalidades { get; set; }
+    
+    public DbSet<DocIdentificacao> DocId { get; set; }
+    
     public DbSet<Domain.Clube.Clube> Clubes { get; set; }
     public DbSet<Domain.ProcessoInscricao.ProcessoInscricao> Processos { get; set; }
     public DbSet<Domain.Pessoa.Pessoa> Pessoas { get; set; }
-
-
-    public DDDSample1DbContext(DbContextOptions options) : base(options)
-    {
-    }
 
     public int ObterNumeroDeJogadores()
     {
@@ -59,6 +59,10 @@ public class DDDSample1DbContext : DbContext
     public int ObterNumeroDeProcessos()
     {
         return Processos.Count();
+    }
+    public DDDSample1DbContext(DbContextOptions options) : base(options)
+    {
+
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

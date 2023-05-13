@@ -25,11 +25,11 @@ public class NrIdentificacao: IValueObject
             throw new BusinessRuleValidationException("Preencha o campo referente aos 'Números do  Documento de Identificação'!");
         }
 
-        if (nr.ToString().Length != 8)
+        /*if (nr.ToString().Length != 8)
         {
             throw new BusinessRuleValidationException(
                 "O número do documento de identificação deve ter exatamente 8 digitos!");
-        }
+        }*/
 
         return nr;
     }

@@ -10,14 +10,14 @@ namespace ConsoleApp1.Domain.Pessoa;
 public class Pessoa : Entity<Identifier>, IAggregateRoot
 {
     public Nome Nome { get; set; }
-    public DataNascimento DataNascimento{ get; set; }
+    public DataNascimento DataNascimento { get; set; }
     public Telefone Telefone { get; set; }
     public Email Email { get; set; }
     public ConcelhoResidência ConcelhoResidência { get; set; }
     public TipoGenero TipoGenero { get; set; }
     public NrIdentificacao NrIdentificacao { get; set; }
     public NascencaPais NascencaPais { get; set; }
-    public NacionalidadePais NacionalidadePais{ get; set; }
+    public NacionalidadePais NacionalidadePais { get; set; }
     public Jogador.Jogador Jogador { get; set; }
     public Genero.Genero Genero { get; set; }
     public bool Active { get; set; }
@@ -30,8 +30,8 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
 
     public Pessoa()
     {
-        
     }
+
     public Pessoa(string nome, string dataNascimento, string? telefone, string? email, string? concelhoResidencia,
         string genero, string docId, string paisNascenca, string nacionalidade)
     {
@@ -43,6 +43,21 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
         Email = new Email(email);
         ConcelhoResidência = new ConcelhoResidência(concelhoResidencia);
         TipoGenero = new TipoGenero(genero);
+        NrIdentificacao = new NrIdentificacao(docId);
+        NascencaPais = new NascencaPais(paisNascenca);
+        NacionalidadePais = new NacionalidadePais(nacionalidade);
+        Active = true;
+    }
+
+    public Pessoa(string nome, string dataNascimento, string genero, string email, string docId, string paisNascenca,
+        string nacionalidade)
+    {
+        Id = new Identifier(Guid.NewGuid());
+        IdentificadorPessoa = new IdentificadorPessoa();
+        Nome = new Nome(nome);
+        DataNascimento = new DataNascimento(dataNascimento);
+        TipoGenero = new TipoGenero(genero);
+        Email = new Email(email);
         NrIdentificacao = new NrIdentificacao(docId);
         NascencaPais = new NascencaPais(paisNascenca);
         NacionalidadePais = new NacionalidadePais(nacionalidade);
@@ -84,17 +99,3 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
         ConcelhoResidência = new ConcelhoResidência(concelho);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

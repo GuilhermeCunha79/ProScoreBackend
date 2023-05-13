@@ -9,12 +9,9 @@ public class NrEquipas: IValueObject
 
     public NrEquipas()
     {
-        var options = SharedMethods.connection();
-        using (var context = new DDDSample1DbContext(options))
-        {
-            var numeroDeTipos = context.ObterNumeroDeEquipas()+1;
-            NumeroEquipas += numeroDeTipos;
-        }
+
+            NumeroEquipas =1;
+        
     }
 
     public override string ToString()

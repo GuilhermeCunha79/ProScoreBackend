@@ -1,4 +1,7 @@
-﻿using ConsoleApp1.Domain.Jogador;
+﻿using Azure;
+using Azure.AI.FormRecognizer.DocumentAnalysis;
+using ConsoleApp1.Domain.DocumentoIdentificacao;
+using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +12,7 @@ namespace ConsoleApp1.Controller
     public class JogadorController : ControllerBase
     {
         private readonly IJogadorService _service;
+        private readonly IDocIdentificacaoService _service_doc;
 
         public JogadorController(IJogadorService service)
         {
@@ -59,7 +63,8 @@ namespace ConsoleApp1.Controller
             {
                 foreach (var jogadorDto in list)
                 {
-                    if (jogadorDto.Licenca.Equals(dto.Licenca)| jogadorDto.IdentificadorPessoa.Equals(dto.IdentificadorPessoa))
+                    if (jogadorDto.Licenca.Equals(dto.Licenca) |
+                        jogadorDto.IdentificadorPessoa.Equals(dto.IdentificadorPessoa))
                     {
                         return BadRequest(new
                             { Message = "Já existe um 'Jogador' registado com esta 'Licenca'." });
@@ -78,7 +83,9 @@ namespace ConsoleApp1.Controller
                 return BadRequest(new { ex.Message });
             }
         }
-
+        
+       
+        
 
         // PUT: api/Jogadores/5
         [HttpPut("{id}")]
@@ -115,7 +122,7 @@ namespace ConsoleApp1.Controller
         public async Task<ActionResult<JogadorDTO>> UpdateByLicencaAsync(string licenca,
             JogadorDTO dto)
         {
-            dto.Licenca = new Licenca();
+            dto.Licenca = new Licenca(licenca);
 
             try
             {

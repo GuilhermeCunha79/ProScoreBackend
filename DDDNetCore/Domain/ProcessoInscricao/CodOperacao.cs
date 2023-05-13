@@ -6,7 +6,7 @@ namespace ConsoleApp1.Domain.ProcessoInscricao;
 public class CodOperacao: IValueObject
 {
     public int CodOpe { get; set; }
-    
+    private static int totalCod = 0;
 
     public CodOperacao(string codOp)
     {
@@ -15,12 +15,7 @@ public class CodOperacao: IValueObject
     
     public CodOperacao()
     {
-        var options = SharedMethods.connection();
-        using (var context = new DDDSample1DbContext(options))
-        {
-            var numeroDeTipos = context.ObterNumeroDeProcessos()+1;
-            CodOpe += numeroDeTipos;
-        }
+        CodOpe = totalCod++;
     }
     
     private int validateOperacao(string licenca)

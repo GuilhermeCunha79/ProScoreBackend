@@ -7,6 +7,9 @@ namespace ConsoleApp1.Domain.InscricaoProvisoriaClubeJogador;
 
 public class InscricaoProvisoriaClubeJogador : Entity<Identifier>
 {
+    
+    //public BoletimInscricaoPath BoletimInscricaoPath { get; set; }
+    //public DocIdPath DocIdPath { get; set; }
     public CodOperacao CodOperacao { get; set; }
     public CodigoClube CodigoClube { get; set; }
     public Licenca Licenca { get; set; }
@@ -17,21 +20,15 @@ public class InscricaoProvisoriaClubeJogador : Entity<Identifier>
     {
         
     }    
-    public InscricaoProvisoriaClubeJogador(string codClube)
-    {
+    public InscricaoProvisoriaClubeJogador(int codClube,string boletimPath,string docIdPath){
+    
         Id = new Identifier(Guid.NewGuid());
         CodOperacao = new CodOperacao();
         Licenca = new Licenca();
         CodigoClube = new CodigoClube(codClube);
-       
+       // BoletimInscricaoPath = new BoletimInscricaoPath(boletimPath);
+       // DocIdPath = new DocIdPath(docIdPath);
     }
     
-    public InscricaoProvisoriaClubeJogador(string codClube,string licenca)
-    {
-        Id = new Identifier(Guid.NewGuid());
-        CodOperacao = new CodOperacao();
-        Licenca = new Licenca(licenca);
-        CodigoClube = new CodigoClube(codClube);
-      
-    }
+ 
 }

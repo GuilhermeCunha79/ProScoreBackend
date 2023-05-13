@@ -6,10 +6,9 @@ public class DataRegisto: IValueObject
 {
     public string DataReg { get; set; }
     
-    DateTime today = DateTime.Today;
-
+    
     public DataRegisto()
     {
-        DataReg = today.ToShortDateString();
+        DataReg = "A AGUARDAR APROVAÇÃO DA ASSOCIAÇÃO";
     }
 }

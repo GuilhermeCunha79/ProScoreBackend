@@ -21,13 +21,13 @@ public class JogadorControllerTest
     public async void Create()
     {
         var jogadorServiceMock = new Mock<IJogadorService>();
-        string licenca = "2";
+        int licenca = 2;
         string estatuto = "Portugal";
         int idPessoa = 132;
-        string idEquipa = "2342";
+        int idEquipa = 2342;
         string status = "Active";
         var delivery = new Jogador(estatuto, idPessoa,idEquipa);
-        var deliveryDto = new JogadorDTO(delivery.Id.AsGuid(), estatuto,  idPessoa, Int32.Parse(idEquipa), status);
+        var deliveryDto = new JogadorDTO( delivery.Id.AsGuid(),licenca,estatuto,  idPessoa, idEquipa, status);
 
         jogadorServiceMock.Setup(_ => _.GetByIdAsync(delivery.Id)).ReturnsAsync(deliveryDto);
         jogadorServiceMock.Setup(_ => _.AddAsync(deliveryDto)).ReturnsAsync(deliveryDto);
@@ -45,19 +45,19 @@ public class JogadorControllerTest
     public async void GetByDeliveryIdentifier()
     {
         var deliveryServiceMock = new Mock<IJogadorService>();
-        string licenca = "21ddd3";
+        string licenca = "213";
         string estatuto = "Portugal";
         int idPessoa = 132;
-        string idEquipa = "2342";
+        int idEquipa = 2342;
         string status = "Active";
         var delivery = new Jogador(estatuto, idPessoa,idEquipa);
-        var deliveryDto = new JogadorDTO(delivery.Id.AsGuid(), estatuto, idPessoa, Int32.Parse(idEquipa), status);
+        var deliveryDto = new JogadorDTO( delivery.Id.AsGuid(),delivery.Licenca.Lic,estatuto, idPessoa, idEquipa, status);
         
         deliveryServiceMock.Setup(_ => _.GetByLicencaJogador(licenca)).ReturnsAsync(deliveryDto);
         
         var controller = new JogadorController(deliveryServiceMock.Object);
         
-        var actual = await controller.GetByLicencaJogador("21ddd3");
+        var actual = await controller.GetByLicencaJogador("213");
 
         Assert.Equal (deliveryDto, actual.Value);
     }

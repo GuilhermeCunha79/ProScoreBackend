@@ -4,7 +4,7 @@ namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
 public class CheckDigit : IValueObject
 {
-    public int CheckDig { get; set; }
+    public string CheckDig { get; set; }
 
     public CheckDigit()
     {
@@ -15,14 +15,14 @@ public class CheckDigit : IValueObject
         CheckDig = validateCheck(check);
     }
     
-    private int validateCheck(string check)
+    private string validateCheck(string check)
     {
-        int number = SharedMethods.onlyNumbers(check);
+        string number = SharedMethods.onlyNumbers(check).ToString().Substring(0,1);
         if (check == null )
         {
             throw new BusinessRuleValidationException(
                 "Preencha o campo referente ao 'Check Digit do nº de Identificação Civil'!");
-        } if (number.ToString().Length > 1)
+        } if (number.Length > 1)
         {
             throw new BusinessRuleValidationException(
                 "O campo do 'Check Digit do nº de Identificação Civil' só deve apresentar um caratér numérico!");

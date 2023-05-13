@@ -17,6 +17,6 @@ internal class InscricaoProvisoriaClubeEquipaEntityTypeConfiguration : IEntityTy
         builder.Property(b => b.CodigoClube)
             .HasConversion(
                 v => v.CodClube,
-                v => new CodigoClube(v.ToString()));
+                v => new CodigoClube(v));
     }
 }

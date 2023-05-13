@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Domain.Jogador;
+using ConsoleApp1.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp1.Infraestructure.Shared;
@@ -19,7 +20,12 @@ public class BaseRepository<TEntity,TEntityId> : IRepository<TEntity,TEntityId>
     {
         return await this._objs.ToListAsync();
     }
-        
+
+    public Task<TEntity> GetByIdAsync(Licenca id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<TEntity> GetByIdAsync(TEntityId id)
     {
         //return await this._context.Categories.FindAsync(id);

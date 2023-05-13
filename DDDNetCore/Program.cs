@@ -46,9 +46,12 @@ public class Tas
         
         string modelId = "ef1da940-cf12-4858-a4e3-c3d01c222a3e";
 
-        using var stream = new FileStream(filePath, FileMode.Open);
+        Uri fileUri =
+            new Uri(
+                "https://user-images.githubusercontent.com/127695615/225075521-b30eb6e6-7b70-4106-9e53-c1cecb10a04e.jpeg");
 
-        AnalyzeDocumentOperation operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, modelId, stream);
+        AnalyzeDocumentOperation operation =
+            await client.AnalyzeDocumentFromUriAsync(WaitUntil.Completed, modelId, fileUri);
         AnalyzeResult result = operation.Value;
 
         Console.WriteLine($"Document was analyzed with model with ID: {result.ModelId}");
@@ -63,6 +66,7 @@ public class Tas
                 DocumentField field = fieldKvp.Value;
 
                 Console.WriteLine($"Field '{fieldName}': ");
+
                 Console.WriteLine($"  Content: '{field.Content}'");
                 Console.WriteLine($"  Confidence: '{field.Confidence}'");
             }

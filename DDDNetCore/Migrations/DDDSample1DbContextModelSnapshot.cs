@@ -58,9 +58,27 @@ namespace ConsoleApp1.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Morada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NifClube")
+                        .HasColumnType("int");
+
                     b.Property<string>("NomeAssociacao")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("NomeClube")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NrEquipas")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TelefoneClube")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CodigoClube");
 
@@ -90,7 +108,26 @@ namespace ConsoleApp1.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int>("CheckDigit")
+                        .HasColumnType("int");
+
                     b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LetrasDoc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nif")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NrUtente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ValidadeDoc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NrIdentificacao");
@@ -108,6 +145,10 @@ namespace ConsoleApp1.Migrations
 
                     b.Property<int>("CodigoClube")
                         .HasColumnType("int");
+
+                    b.Property<string>("Divisao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
@@ -257,6 +298,10 @@ namespace ConsoleApp1.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<string>("EstatutoFpF")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
 
@@ -370,6 +415,18 @@ namespace ConsoleApp1.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ConcelhoResidência")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DataNascimento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(max)");
 
@@ -381,8 +438,16 @@ namespace ConsoleApp1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("NrIdentificacao")
                         .HasColumnType("int");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TipoGenero")
                         .IsRequired()
@@ -409,7 +474,27 @@ namespace ConsoleApp1.Migrations
                     b.Property<int>("CodOperacao")
                         .HasColumnType("int");
 
+                    b.Property<string>("DataRegisto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DataSubscricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EpocaDesportiva")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoProcesso")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CodOperacao");
@@ -425,211 +510,7 @@ namespace ConsoleApp1.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("ConsoleApp1.Domain.Clube.Morada", "Morada", b1 =>
-                        {
-                            b1.Property<int>("ClubeCodigoClube")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Morad")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ClubeCodigoClube");
-
-                            b1.ToTable("Clube", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClubeCodigoClube");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Clube.NifClube", "NifClube", b1 =>
-                        {
-                            b1.Property<int>("ClubeCodigoClube")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("ClubeNif")
-                                .HasColumnType("int");
-
-                            b1.HasKey("ClubeCodigoClube");
-
-                            b1.ToTable("Clube", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClubeCodigoClube");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Clube.NomeClube", "NomeClube", b1 =>
-                        {
-                            b1.Property<int>("ClubeCodigoClube")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("NomeClub")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ClubeCodigoClube");
-
-                            b1.ToTable("Clube", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClubeCodigoClube");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Clube.NrEquipas", "NrEquipas", b1 =>
-                        {
-                            b1.Property<int>("ClubeCodigoClube")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("NumeroEquipas")
-                                .HasColumnType("int");
-
-                            b1.HasKey("ClubeCodigoClube");
-
-                            b1.ToTable("Clube", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClubeCodigoClube");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Clube.TelefoneClube", "TelefoneClube", b1 =>
-                        {
-                            b1.Property<int>("ClubeCodigoClube")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("TelefoneClub")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ClubeCodigoClube");
-
-                            b1.ToTable("Clube", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ClubeCodigoClube");
-                        });
-
                     b.Navigation("Associacao");
-
-                    b.Navigation("Morada")
-                        .IsRequired();
-
-                    b.Navigation("NifClube")
-                        .IsRequired();
-
-                    b.Navigation("NomeClube")
-                        .IsRequired();
-
-                    b.Navigation("NrEquipas")
-                        .IsRequired();
-
-                    b.Navigation("TelefoneClube")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ConsoleApp1.Domain.DocumentoIdentificacao.DocIdentificacao", b =>
-                {
-                    b.OwnsOne("ConsoleApp1.Domain.DocumentoIdentificacao.CheckDigit", "CheckDigit", b1 =>
-                        {
-                            b1.Property<int>("DocIdentificacaoNrIdentificacao")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("CheckDig")
-                                .HasColumnType("int");
-
-                            b1.HasKey("DocIdentificacaoNrIdentificacao");
-
-                            b1.ToTable("DocumentoIdentificacao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DocIdentificacaoNrIdentificacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.DocumentoIdentificacao.LetrasDoc", "LetrasDoc", b1 =>
-                        {
-                            b1.Property<int>("DocIdentificacaoNrIdentificacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("LetrasDocumento")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("DocIdentificacaoNrIdentificacao");
-
-                            b1.ToTable("DocumentoIdentificacao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DocIdentificacaoNrIdentificacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.DocumentoIdentificacao.Nif", "Nif", b1 =>
-                        {
-                            b1.Property<int>("DocIdentificacaoNrIdentificacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("NumIdFis")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("DocIdentificacaoNrIdentificacao");
-
-                            b1.ToTable("DocumentoIdentificacao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DocIdentificacaoNrIdentificacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.DocumentoIdentificacao.NrUtente", "NrUtente", b1 =>
-                        {
-                            b1.Property<int>("DocIdentificacaoNrIdentificacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("NumUtente")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("DocIdentificacaoNrIdentificacao");
-
-                            b1.ToTable("DocumentoIdentificacao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DocIdentificacaoNrIdentificacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.DocumentoIdentificacao.ValidadeDoc", "ValidadeDoc", b1 =>
-                        {
-                            b1.Property<int>("DocIdentificacaoNrIdentificacao")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("Ano")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("Dia")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("Mes")
-                                .HasColumnType("int");
-
-                            b1.HasKey("DocIdentificacaoNrIdentificacao");
-
-                            b1.ToTable("DocumentoIdentificacao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DocIdentificacaoNrIdentificacao");
-                        });
-
-                    b.Navigation("CheckDigit")
-                        .IsRequired();
-
-                    b.Navigation("LetrasDoc")
-                        .IsRequired();
-
-                    b.Navigation("Nif")
-                        .IsRequired();
-
-                    b.Navigation("NrUtente")
-                        .IsRequired();
-
-                    b.Navigation("ValidadeDoc")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ConsoleApp1.Domain.Equipa.Equipa", b =>
@@ -658,29 +539,9 @@ namespace ConsoleApp1.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("ConsoleApp1.Domain.Equipa.Divisao", "Divisao", b1 =>
-                        {
-                            b1.Property<int>("EquipaIdentificadorEquipa")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Div")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("EquipaIdentificadorEquipa");
-
-                            b1.ToTable("Equipa", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("EquipaIdentificadorEquipa");
-                        });
-
                     b.Navigation("Categoria");
 
                     b.Navigation("Clube");
-
-                    b.Navigation("Divisao")
-                        .IsRequired();
 
                     b.Navigation("Genero");
 
@@ -801,27 +662,7 @@ namespace ConsoleApp1.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("ConsoleApp1.Domain.Jogador.EstatutoFpF", "EstatutoFpF", b1 =>
-                        {
-                            b1.Property<int>("JogadorLicenca")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Estatuto")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("JogadorLicenca");
-
-                            b1.ToTable("Jogador", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("JogadorLicenca");
-                        });
-
                     b.Navigation("Equipa");
-
-                    b.Navigation("EstatutoFpF")
-                        .IsRequired();
 
                     b.Navigation("Pessoa");
                 });
@@ -893,215 +734,13 @@ namespace ConsoleApp1.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("ConsoleApp1.Domain.Pessoa.ConcelhoResidência", "ConcelhoResidência", b1 =>
-                        {
-                            b1.Property<int>("PessoaIdentificadorPessoa")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Concelho")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PessoaIdentificadorPessoa");
-
-                            b1.ToTable("Pessoa", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PessoaIdentificadorPessoa");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Pessoa.DataNascimento", "DataNascimento", b1 =>
-                        {
-                            b1.Property<int>("PessoaIdentificadorPessoa")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("DataNasc")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PessoaIdentificadorPessoa");
-
-                            b1.ToTable("Pessoa", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PessoaIdentificadorPessoa");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Pessoa.Email", "Email", b1 =>
-                        {
-                            b1.Property<int>("PessoaIdentificadorPessoa")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Emaill")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PessoaIdentificadorPessoa");
-
-                            b1.ToTable("Pessoa", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PessoaIdentificadorPessoa");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Pessoa.Nome", "Nome", b1 =>
-                        {
-                            b1.Property<int>("PessoaIdentificadorPessoa")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Nomee")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PessoaIdentificadorPessoa");
-
-                            b1.ToTable("Pessoa", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PessoaIdentificadorPessoa");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.Pessoa.Telefone", "Telefone", b1 =>
-                        {
-                            b1.Property<int>("PessoaIdentificadorPessoa")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Telemovel")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PessoaIdentificadorPessoa");
-
-                            b1.ToTable("Pessoa", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PessoaIdentificadorPessoa");
-                        });
-
-                    b.Navigation("ConcelhoResidência")
-                        .IsRequired();
-
-                    b.Navigation("DataNascimento")
-                        .IsRequired();
-
                     b.Navigation("DocIdentificacao");
-
-                    b.Navigation("Email")
-                        .IsRequired();
 
                     b.Navigation("Genero");
 
                     b.Navigation("Nacionalidade");
 
-                    b.Navigation("Nome")
-                        .IsRequired();
-
                     b.Navigation("PaisNascenca");
-
-                    b.Navigation("Telefone")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ConsoleApp1.Domain.ProcessoInscricao.ProcessoInscricao", b =>
-                {
-                    b.OwnsOne("ConsoleApp1.Domain.ProcessoInscricao.DataRegisto", "DataRegisto", b1 =>
-                        {
-                            b1.Property<int>("ProcessoInscricaoCodOperacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("DataReg")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ProcessoInscricaoCodOperacao");
-
-                            b1.ToTable("ProcessoInscricao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProcessoInscricaoCodOperacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.ProcessoInscricao.DataSubscricao", "DataSubscricao", b1 =>
-                        {
-                            b1.Property<int>("ProcessoInscricaoCodOperacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("DataSubs")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ProcessoInscricaoCodOperacao");
-
-                            b1.ToTable("ProcessoInscricao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProcessoInscricaoCodOperacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.ProcessoInscricao.EpocaDesportiva", "EpocaDesportiva", b1 =>
-                        {
-                            b1.Property<int>("ProcessoInscricaoCodOperacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("EpocaDesp")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ProcessoInscricaoCodOperacao");
-
-                            b1.ToTable("ProcessoInscricao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProcessoInscricaoCodOperacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.ProcessoInscricao.Estado", "Estado", b1 =>
-                        {
-                            b1.Property<int>("ProcessoInscricaoCodOperacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Status")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ProcessoInscricaoCodOperacao");
-
-                            b1.ToTable("ProcessoInscricao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProcessoInscricaoCodOperacao");
-                        });
-
-                    b.OwnsOne("ConsoleApp1.Domain.ProcessoInscricao.TipoProcesso", "TipoProcesso", b1 =>
-                        {
-                            b1.Property<int>("ProcessoInscricaoCodOperacao")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("ProcessoTipo")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ProcessoInscricaoCodOperacao");
-
-                            b1.ToTable("ProcessoInscricao", "dbo");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProcessoInscricaoCodOperacao");
-                        });
-
-                    b.Navigation("DataRegisto")
-                        .IsRequired();
-
-                    b.Navigation("DataSubscricao")
-                        .IsRequired();
-
-                    b.Navigation("EpocaDesportiva")
-                        .IsRequired();
-
-                    b.Navigation("Estado")
-                        .IsRequired();
-
-                    b.Navigation("TipoProcesso")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ConsoleApp1.Domain.Associacao.Associacao", b =>

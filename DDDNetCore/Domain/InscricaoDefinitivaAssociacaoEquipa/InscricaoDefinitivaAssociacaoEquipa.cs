@@ -17,19 +17,13 @@ public class InscricaoDefinitivaAssociacaoEquipa
     {
 
     }
-
-    public InscricaoDefinitivaAssociacaoEquipa(string nomeAssociacao)
-    {
-        CodOperacao = new CodOperacao();
-        NomeAssociacao = new NomeAssociacao(nomeAssociacao);
-        IdentificadorEquipa = new IdentificadorEquipa();
-    }
+    
 
     //Revalidaçao
-    public InscricaoDefinitivaAssociacaoEquipa(string nomeAssociacao, string licenca)
+    public InscricaoDefinitivaAssociacaoEquipa(string nomeAssociacao, string licenca,int idEquipa)
     {
         CodOperacao = new CodOperacao();
         NomeAssociacao = new NomeAssociacao(nomeAssociacao);
-        IdentificadorEquipa = new IdentificadorEquipa(licenca);
+        IdentificadorEquipa = new IdentificadorEquipa(idEquipa);
     }
 }

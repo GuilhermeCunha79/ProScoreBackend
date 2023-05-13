@@ -14,13 +14,8 @@ internal class JogadorEntityTypeConfiguration : IEntityTypeConfiguration<Domain.
     {
         builder.ToTable("Jogador", SchemaNames.DDDSample1);
         builder.HasKey(b => b.Licenca);
-        builder.OwnsOne(b => b.EstatutoFpF);
-        //builder.Property<bool>("_active").HasColumnName("Active");
 
-        builder.Property(b => b.Id)
-            .HasConversion(
-                v => v.Value,
-                v => new Identifier(Guid.Parse(v)));
+        //builder.Property<bool>("_active").HasColumnName("Active");
 
         builder.HasOne(j => j.Equipa)
             .WithMany(e => e.Jogadores)
@@ -28,10 +23,15 @@ internal class JogadorEntityTypeConfiguration : IEntityTypeConfiguration<Domain.
         
        
         
+        builder.Property(b => b.EstatutoFpF)
+            .HasConversion(
+                v => v.Estatuto,
+                v => new EstatutoFpF(v));
+        
         builder.Property(b => b.IdentificadorEquipa)
             .HasConversion(
                 v => v.IdEquipa,
-                v => new IdentificadorEquipa(v.ToString()));
+                v => new IdentificadorEquipa(v));
         
         builder.Property(b => b.Licenca)
             .HasConversion(

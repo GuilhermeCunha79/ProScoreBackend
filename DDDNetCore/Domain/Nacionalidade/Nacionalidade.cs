@@ -1,9 +1,11 @@
-﻿using ConsoleApp1.Domain.CodigoPaises;
+﻿using System.Globalization;
+using ConsoleApp1.Domain.CodigoPaises;
 using ConsoleApp1.Domain.Pais;
+using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.Nacionalidade;
 
-public class Nacionalidade
+public class Nacionalidade:Entity<Identifier>
 {
     public NacionalidadePais NacionalidadePais { get; set; }
     
@@ -16,11 +18,13 @@ public class Nacionalidade
     {
         
     }
-    public Nacionalidade(string nacao)
+    public Nacionalidade(string nacao,string codPais,string nome)
     {
-        NacionalidadePais = new NacionalidadePais(nacao);
+        NacionalidadePais = new NacionalidadePais(nacao.TrimStart().TrimEnd());
+        NomePais = new NomePais(nome);
+        CodPaises = new CodPaises(codPais);
     }
     
-
+   
    
 }

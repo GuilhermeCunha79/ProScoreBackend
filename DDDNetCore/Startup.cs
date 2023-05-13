@@ -1,6 +1,13 @@
-﻿using ConsoleApp1.Domain.Jogador;
+﻿using ConsoleApp1.Domain.DocumentoIdentificacao;
+using ConsoleApp1.Domain.Equipa;
+using ConsoleApp1.Domain.Jogador;
+using ConsoleApp1.Domain.Nacionalidade;
+using ConsoleApp1.Domain.Pessoa;
+using ConsoleApp1.Domain.ProcessoInscricao;
 using ConsoleApp1.Infraestructure;
+using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
 using ConsoleApp1.Infraestructure.Jogador;
+using ConsoleApp1.Infraestructure.Nacionalidade;
 using ConsoleApp1.Infraestructure.Shared;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +43,7 @@ namespace ConsoleApp1;
             
             
             services.AddDbContext<DDDSample1DbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("jdbc:jtds:sqlserver://192.168.1.72:80;instance=EstagioGuilherme;TrustServerCertificate=True;")) .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
+                options.UseSqlServer(Configuration.GetConnectionString("jdbc:jtds:sqlserver://192.168.1.72\\FPFSCOREDEV;instance=EstagioGuilherme;TrustServerCertificate=True;")) .ReplaceService<IValueConverterSelector, StronglyEntityIdValueConverterSelector>());
             ConfigureMyServices(services);
             
             services.AddDbContext<DDDSample1DbContext>(opt =>
@@ -93,5 +100,20 @@ namespace ConsoleApp1;
 
             services.AddTransient<IJogadorRepository, JogadorRepository>();
             services.AddTransient<IJogadorService, JogadorService>();
+            
+            services.AddTransient<IEquipaRepository, EquipaRepository>();
+            services.AddTransient<IEquipaService, EquipaService>();
+            
+            services.AddTransient<IPessoaRepository, PessoaRepository>();
+            services.AddTransient<IPessoaService, PessoaService>();
+            
+            services.AddTransient<IDocIdentificacaoRepository, DocIdentificacaoRepository>();
+            services.AddTransient<IDocIdentificacaoService, DocIdentificacaoService>();
+            
+            services.AddTransient<IProcessoInscricaoRepository, ProcessoInscricaoRepository>();
+            services.AddTransient<IProcessoInscricaoService, ProcessoInscricaoService>();
+            
+            services.AddTransient<INacionalidadeRepository, NacionalidadeRepository>();
+            services.AddTransient<INacionalidadeService, NacionalidadeService>();
         }
     }

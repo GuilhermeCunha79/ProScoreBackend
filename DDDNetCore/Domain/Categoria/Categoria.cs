@@ -14,7 +14,6 @@ public class Categoria: Entity<Identifier>
     }
     public Categoria(string categoria)
     {
-        Id = new Identifier(Guid.NewGuid());
         TipoCategoria = new TipoCategoria(categoria);
     }
 }

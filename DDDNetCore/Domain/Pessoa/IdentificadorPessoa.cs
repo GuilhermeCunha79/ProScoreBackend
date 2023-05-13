@@ -6,15 +6,10 @@ namespace ConsoleApp1.Domain.Pessoa;
 public class IdentificadorPessoa
 {
     public int IdPessoa { get; set; }
-
+    private static int totalEquipas = 0;
     public IdentificadorPessoa()
     {
-        var options = SharedMethods.connection();
-        using (var context = new DDDSample1DbContext(options))
-        {
-            var numeroDeTipos = context.ObterNumeroDePessoas() + 1;
-            IdPessoa += numeroDeTipos;
-        }
+        IdPessoa = totalEquipas++;
     }
 
     public IdentificadorPessoa(int idPessoa)

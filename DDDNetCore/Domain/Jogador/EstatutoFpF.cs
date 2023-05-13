@@ -1,7 +1,10 @@
-﻿namespace ConsoleApp1.Domain.Jogador;
+﻿using ConsoleApp1.Shared;
 
-public class EstatutoFpF
+namespace ConsoleApp1.Domain.Jogador;
+
+public class EstatutoFpF:IValueObject
 {
+    public Jogador Jogador { get; set; }
     public string Estatuto { get; set; }
 
     public EstatutoFpF()
@@ -19,9 +22,7 @@ public class EstatutoFpF
         
         string[] paisesUe =
         {
-            "Alemanha", "Áustria", "Bélgica", "Bulgária", "Chipre", "Croácia", "Dinamarca", "Eslováquia", "Eslovênia",
-            "Espanha", "Estônia", "Finlândia", "França", "Grécia", "Holanda", "Hungria", "Irlanda", "Itália", "Letônia",
-            "Lituânia", "Luxemburgo", "Malta", "Polônia", "República Tcheca", "Romênia", "Suécia", "Portugal"
+            "Alemã", "Austríaca", "Belga", "Búlgara", "Cipriota", "Croata", "Dinamarquesa", "Eslovaca", "Eslovena", "Espanhola", "Estoniana", "Finlandesa", "Francesa", "Grega", "Holandesa", "Húngara", "Irlandesa", "Italiana", "Letã", "Lituana", "Luxemburguesa", "Maltesa", "Polonesa", "Tcheca", "Romena", "Sueca", "Portuguesa"
         };
         
 

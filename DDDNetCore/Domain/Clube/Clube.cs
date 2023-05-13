@@ -16,7 +16,7 @@ public class Clube: Entity<Identifier>,IAggregateRoot
     public NifClube NifClube { get; set; }
     public ICollection<InscricaoProvisoriaClubeEquipa.InscricaoProvisoriaClubeEquipa> InscricaoProvisoriaClubeEquipa { get; set; }
     public ICollection<InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador> InscricaoProvisoriaClubeJogador{ get; set; }
-
+    private static int totalEquipas = 0;
     public ICollection<Equipa.Equipa> Equipas { get; set; }
     public Associacao.Associacao Associacao { get; set; }
 
@@ -29,7 +29,7 @@ public class Clube: Entity<Identifier>,IAggregateRoot
     {
         Id = new Identifier(Guid.NewGuid());
         NomeAssociacao = new NomeAssociacao(nomeAss);
-        CodigoClube = new CodigoClube();
+        CodigoClube = new CodigoClube(totalEquipas++);
         NomeClube = new NomeClube(nomeClube);
         Morada = new Morada(morada);
         NrEquipas = new NrEquipas();

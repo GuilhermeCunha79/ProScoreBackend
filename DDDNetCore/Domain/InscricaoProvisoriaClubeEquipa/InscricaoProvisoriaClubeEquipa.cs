@@ -21,16 +21,8 @@ public class InscricaoProvisoriaClubeEquipa : Entity<Identifier>
     {
     }
 
-    public InscricaoProvisoriaClubeEquipa(string codClube)
-    {
-        Id = new Identifier(Guid.NewGuid());
-        CodOperacao = new CodOperacao();
-        IdentificadorEquipa = new IdentificadorEquipa();
-        CodigoClube = new CodigoClube(codClube);
-
-    }
-
-    public InscricaoProvisoriaClubeEquipa(string codClube, string idEquipa)
+   
+    public InscricaoProvisoriaClubeEquipa(int codClube, int idEquipa)
     {
         Id = new Identifier(Guid.NewGuid());
         CodOperacao = new CodOperacao();

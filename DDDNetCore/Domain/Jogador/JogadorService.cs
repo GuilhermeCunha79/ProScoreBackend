@@ -18,12 +18,17 @@ public class JogadorService:IJogadorService
         var list = await _repo.GetAllAsync();
 
         List<JogadorDTO> listDto = list.ConvertAll(jogador =>
-            new JogadorDTO(jogador.Id.AsGuid(), jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
+            new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
                 jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active)));
 
         return listDto;
     }
-    
+
+    public Task<JogadorDTO> GetByIdAsync(Identifier id)
+    {
+        throw new NotImplementedException();
+    }
+
     private string CheckStatus(bool status)
     {
         if (status)
@@ -36,43 +41,42 @@ public class JogadorService:IJogadorService
         }
     }
     
-    public async Task<JogadorDTO> GetByDeliveryIdAsync(string licenca)
-    {
-        var jogador = await this._repo.GetByLicencaAsync(licenca);
-
-        if (jogador == null)
-            return null;
-
-        return new JogadorDTO(jogador.Id.AsGuid(), jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
-            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
-    }
     
 
-    public async Task<JogadorDTO> GetByIdAsync(Identifier id)
+    public async Task<JogadorDTO> GetByLicencaJogador(string licenca)
     {
-        var jogador = await _repo.GetByIdAsync(id);
+        var jogador = await _repo.GetByLicencaAsync(licenca);
 
         if (jogador == null)
             return null;
 
-        return new JogadorDTO(jogador.Id.AsGuid(), jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
+        return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
             jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
     }
 
-    public Task<JogadorDTO> GetByLicencaJogador(string licenca)
-    {
-        throw new NotImplementedException();
-    }
+    
 
     public async Task<JogadorDTO> AddAsync(JogadorDTO dto)
     {
-        var jogador = new Jogador(dto.EstatutoFPF, dto.IdentificadorPessoa, dto.IdentificadorEquipa.ToString());
+        var jogador = new Jogador(dto.EstatutoFpF, dto.IdentificadorPessoa, dto.IdentificadorEquipa);
 
         await _repo.AddAsync(jogador);
 
         await _unitOfWork.CommitAsync();
 
-        return new JogadorDTO(jogador.Id.AsGuid(), jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
+        return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
+            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
+    }
+    
+    public async Task<JogadorDTO> AddAsync1(JogadorDTO dto)
+    {
+        var jogador = new Jogador(dto.EstatutoFpF, dto.IdentificadorPessoa, dto.IdentificadorEquipa);
+
+        await _repo.AddAsync(jogador);
+
+        await _unitOfWork.CommitAsync();
+
+        return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
             jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
     }
 

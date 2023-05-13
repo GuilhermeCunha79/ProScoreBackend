@@ -20,15 +20,17 @@ public class DocIdentificacao: Entity<Identifier>
     }
     public DocIdentificacao(string nrId, string letrasId, string checkDigit, string validade, string nif, string nrUtente)
     {
+
         Id = new Identifier(Guid.NewGuid());
         NrIdentificacao = new NrIdentificacao(nrId);
         LetrasDoc = new LetrasDoc(letrasId);
         CheckDigit = new CheckDigit(checkDigit);
         ValidadeDoc = new ValidadeDoc(validade);
-        Nif = new Nif(nif);
+        Nif = new Nif(nif) ;
         NrUtente = new NrUtente(nrUtente);
         Active = true;
     }
+
 
     public void ChangeNrIdentificacao(string newId)
     {

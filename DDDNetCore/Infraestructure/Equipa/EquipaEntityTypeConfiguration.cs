@@ -11,14 +11,14 @@ internal class EquipaEntityTypeConfiguration : IEntityTypeConfiguration<Domain.E
     {
         builder.ToTable("Equipa", SchemaNames.DDDSample1);
         builder.HasKey(b => b.IdentificadorEquipa);
-        builder.OwnsOne(b => b.Divisao);
+        
         //builder.Property<bool>("_active").HasColumnName("Active");
-
-        builder.Property(b => b.Id)
+        
+        builder.Property(b => b.Divisao)
             .HasConversion(
-                v => v.ToString(),
-                v => new Identifier(Guid.Parse(v)));
-
+                v => v.Div,
+                v => new Divisao(v));
+        
         builder
             .HasMany(e => e.Jogadores)
             .WithOne(j => j.Equipa)
@@ -40,7 +40,7 @@ internal class EquipaEntityTypeConfiguration : IEntityTypeConfiguration<Domain.E
         builder.Property(b => b.IdentificadorEquipa)
             .HasConversion(
                 v => v.IdEquipa,
-                v => new IdentificadorEquipa(v.ToString()));
+                v => new IdentificadorEquipa(v));
     }
 
 }

@@ -14,13 +14,34 @@ internal class PessoaEntityTypeConfiguration : IEntityTypeConfiguration<Domain.P
     {
         builder.ToTable("Pessoa", SchemaNames.DDDSample1);
         builder.HasKey(b => b.IdentificadorPessoa);
-        builder.OwnsOne(b => b.Nome);
-        builder.OwnsOne(b => b.DataNascimento);
-        builder.OwnsOne(b => b.Telefone);
-        builder.OwnsOne(b => b.Email);
-        builder.OwnsOne(b => b.ConcelhoResidência);
+        
 
-
+        builder.Property(b => b.Nome)
+            .HasConversion(
+                v => v.Nomee,
+                v => new Nome(v)).IsRequired();
+        
+        builder.Property(b => b.DataNascimento)
+            .HasConversion(
+                v => v.DataNasc,
+                v => new DataNascimento(v)).IsRequired();
+        
+        builder.Property(b => b.Telefone)
+            .HasConversion(
+                v => v.Telemovel,
+                v => new Telefone(v)).IsRequired();
+        
+        builder.Property(b => b.Email)
+            .HasConversion(
+                v => v.Emaill,
+                v => new Email(v)).IsRequired();
+        
+        builder.Property(b => b.ConcelhoResidência)
+            .HasConversion(
+                v => v.Concelho,
+                v => new ConcelhoResidência(v)).IsRequired();
+        
+        
         builder
             .HasOne(e => e.Jogador)
             .WithOne(j => j.Pessoa)

@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp1.Domain.Jogador;
 
@@ -7,21 +8,18 @@ public class Licenca: IValueObject
 {
     public int Lic { get; set; }
 
+
+    private static int totalEquipas = 0;
     public Licenca()
     {
-        var options = SharedMethods.connection();
-        using (var context = new DDDSample1DbContext(options))
-        {
-            var numeroDeTipos = context.ObterNumeroDeJogadores()+1;
-            Lic += numeroDeTipos;
-        }
-    }
-
-    public Licenca(string licenca)
-    {
-        Lic = validateLicenca(licenca);
+        Lic = totalEquipas++;
     }
     
+    public Licenca(string lic)
+    {
+        Lic = validateLicenca(lic);
+    }
+
     private int validateLicenca(string licenca)
     {
         if (licenca == null)

@@ -10,7 +10,7 @@ public class ResourceHelper
 
     static ResourceHelper()
     {
-        _resourceManager = new ResourceManager("DDDNetCore.Domain.Language.string", Assembly.GetExecutingAssembly());
+        _resourceManager = new ResourceManager("ConsoleApp1.Domain.Language.string", Assembly.GetExecutingAssembly());
     }
 
     public static string GetString(string name)

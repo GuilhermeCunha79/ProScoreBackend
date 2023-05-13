@@ -1,27 +1,23 @@
-﻿using ConsoleApp1.Shared;
+﻿using System.Globalization;
+using ConsoleApp1.Infraestructure.Nacionalidade;
+using ConsoleApp1.Shared;
+using Microsoft.Data.SqlClient;
 
 namespace ConsoleApp1.Domain.Nacionalidade;
 
-public class NacionalidadePais
+public class NacionalidadePais:IValueObject
 {
-    public string NacionalidadePaiss  { get; set; }
+    private NacionalidadeService ola;
+    public string NacionalidadePaiss { get; set; }
 
     public NacionalidadePais()
     {
-        
     }
+
     public NacionalidadePais(string pais)
     {
-        NacionalidadePaiss = validateNacao(pais);
+        NacionalidadePaiss = pais;
     }
-    
-    private string validateNacao(string nacao)
-    {
-        if (nacao == null)
-        {
-            throw new BusinessRuleValidationException("Preencha o campo referente à 'Nacionalidade'!");
-        }
 
-        return SharedMethods.onlyLettersAndSpace(nacao);
-    }
+    
 }
