@@ -20,7 +20,7 @@ public class EquipaService:IEquipaService
         var list = await _repo.GetAllAsync();
 
         List<EquipaDTO> listDto = list.ConvertAll(jogador =>
-            new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.Divisao.Div,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade));
+            new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade));
 
         return listDto;
     }
@@ -46,7 +46,7 @@ public class EquipaService:IEquipaService
             return null;
         }
 
-        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.Divisao.Div,jogador.CodigoClube.CodClube,jogador.Categoria.TipoCategoria.Categoria,jogador.Genero.TipoGenero.Genero,jogador.Modalidade.TipoModalidade.Modalidade);
+        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.Categoria.TipoCategoria.Categoria,jogador.Genero.TipoGenero.Genero,jogador.Modalidade.TipoModalidade.Modalidade);
     }
     
     public async Task<EquipaDTO> GetByIdAsync(Identifier id)
@@ -56,7 +56,7 @@ public class EquipaService:IEquipaService
         if (jogador == null)
             return null;
 
-        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.Divisao.Div,jogador.CodigoClube.CodClube,jogador.Categoria.TipoCategoria.Categoria,jogador.Genero.TipoGenero.Genero,jogador.Modalidade.TipoModalidade.Modalidade);
+        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.Categoria.TipoCategoria.Categoria,jogador.Genero.TipoGenero.Genero,jogador.Modalidade.TipoModalidade.Modalidade);
     }
 
     public Task<EquipaDTO> GetByLicencaJogador(string licenca)
@@ -66,13 +66,13 @@ public class EquipaService:IEquipaService
 
     public async Task<EquipaDTO> AddAsync(EquipaDTO dto)
     {
-        var jogador = new Equipa(dto.Divisao, dto.CodigoClube,dto.Categoria,dto.Modalidade,dto.Genero);
+        var jogador = new Equipa(dto.IdentificadorEquipa,dto.Divisao, dto.CodigoClube,dto.Categoria,dto.Modalidade,dto.Genero);
 
         await _repo.AddAsync(jogador);
 
         await _unitOfWork.CommitAsync();
 
-        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.Divisao.Div,jogador.CodigoClube.CodClube,jogador.Categoria.TipoCategoria.Categoria,jogador.Genero.TipoGenero.Genero,jogador.Modalidade.TipoModalidade.Modalidade);
+        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade);
     }
 
     public Task<EquipaDTO> UpdateAsync(EquipaDTO dto)
@@ -172,5 +172,6 @@ public class EquipaService:IEquipaService
         await _unitOfWork.CommitAsync();
 
         return new JogadorDTO(jogador.Id.AsGuid(), jogador.EstatutoFpF.Estatuto, jogador.Licenca.Lic, jogador.IdentificadorPessoa.IdPessoa,
-            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));*/
+            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
+            }*/
     }

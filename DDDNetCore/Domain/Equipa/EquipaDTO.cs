@@ -1,11 +1,11 @@
-﻿using ConsoleApp1.Domain.Pessoa;
+﻿
 using Newtonsoft.Json;
 
 namespace ConsoleApp1.Domain.Equipa;
 
 public class EquipaDTO
 {
-    public Guid Id;
+    public Guid Id { get; set; }
     public int IdentificadorEquipa { get; set; }
     public string Divisao { get; set; }
     public int CodigoClube { get; set; }
@@ -25,5 +25,7 @@ public class EquipaDTO
         Modalidade = modalidade;
         Status = true;
     }
+
+   
     
 }

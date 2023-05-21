@@ -8,11 +8,10 @@ public class Licenca: IValueObject
 {
     public int Lic { get; set; }
 
-
-    private static int totalEquipas = 0;
+    
     public Licenca()
     {
-        Lic = totalEquipas++;
+        
     }
     
     public Licenca(string lic)

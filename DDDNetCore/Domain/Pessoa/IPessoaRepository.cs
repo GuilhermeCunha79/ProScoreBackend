@@ -5,4 +5,5 @@ namespace ConsoleApp1.Domain.Pessoa;
 public interface IPessoaRepository : IRepository<Pessoa, Identifier>
 {
     Task<Pessoa> GetByIdPessoaAsync(string licenca);
+    Task<Pessoa> GetByNrIdentificacaoAsync(string licenca);
 }

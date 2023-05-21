@@ -3,17 +3,20 @@
 public class ClubeDTO
 {
     public Guid Id;
+
+    public string NomeAssociacao { get; set; }
     public string NomeClube { get; set; }
-    public CodigoClube CodigoClube { get; set; }
+    public int CodigoClube { get; set; }
     public string? Morada { get; set; }
     public string TelefoneClube { get; set; }
-    public NrEquipas NrEquipas { get; set; }
-    public string NifClube { get; set; }
+    public int NrEquipas { get; set; }
+    public int NifClube { get; set; }
     public string Status { get; set; }
 
-    public ClubeDTO(Guid id, string nomeClube, CodigoClube codigoClube, string? morada, string telefoneClube, NrEquipas nrEquipas, string nifClube,string status )
+    public ClubeDTO(Guid id, string nomeAssociacao,string nomeClube, int codigoClube, string? morada, string telefoneClube, int nrEquipas, int nifClube,string status )
     {
         Id = id;
+        NomeAssociacao = nomeAssociacao;
         NomeClube = nomeClube;
         CodigoClube = codigoClube;
         Morada = morada;
@@ -22,4 +25,6 @@ public class ClubeDTO
         NifClube = nifClube;
         Status = status;
     }
+
+
 }

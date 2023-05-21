@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Domain.Pessoa;
+using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,11 @@ namespace ConsoleApp1.Controller;
 public class PessoaController : ControllerBase
 {
     private readonly IPessoaService _service;
-
-    public PessoaController(IPessoaService service)
+    private readonly DDDSample1DbContext _context;
+    public PessoaController(IPessoaService service,DDDSample1DbContext _context1)
     {
         _service = service;
+        _context = _context1;
     }
 
     // GET: api/Equipas
@@ -66,7 +68,7 @@ public class PessoaController : ControllerBase
                 }
             }
         }*/
-
+        dto.IdentificadorPessoa = _context.ObterNumeroDePessoas();
         try
         {
             var jogador = await _service.AddAsync(dto);
@@ -81,15 +83,15 @@ public class PessoaController : ControllerBase
 
 
     // PUT: api/Jogadores/5
-  /*  [HttpPut("{id}")]
-    public async Task<ActionResult<EquipaDTO>> Update(int id, EquipaDTO dto)
+    [HttpPut("{id}")]
+    public async Task<ActionResult<PessoaDTO>> Update(int id, PessoaDTO dto)
     {
         // if (id != dto.Id)
         // {
         //     return BadRequest();
         // }
 
-        dto. = new IdentificadorEquipa(id);
+        dto.IdentificadorPessoa = Int32.Parse(new IdentificadorPessoa(id).ToString());
 
         try
         {
@@ -112,14 +114,14 @@ public class PessoaController : ControllerBase
 
     // PUT: api/jogador/5
     [HttpPut("ByIdentifier/{licenca}")]
-    public async Task<ActionResult<EquipaDTO>> UpdateByLicencaAsync(string licenca,
-        EquipaDTO dto)
+    public async Task<ActionResult<PessoaDTO>> UpdateByIdPessoaAsync(string licenca,
+        PessoaDTO dto)
     {
-        dto.IdentificadorEquipa = new IdentificadorEquipa(Int32.Parse(licenca));
+        dto.IdentificadorPessoa = Int32.Parse(new IdentificadorPessoa(Int32.Parse(licenca)).ToString());
 
         try
         {
-            var jogador = await _service.UpdateByIdentificadorEquipaAsync(dto);
+            var jogador = await _service.UpdateByIdPessoaAsync(dto);
 
             if (jogador == null)
             {
@@ -136,7 +138,7 @@ public class PessoaController : ControllerBase
 
     // Inactivate: api/Jogadores/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<EquipaDTO>> SoftDelete(Guid id)
+    public async Task<ActionResult<PessoaDTO>> SoftDelete(Guid id)
     {
         var jogador = await _service.InactivateAsync(new Identifier(id));
 
@@ -150,7 +152,7 @@ public class PessoaController : ControllerBase
 
     // DELETE: api/Jogadores/5
     [HttpDelete("{id}/hard")]
-    public async Task<ActionResult<EquipaDTO>> HardDelete(Guid id)
+    public async Task<ActionResult<PessoaDTO>> HardDelete(Guid id)
     {
         try
         {
@@ -167,6 +169,6 @@ public class PessoaController : ControllerBase
         {
             return BadRequest(new { ex.Message });
         }
-    }*/
+    }
 }
 

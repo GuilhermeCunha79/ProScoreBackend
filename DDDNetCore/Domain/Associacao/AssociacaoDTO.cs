@@ -4,12 +4,15 @@ public class AssociacaoDTO
 {
     public Guid Id;
     public string NomeAssociacao { get;set; }
-  //  public string NomeCurto { get;set; }
+    public string NomeCurto { get;set; }
 
-    public AssociacaoDTO(Guid id,string nome)
+    public string Acronimo { get; set; }
+
+    public AssociacaoDTO(Guid id,string nome,string nomeCurto,string acronimo)
     {
         Id = id;
         NomeAssociacao = nome;
-       // NomeCurto = nomeCurto;
+        NomeCurto = nomeCurto;
+        Acronimo = acronimo;
     }
 }

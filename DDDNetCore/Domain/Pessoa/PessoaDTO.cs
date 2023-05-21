@@ -9,12 +9,14 @@ public class PessoaDTO
     public string TipoGenero;
     public string Email;
     public string NrIdentificacao;
+    public string Telefone;
+    public string ConcelhoResidencia;
     public string NascencaPais;
     public string NacionalidadePais;
-    public bool Status;
+    public string Status;
 
     public PessoaDTO(Guid id, int identificadorPessoa, string nome, string dataNascimento,
-        string tipoGenero,string email, string nrIdentificacao, string nascencaPais,string nacionalidadePais)
+        string tipoGenero,string email, string nrIdentificacao, string nascencaPais,string nacionalidadePais,string boool,string telefone,string concelho)
     {
         Id = id;
         IdentificadorPessoa = identificadorPessoa;
@@ -25,8 +27,11 @@ public class PessoaDTO
         NrIdentificacao = nrIdentificacao;
         NascencaPais = nascencaPais;
         NacionalidadePais = nacionalidadePais;
-        Status = true;
+        Status = boool;
+        Telefone = telefone;
+        ConcelhoResidencia = concelho;
 
     }
+
 
 }

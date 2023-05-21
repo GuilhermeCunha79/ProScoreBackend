@@ -19,7 +19,7 @@ public class AssociacaoService : IAssociacaoService
         var list = await _repo.GetAllAsync();
 
         List<AssociacaoDTO> listDto = list.ConvertAll(associacao =>
-            new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss));
+            new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss,associacao.NomeCurto.NomeCurt,associacao.Acronimo.Acronimoo));
 
         return listDto;
     }
@@ -43,7 +43,27 @@ public class AssociacaoService : IAssociacaoService
         if (associacao == null)
             return null;
 
-        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss);
+        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss,associacao.NomeCurto.NomeCurt,associacao.Acronimo.Acronimoo);
+    }
+    
+    public async Task<AssociacaoDTO> GetNomeAssociacaoByCodClube(string licenca)
+    {
+        var associacao1 = this._repo.GetNomeAssociacaoByCodClube(licenca).Result.NomeAssociacao.NomeAss;
+
+        if (associacao1 == null)
+            return null;
+        var associacao =  _repo.GetByNomeAssociacao(associacao1).Result;
+        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss,associacao.NomeCurto.NomeCurt,associacao.Acronimo.Acronimoo);
+    }
+    
+    public async Task<AssociacaoDTO> GetNomeAssociacaoByLicenca(string licenca)
+    {
+        var associacao1 = this._repo.GetNomeAssociacaoByLicenca(licenca).Result.NomeAssociacao.NomeAss;
+
+        if (associacao1 == null)
+            return null;
+        var associacao =  _repo.GetByNomeAssociacao(associacao1).Result;
+        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss,associacao.NomeCurto.NomeCurt,associacao.Acronimo.Acronimoo);
     }
 
 
@@ -54,7 +74,7 @@ public class AssociacaoService : IAssociacaoService
         if (associacao == null)
             return null;
 
-        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss);
+        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss,associacao.NomeCurto.NomeCurt,associacao.Acronimo.Acronimoo);
     }
 
     public Task<JogadorDTO> GetByLicencaJogador(string licenca)
@@ -64,13 +84,13 @@ public class AssociacaoService : IAssociacaoService
 
     public async Task<AssociacaoDTO> AddAsync(AssociacaoDTO dto)
     {
-        var associacao = new Associacao(dto.NomeAssociacao);
+        var associacao = new Associacao(dto.NomeAssociacao,dto.NomeCurto,dto.Acronimo);
 
         await _repo.AddAsync(associacao);
 
         await _unitOfWork.CommitAsync();
 
-        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss);
+        return new AssociacaoDTO(associacao.Id.AsGuid(),associacao.NomeAssociacao.NomeAss,associacao.NomeCurto.NomeCurt,associacao.Acronimo.Acronimoo);
     }
     
 

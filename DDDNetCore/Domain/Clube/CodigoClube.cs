@@ -11,10 +11,11 @@ public class CodigoClube: IValueObject
     
     public CodigoClube(int codigo)
     {
-        CodClube = codigo;
+        CodClube = validateCod(codigo);
     }
+    
 
-  /*  public int validateCod(int codigo)
+    public int validateCod(int codigo)
     {
         if (codigo == null)
         {
@@ -22,11 +23,11 @@ public class CodigoClube: IValueObject
         }
 
         int result;
-        if (!int.TryParse(codigo, out result))
+        if (!int.TryParse(SharedMethods.onlyNumbers(codigo.ToString()).ToString(), out result))
         {
             throw new BusinessRuleValidationException("O 'Código do Clube' deve apenas conter caracteres numéricos!");
         }
 
-        return SharedMethods.onlyNumbers(codigo);
-    }*/
+        return result;
+    }
 }

@@ -68,7 +68,7 @@ public class JogadorService:IJogadorService
             jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
     }
     
-    public async Task<JogadorDTO> AddAsync1(JogadorDTO dto)
+    /*public async Task<JogadorDTO> AddAsync1(JogadorDTO dto)
     {
         var jogador = new Jogador(dto.EstatutoFpF, dto.IdentificadorPessoa, dto.IdentificadorEquipa);
 
@@ -76,18 +76,48 @@ public class JogadorService:IJogadorService
 
         await _unitOfWork.CommitAsync();
 
+        return new JogadorDTO( jogador.Id.AsGuid(),jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
+            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
+    }*/
+
+    public async Task<JogadorDTO> UpdateAsync(JogadorDTO dto)
+    {
+        var jogador = await _repo.GetByIdAsync(new Identifier(dto.Id));
+
+        if (jogador == null)
+            return null;
+
+        // change all fields
+
+        
+        //delivery.ChangeDeliveryMass(new DeliveryMass(dto.Mass));
+        //delivery.ChangeDeliveryTime(new DeliveryTime(dto.PlacingTime, dto.WithdrawalTime));
+        //delivery.ChangeStoreId(new WarehouseId(dto.StoreId));
+
+        await _unitOfWork.CommitAsync();
+
         return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
             jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
     }
 
-    public Task<JogadorDTO> UpdateAsync(JogadorDTO dto)
+    public async Task<JogadorDTO> UpdateByJogadorLicencaAsync(JogadorDTO dto)
     {
-        throw new NotImplementedException();
-    }
+        var jogador = await _repo.GetByLicencaAsync(dto.Licenca.ToString());
 
-    public Task<JogadorDTO> UpdateByJogadorLicencaAsync(JogadorDTO dto)
-    {
-        throw new NotImplementedException();
+        if (jogador == null)
+            return null;
+
+        // change all fields
+
+        
+        //delivery.ChangeDeliveryMass(new DeliveryMass(dto.Mass));
+        //delivery.ChangeDeliveryTime(new DeliveryTime(dto.PlacingTime, dto.WithdrawalTime));
+        //delivery.ChangeStoreId(new WarehouseId(dto.StoreId));
+
+        await _unitOfWork.CommitAsync();
+
+        return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
+            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
     }
 
     public Task<JogadorDTO> InactivateAsync(Identifier id)

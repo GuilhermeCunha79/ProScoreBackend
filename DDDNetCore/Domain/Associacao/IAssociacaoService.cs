@@ -9,6 +9,10 @@ public interface IAssociacaoService
     Task<AssociacaoDTO> GetByIdAsync(Identifier id);
     Task<AssociacaoDTO> GetByNomeAssociacao(string licenca);
     
+    Task<AssociacaoDTO> GetNomeAssociacaoByCodClube(string licenca);
+    Task<AssociacaoDTO> GetNomeAssociacaoByLicenca(string licenca);
+
+    
     Task<AssociacaoDTO> AddAsync(AssociacaoDTO obj);
 
     Task<AssociacaoDTO> UpdateAsync(AssociacaoDTO dto);

@@ -9,22 +9,18 @@ public class EpocaDesportiva: IValueObject
 
     public EpocaDesportiva()
     {
-        
+        EpocaDesp = string.Concat(getYear(),"/",getYearPlusOne());
     }
-
-    public EpocaDesportiva(string epoca)
+    
+    public string getYear()
     {
-        EpocaDesp = formatEpoca(epoca);
+        return DateTime.Today.Year.ToString();
     }
-
-    private string formatEpoca(string epoca)
+    
+    public string getYearPlusOne()
     {
-        if (epoca == null)
-        {
-            throw new BusinessRuleValidationException("Preencha o campo referente à 'Época Desportiva'!");
-        }
-
-        return SharedMethods.onlyNumbersAndSeparator(epoca);
+        int year= DateTime.Today.Year+1;
+        return year.ToString();
     }
 
 

@@ -12,4 +12,9 @@ public class DataSubscricao: IValueObject
     {
         DataSubs = today.ToShortDateString();
     }
+    
+    public DataSubscricao(string dataSubs)
+    {
+        DataSubs = dataSubs;
+    }
 }

@@ -8,25 +8,17 @@ public class JogadorDTO
     public int IdentificadorEquipa { get; set; }
     public string Status { get; set; }
 
-    public Licenca Licenca;
+    public int Licenca;
 
     public JogadorDTO(Guid id,int lic ,string est, int identificadorPessoa, int identificadorEquipa, string status)
     {
         Id = id;
         EstatutoFpF = est;
-        Licenca = new Licenca(lic.ToString());
+        Licenca = lic;
         IdentificadorPessoa = identificadorPessoa;
         IdentificadorEquipa=identificadorEquipa;
         Status = status;
     }
     
-    public JogadorDTO(Guid id ,string est, int identificadorPessoa, int identificadorEquipa, string status)
-    {
-        Id = id;
-        EstatutoFpF = est;
-        Licenca = new Licenca();
-        IdentificadorPessoa = identificadorPessoa;
-        IdentificadorEquipa=identificadorEquipa;
-        Status = status;
-    }
+
 }

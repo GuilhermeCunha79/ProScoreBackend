@@ -23,11 +23,39 @@ internal class AssociacaoEntityTypeConfiguration : IEntityTypeConfiguration<Doma
             .HasConversion(
                 v => v.NomeAss,
                 v => new NomeAssociacao(v.ToString()));
-builder
+        
+        builder.Property(b => b.NomeCurto)
+            .HasConversion(
+                v => v.NomeCurt,
+                v => new NomeCurto(v.ToString()));
+        
+        builder.Property(b => b.Acronimo)
+            .HasConversion(
+                v => v.Acronimoo,
+                v => new Acronimo(v.ToString()));
+        
+        builder
             .HasMany(e => e.Clubes)
             .WithOne(j => j.Associacao)
             .HasForeignKey(e => e.NomeAssociacao)
             .OnDelete(DeleteBehavior.Restrict);
         
+        builder
+            .HasMany(e => e.InscricaoDefinitivaAssociacaoJogador)
+            .WithOne(j => j.Associacao)
+            .HasForeignKey(e=>e.NomeAssociacao)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder
+            .HasMany(e => e.InscricaoDefinitivaAssociacaoEquipa)
+            .WithOne(j => j.Associacao)
+            .HasForeignKey(e=>e.NomeAssociacao)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder
+            .HasMany(e => e.Utilizadores)
+            .WithOne(j => j.Associacao)
+            .HasForeignKey(e=>e.NomeAssociacao)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

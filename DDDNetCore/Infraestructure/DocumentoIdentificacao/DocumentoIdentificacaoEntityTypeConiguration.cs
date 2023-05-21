@@ -46,11 +46,7 @@ namespace ConsoleApp1.Infraestructure.DocumentoIdentificacao;
 
         //builder.Property<bool>("_active").HasColumnName("Active");
 
-        builder.Property(b => b.Id)
-            .HasConversion(
-                v => v.ToString(),
-                v => new Identifier(Guid.Parse(v)));
-        
+
         builder.Property(b => b.NrIdentificacao)
             .HasConversion(
                 v => v.NumeroId,

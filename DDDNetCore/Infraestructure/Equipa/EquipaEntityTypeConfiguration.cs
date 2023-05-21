@@ -14,10 +14,6 @@ internal class EquipaEntityTypeConfiguration : IEntityTypeConfiguration<Domain.E
         
         //builder.Property<bool>("_active").HasColumnName("Active");
         
-        builder.Property(b => b.Divisao)
-            .HasConversion(
-                v => v.Div,
-                v => new Divisao(v));
         
         builder
             .HasMany(e => e.Jogadores)

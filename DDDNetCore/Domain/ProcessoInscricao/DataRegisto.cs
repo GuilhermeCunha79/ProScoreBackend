@@ -11,4 +11,9 @@ public class DataRegisto: IValueObject
     {
         DataReg = "A AGUARDAR APROVAÇÃO DA ASSOCIAÇÃO";
     }
+    
+    public DataRegisto(string data)
+    {
+        DataReg =data;
+    }
 }

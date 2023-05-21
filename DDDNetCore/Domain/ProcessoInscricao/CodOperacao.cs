@@ -6,7 +6,7 @@ namespace ConsoleApp1.Domain.ProcessoInscricao;
 public class CodOperacao: IValueObject
 {
     public int CodOpe { get; set; }
-    private static int totalCod = 0;
+   
 
     public CodOperacao(string codOp)
     {
@@ -15,7 +15,7 @@ public class CodOperacao: IValueObject
     
     public CodOperacao()
     {
-        CodOpe = totalCod++;
+     
     }
     
     private int validateOperacao(string licenca)

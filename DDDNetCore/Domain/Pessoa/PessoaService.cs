@@ -23,9 +23,20 @@ public class PessoaService : IPessoaService
         var list = await _repo.GetAllAsync();
 
         List<PessoaDTO> listDto = list.ConvertAll(jogador =>
-            new PessoaDTO(jogador.Id.AsGuid(),jogador.IdentificadorPessoa.IdPessoa,jogador.Nome.Nomee,jogador.DataNascimento.DataNasc,jogador.TipoGenero.Genero,jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss));
+            new PessoaDTO(jogador.Id.AsGuid(),jogador.IdentificadorPessoa.IdPessoa,jogador.Nome.Nomee,jogador.DataNascimento.DataNasc,jogador.TipoGenero.Genero,
+                jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss,CheckStatus(jogador.Active),jogador.Telefone.Telemovel,jogador.ConcelhoResidência.Concelho));
 
         return listDto;
+    }
+    
+    private string CheckStatus(bool status)
+    {
+        if (status)
+        {
+            return "Active";
+        }
+
+        return "Inactive";
     }
 
     public Task<PessoaDTO> GetByIdAsync(Identifier id)
@@ -42,7 +53,7 @@ public class PessoaService : IPessoaService
             return null;
 
         return new PessoaDTO(jogador.Id.AsGuid(),jogador.IdentificadorPessoa.IdPessoa,jogador.Nome.Nomee,jogador.DataNascimento.DataNasc,jogador.TipoGenero.Genero,
-            jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss);
+            jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss,CheckStatus(jogador.Active),jogador.Telefone.Telemovel,jogador.ConcelhoResidência.Concelho);
 
     }
 
@@ -50,29 +61,62 @@ public class PessoaService : IPessoaService
 
     public async Task<PessoaDTO> AddAsync(PessoaDTO dto)
     {
-        NacionalidadePais result= await _repo_nacionalidade.GetByNomePaisAsync1(dto.NacionalidadePais); 
+        //NacionalidadePais result= await _repo_nacionalidade.GetByNomePaisAsync1(new NacionalidadePais(dto.NacionalidadePais).NacionalidadePaiss); 
        
        
         
-        var jogador = new Pessoa(dto.Nome,dto.DataNascimento,dto.TipoGenero,dto.Email,dto.NrIdentificacao,dto.NascencaPais,result.NacionalidadePaiss);
+        var jogador = new Pessoa(dto.Nome,dto.IdentificadorPessoa,dto.DataNascimento,dto.TipoGenero,dto.Email,dto.NrIdentificacao,dto.NascencaPais,new NacionalidadePais(dto.NacionalidadePais).NacionalidadePaiss);
 
         await _repo.AddAsync(jogador);
 
         await _unitOfWork.CommitAsync();
 
-        return new PessoaDTO(jogador.Id.AsGuid(), jogador.IdentificadorPessoa.IdPessoa,jogador.Nome.Nomee,jogador.DataNascimento.DataNasc,jogador.TipoGenero.Genero,
-            jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss);
+        return new PessoaDTO(jogador.Id.AsGuid(),jogador.IdentificadorPessoa.IdPessoa,jogador.Nome.Nomee,jogador.DataNascimento.DataNasc,jogador.TipoGenero.Genero,
+            jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss,CheckStatus(jogador.Active),"-----","-----");
 
     }
 
-    public Task<PessoaDTO> UpdateAsync(PessoaDTO dto)
+    public async Task<PessoaDTO> UpdateAsync(PessoaDTO dto)
     {
-        throw new NotImplementedException();
+        var jogador = await _repo.GetByIdAsync(new Identifier(dto.Id));
+
+        if (jogador == null)
+            return null;
+
+        // change all fields
+
+        
+
+
+        await _unitOfWork.CommitAsync();
+
+        return new PessoaDTO(jogador.Id.AsGuid(),jogador.IdentificadorPessoa.IdPessoa,jogador.Nome.Nomee,jogador.DataNascimento.DataNasc,jogador.TipoGenero.Genero,
+            jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(),jogador.NascencaPais.PaisNascenca,jogador.NacionalidadePais.NacionalidadePaiss,"true",jogador.Telefone.Telemovel,jogador.ConcelhoResidência.Concelho);
     }
 
-    public Task<PessoaDTO> UpdateByIdPessoaAsync(PessoaDTO dto)
+    public async Task<PessoaDTO> UpdateByIdPessoaAsync(PessoaDTO dto)
     {
-        throw new NotImplementedException();
+        var jogador = await _repo.GetByIdAsync(new Identifier(dto.Id));
+
+        if (jogador == null)
+            return null;
+
+        // change all fields
+
+        
+        jogador.ChangeEmail(dto.Email);
+        jogador.ChangeConcelhoResidencia(dto.ConcelhoResidencia);
+        jogador.ChangeNome(dto.Nome);
+        jogador.ChangeTelefone(dto.Telefone);
+        jogador.ChangeDataNascimento(dto.DataNascimento);
+
+
+        await _unitOfWork.CommitAsync();
+
+        return new PessoaDTO( jogador.Id.AsGuid(),jogador.IdentificadorPessoa.IdPessoa,
+            jogador.Nome.Nomee, jogador.DataNascimento.DataNasc,
+            jogador.TipoGenero.Genero,jogador.Email.Emaill,jogador.NrIdentificacao.NumeroId.ToString(), jogador.NascencaPais.PaisNascenca, jogador.Nacionalidade.NacionalidadePais.NacionalidadePaiss,
+            CheckStatus(jogador.Active),jogador.Telefone.Telemovel, jogador.ConcelhoResidência.Concelho); 
     }
 
     public Task<PessoaDTO> InactivateAsync(Identifier id)

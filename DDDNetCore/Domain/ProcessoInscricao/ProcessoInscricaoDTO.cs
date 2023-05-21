@@ -1,26 +1,29 @@
-﻿namespace ConsoleApp1.Domain.ProcessoInscricao;
+﻿using Newtonsoft.Json;
+
+namespace ConsoleApp1.Domain.ProcessoInscricao;
 
 public class ProcessoInscricaoDTO
 {
     public Guid Id;
 
-    public CodOperacao CodOperacao { get; set; }
+    public string CodOperacao { get; set; }
 
     public string TipoProcesso { get; set; }
-    public Estado Estado { get; set; }
+    public string Estado { get; set; }
     public string EpocaDesportiva { get; set; }
-    public DataRegisto DataRegisto { get; set; }
-    public DataSubscricao DataSubscricao { get; set; }
+    public string DataRegisto { get; set; }
+    public string DataSubscricao { get; set; }
 
-    public ProcessoInscricaoDTO(Guid id, string tipoProcesso, string epocaDesportiva)
+
+    public ProcessoInscricaoDTO(Guid id,string codOperacao, string status, string dataRegisto, string dataSubs, string tipoProcesso, string epocaDesportiva)
     {
         Id = id;
-        CodOperacao = new CodOperacao();
+        CodOperacao = codOperacao;
         TipoProcesso = tipoProcesso;
-        Estado = new Estado();
+        Estado = status;
         EpocaDesportiva = epocaDesportiva;
-        DataRegisto = new DataRegisto();
-        DataSubscricao = new DataSubscricao();
+        DataRegisto = dataRegisto;
+        DataSubscricao = dataSubs;
     }
 
    

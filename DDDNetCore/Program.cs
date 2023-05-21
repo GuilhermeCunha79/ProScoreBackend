@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Net;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ConsoleApp1;
@@ -26,8 +27,16 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        Tas t = new Tas();
-        await t.tas1();
+        //Tas t = new Tas();
+        //await t.tas1();
+        string imageUrl = "https://user-images.githubusercontent.com/127695615/225075521-b30eb6e6-7b70-4106-9e53-c1cecb10a04e.jpeg";
+
+        using (var webClient = new WebClient())
+        {
+            byte[] imagemBytes = webClient.DownloadData(imageUrl);
+            string imagemBase64 = Convert.ToBase64String(imagemBytes);
+           Console.Write(imagemBase64);
+        }
         Console.WriteLine("finished");
         Console.ReadKey();
     }

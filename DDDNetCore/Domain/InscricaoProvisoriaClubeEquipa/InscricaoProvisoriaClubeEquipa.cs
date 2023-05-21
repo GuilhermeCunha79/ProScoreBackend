@@ -15,8 +15,6 @@ public class InscricaoProvisoriaClubeEquipa : Entity<Identifier>
     public Clube.Clube Clube { get; set; }
     public ProcessoInscricao.ProcessoInscricao ProcessoInscricao { get; set; }
 
-    public Jogador.Jogador Jogador { get; set; }
-
     public InscricaoProvisoriaClubeEquipa()
     {
     }

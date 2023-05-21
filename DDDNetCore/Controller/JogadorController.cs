@@ -1,7 +1,7 @@
-﻿using Azure;
-using Azure.AI.FormRecognizer.DocumentAnalysis;
+﻿
 using ConsoleApp1.Domain.DocumentoIdentificacao;
 using ConsoleApp1.Domain.Jogador;
+using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +12,12 @@ namespace ConsoleApp1.Controller
     public class JogadorController : ControllerBase
     {
         private readonly IJogadorService _service;
-        private readonly IDocIdentificacaoService _service_doc;
+        private readonly DDDSample1DbContext _context;
 
-        public JogadorController(IJogadorService service)
+        public JogadorController(IJogadorService service,DDDSample1DbContext _context1)
         {
             _service = service;
+            _context = _context1;
         }
 
         // GET: api/Jogadores
@@ -72,6 +73,7 @@ namespace ConsoleApp1.Controller
                 }
             }
 
+            dto.Licenca = _context.ObterNumeroDeJogadores();
             try
             {
                 var jogador = await _service.AddAsync(dto);
@@ -122,7 +124,7 @@ namespace ConsoleApp1.Controller
         public async Task<ActionResult<JogadorDTO>> UpdateByLicencaAsync(string licenca,
             JogadorDTO dto)
         {
-            dto.Licenca = new Licenca(licenca);
+            dto.Licenca = Int32.Parse(licenca);
 
             try
             {

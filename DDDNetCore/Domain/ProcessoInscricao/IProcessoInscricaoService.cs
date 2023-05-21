@@ -10,6 +10,8 @@ public interface IProcessoInscricaoService
     Task<ProcessoInscricaoDTO> GetByIdAsync(Identifier id);
     Task<ProcessoInscricaoDTO> GetByCodOperacao(string licenca);
     
+    Task<List<ProcessoInscricaoDTO>> GetProcessosAssociacaoByNomeAssociacaoAsync(string licenca);
+    
     Task<ProcessoInscricaoDTO> AddAsync(ProcessoInscricaoDTO obj);
 
     Task<ProcessoInscricaoDTO> UpdateAsync(ProcessoInscricaoDTO dto);

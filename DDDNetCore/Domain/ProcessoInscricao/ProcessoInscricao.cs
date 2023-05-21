@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using Azure.Identity;
+using ConsoleApp1.Domain.DocumentosProcesso;
 using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.ProcessoInscricao;
@@ -10,7 +12,7 @@ public class ProcessoInscricao : Entity<Identifier>
     public TipoProcesso TipoProcesso { get; set; }
     public Estado Estado { get; set; }
     public EpocaDesportiva EpocaDesportiva { get; set; }
-    public DataRegisto DataRegisto { get; set; }
+    public DataRegisto? DataRegisto { get; set; }
 
 
     public DataSubscricao DataSubscricao { get; set; }
@@ -19,39 +21,39 @@ public class ProcessoInscricao : Entity<Identifier>
     public InscricaoDefinitivaAssociacaoEquipa.InscricaoDefinitivaAssociacaoEquipa InscricaoDefinitivaAssociacaoEquipa { get; set;}
     public InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador InscricaoProvisoriaClubeJogador { get; set;}
     public InscricaoDefinitivaAssociacaoJogador.InscricaoDefinitivaAssociacaoJogador InscricaoDefinitivaAssociacaoJogador { get; set;}
-    
+    public DocumentosProcesso.DocumentosProcesso? DocumentosProcesso { get; set; }
+
+
     public ProcessoInscricao()
     {
         
     }
-    public ProcessoInscricao(string tipoProcesso, string epoca)
+    public ProcessoInscricao(string tipoProcesso,string codOperacao)
     {
         Id = new Identifier(Guid.NewGuid());
-        CodOperacao = new CodOperacao();
+        CodOperacao = new CodOperacao(codOperacao);
         TipoProcesso = new TipoProcesso(tipoProcesso);
         Estado = new Estado();
-        EpocaDesportiva = new EpocaDesportiva(epoca);
+        EpocaDesportiva = new EpocaDesportiva();
         DataSubscricao = new DataSubscricao();
+        DataRegisto = new DataRegisto();
     }
+    
     
 
     public void ChangeEstadoAprovado()
     {
-        Estado = new Estado("Aprovado");
+        Estado = new Estado("APROVADO");
     }
     
     public void ChangeEstadoReprovado()
     {
         Estado = new Estado("Reprovado");
     }
-
-    public void ChangeEpocaDesportiva(string epoca)
+    
+    public void ChangeDataRegisto()
     {
-        if (epoca == null)
-        {
-            throw new NoNullAllowedException("A 'Época Desportiva' deve ser preenchida!");
-        }
-        EpocaDesportiva = new EpocaDesportiva(epoca);
+        DataRegisto = new DataRegisto(DateTime.Today.ToString());
     }
 
     public void ChangeTipoProcesso(string tipo)

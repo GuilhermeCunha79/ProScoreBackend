@@ -31,7 +31,7 @@ namespace ConsoleApp1.Infraestructure.ProcessoInscricao;
             builder.Property(b => b.EpocaDesportiva)
                 .HasConversion(
                     v => v.EpocaDesp,
-                    v => new EpocaDesportiva(v)).IsRequired();
+                    v => new EpocaDesportiva()).IsRequired();
             
             builder.Property(b => b.DataRegisto)
                 .HasConversion(
@@ -62,6 +62,11 @@ namespace ConsoleApp1.Infraestructure.ProcessoInscricao;
                 .HasOne(e => e.InscricaoProvisoriaClubeJogador)
                 .WithOne(j => j.ProcessoInscricao)
                 .HasForeignKey<Domain.InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador>(e=>e.CodOperacao);
+            
+            builder
+                .HasOne(e => e.DocumentosProcesso)
+                .WithOne(j => j.ProcessoInscricao)
+                .HasForeignKey<Domain.DocumentosProcesso.DocumentosProcesso>(e=>e.CodOperacao);
             
 
             builder.Property(b => b.CodOperacao)

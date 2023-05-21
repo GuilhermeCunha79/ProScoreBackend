@@ -24,10 +24,10 @@ public class NifClube: IValueObject
             throw new BusinessRuleValidationException("Insira o 'NIF' do clube que pretende inscrever!");
         }
 
-        if (SharedMethods.onlyLetters(nif).Length != 9)
+     /*   if (SharedMethods.onlyNumbers(nif).ToString().Length != 9)
         {
             throw new BusinessRuleValidationException("O 'NIF' do Clube deve ter exatamente 9 digitos númericos!");
-        }
+        }*/
 
         return SharedMethods.onlyNumbers(nif);
     }

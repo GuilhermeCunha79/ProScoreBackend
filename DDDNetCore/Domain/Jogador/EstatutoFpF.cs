@@ -22,7 +22,7 @@ public class EstatutoFpF:IValueObject
         
         string[] paisesUe =
         {
-            "Alemã", "Austríaca", "Belga", "Búlgara", "Cipriota", "Croata", "Dinamarquesa", "Eslovaca", "Eslovena", "Espanhola", "Estoniana", "Finlandesa", "Francesa", "Grega", "Holandesa", "Húngara", "Irlandesa", "Italiana", "Letã", "Lituana", "Luxemburguesa", "Maltesa", "Polonesa", "Tcheca", "Romena", "Sueca", "Portuguesa"
+            "Alemã", "Austríaca", "Belga", "Búlgara", "Cipriota", "Croata", "Dinamarquesa", "Eslovaca", "Eslovena", "Espanhola", "Estoniana", "Finlandesa", "Francesa", "Grega", "Holandesa", "Húngara", "Irlandesa", "Italiana", "Letã", "Lituana", "Luxemburguesa", "Maltesa", "Polonesa", "Tcheca", "Romena", "Sueca"
         };
         
 
@@ -34,7 +34,7 @@ public class EstatutoFpF:IValueObject
             }
         }
 
-        return pais.ToUpper().Equals("PORTUGUÊS") ? "Português" : "Estrangeiro";
+        return pais.ToUpper().Equals("PORTUGUESA") ? "Português" : "Estrangeiro";
     }
 
     public override string ToString()

@@ -1,10 +1,13 @@
-﻿using ConsoleApp1.Domain.DocumentoIdentificacao;
+﻿using ConsoleApp1.Domain.Divisao;
+using ConsoleApp1.Domain.DocumentoIdentificacao;
 using ConsoleApp1.Domain.Equipa;
+using ConsoleApp1.Domain.Utilizador;
 using ConsoleApp1.Infraestructure.Associacao;
 using ConsoleApp1.Infraestructure.Categoria;
 using ConsoleApp1.Infraestructure.Clube;
 using ConsoleApp1.Infraestructure.CodigoPaises;
 using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
+using ConsoleApp1.Infraestructure.DocumentosProcesso;
 using ConsoleApp1.Infraestructure.Equipa;
 using ConsoleApp1.Infraestructure.Genero;
 using ConsoleApp1.Infraestructure.InscricaoDefinitivaAssociacaoEquipa;
@@ -28,37 +31,45 @@ public class DDDSample1DbContext : DbContext
     public DbSet<Domain.Jogador.Jogador> Jogadores { get; set; }
     public DbSet<Domain.Equipa.Equipa> Equipas { get; set; }
     
+    public DbSet<Domain.Associacao.Associacao> Associacoes { get; set; }
+    
     public DbSet<Domain.Nacionalidade.Nacionalidade> Nacionalidades { get; set; }
+    public DbSet<Domain.InscricaoDefinitivaAssociacaoEquipa.InscricaoDefinitivaAssociacaoEquipa> InscricaoDefinitivaAssociacaoEquipas { get; set; }
+    public DbSet<Domain.InscricaoDefinitivaAssociacaoJogador.InscricaoDefinitivaAssociacaoJogador> InscricaoDefinitivaAssociacaoJogador { get; set; }
     
+    public DbSet<Domain.InscricaoProvisoriaClubeEquipa.InscricaoProvisoriaClubeEquipa> InscricaoProvisoriaClubeEquipa { get; set; }
+    public DbSet<Domain.InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador> InscricaoProvisoriaClubeJogador { get; set; }
     public DbSet<DocIdentificacao> DocId { get; set; }
-    
+    public DbSet<Domain.DocumentosProcesso.DocumentosProcesso> DocumentosProcessos { get; set; }
     public DbSet<Domain.Clube.Clube> Clubes { get; set; }
     public DbSet<Domain.ProcessoInscricao.ProcessoInscricao> Processos { get; set; }
     public DbSet<Domain.Pessoa.Pessoa> Pessoas { get; set; }
 
+    public DbSet<Utilizador> Utilizadores { get; set; }
+
     public int ObterNumeroDeJogadores()
     {
-        return Jogadores.Count();
+        return Jogadores.Count()+1;
     }
     
     public int ObterNumeroDeClubes()
     {
-        return Clubes.Count();
+        return Clubes.Count()+1;
     }
 
     public int ObterNumeroDePessoas()
     {
-        return Pessoas.Count();
+        return Pessoas.Count()+1;
     }
 
     public int ObterNumeroDeEquipas()
     {
-        return Equipas.Count();
+        return Equipas.Count()+1;
     }
 
     public int ObterNumeroDeProcessos()
     {
-        return Processos.Count();
+        return Processos.Count()+1;
     }
     public DDDSample1DbContext(DbContextOptions options) : base(options)
     {
@@ -76,11 +87,11 @@ public class DDDSample1DbContext : DbContext
         
         modelBuilder.ApplyConfiguration(new JogadorEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CategoriaEntityTypeConfiguration());
-        
+        modelBuilder.ApplyConfiguration(new NacionalidadeEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new PessoaEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new GeneroEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new DocumentoIdentificacaoEntityTypeConiguration());
-        modelBuilder.ApplyConfiguration(new NacionalidadeEntityTypeConfiguration());
+
         modelBuilder.ApplyConfiguration(new PaisEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new PaisCodigoEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new PaisNascencaEntityTypeConfiguration());
@@ -97,5 +108,9 @@ public class DDDSample1DbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new EquipaEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new AssociacaoEntityTypeConfiguration());
+       
+        modelBuilder.ApplyConfiguration(new UtilizadorEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new DocumentosProcessoEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new DivisaoEntityTypeConfigurationType());
     }
 }

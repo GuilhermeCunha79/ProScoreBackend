@@ -32,11 +32,11 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
     {
     }
 
-    public Pessoa(string nome, string dataNascimento, string? telefone, string? email, string? concelhoResidencia,
+    public Pessoa(string nome,int idPessoa, string dataNascimento, string? telefone, string? email, string? concelhoResidencia,
         string genero, string docId, string paisNascenca, string nacionalidade)
     {
         Id = new Identifier(Guid.NewGuid());
-        IdentificadorPessoa = new IdentificadorPessoa();
+        IdentificadorPessoa = new IdentificadorPessoa(idPessoa);
         Nome = new Nome(nome);
         DataNascimento = new DataNascimento(dataNascimento);
         Telefone = new Telefone(telefone);
@@ -46,14 +46,14 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
         NrIdentificacao = new NrIdentificacao(docId);
         NascencaPais = new NascencaPais(paisNascenca);
         NacionalidadePais = new NacionalidadePais(nacionalidade);
-        Active = true;
+        Active = false;
     }
 
-    public Pessoa(string nome, string dataNascimento, string genero, string email, string docId, string paisNascenca,
+    public Pessoa(string nome,int idPessoa, string dataNascimento, string genero, string email, string docId, string paisNascenca,
         string nacionalidade)
     {
         Id = new Identifier(Guid.NewGuid());
-        IdentificadorPessoa = new IdentificadorPessoa();
+        IdentificadorPessoa = new IdentificadorPessoa(idPessoa);
         Nome = new Nome(nome);
         DataNascimento = new DataNascimento(dataNascimento);
         TipoGenero = new TipoGenero(genero);
@@ -97,5 +97,25 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
     public void ChangeConcelhoResidencia(string concelho)
     {
         ConcelhoResidência = new ConcelhoResidência(concelho);
+    }
+
+    public void MarkAsInative()
+    {
+        if (!Active)
+        {
+            throw new BusinessRuleValidationException("O 'Jogador' já está inativo!");
+        }
+
+        Active = false;
+    }
+
+    public void MarkAsAtive()
+    {
+        if (Active)
+        {
+            throw new BusinessRuleValidationException("O 'Jogador' já está ativo!");
+        }
+
+        Active = true;
     }
 }

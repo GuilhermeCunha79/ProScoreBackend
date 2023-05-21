@@ -7,7 +7,7 @@ namespace ConsoleApp1.Domain.Jogador;
 
 public class Jogador : Entity<Identifier>
 {
-    private static int totalEquipa = 1;
+    private static int totalEquipa = 0;
     public EstatutoFpF EstatutoFpF { get; set; }
     
     public Licenca Licenca { get; set; }
@@ -36,7 +36,7 @@ public class Jogador : Entity<Identifier>
         EstatutoFpF = new EstatutoFpF(estatuto);
         IdentificadorPessoa = new IdentificadorPessoa(idPessoa);
         IdentificadorEquipa = new IdentificadorEquipa(idEquipa);
-        Active = true;
+        Active = false;
     }
     
     public Jogador(int licenca,string estatuto, int idPessoa, int idEquipa)

@@ -24,13 +24,13 @@ public class LetrasDoc: IValueObject
             throw new BusinessRuleValidationException("As letras do documento de identificação devem ser preenchidas!");
         }
         
-        string let=SharedMethods.onlyLettersAndNumbers(letras).Substring(1,3);
-        if (let.Length != 3)
+
+        if (letras.Length != 3)
         {
-            throw new BusinessRuleValidationException("As letras do documento de identicação devem ser 3 letras!");
+            string let=SharedMethods.onlyLettersAndNumbers(letras).Substring(1,3);
         }
         
         
-        return let;
+        return letras;
     }
 }

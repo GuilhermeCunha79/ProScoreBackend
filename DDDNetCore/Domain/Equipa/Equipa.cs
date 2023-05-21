@@ -2,6 +2,7 @@
 using System.Data;
 using ConsoleApp1.Domain.Categoria;
 using ConsoleApp1.Domain.Clube;
+using ConsoleApp1.Domain.Divisao;
 using ConsoleApp1.Domain.Genero;
 using ConsoleApp1.Domain.Modalidade;
 using ConsoleApp1.Infraestructure;
@@ -19,7 +20,7 @@ public class Equipa: Entity<Identifier>,IAggregateRoot
     public TipoModalidade TipoModalidade { set; get; }
     public TipoGenero TipoGenero { set; get; }
     public bool Active { get; set; }
-    public Divisao Divisao { get; set; }
+    public NomeDivisao NomeDivisao { get; set; }
     public ICollection<Jogador.Jogador> Jogadores { get; set; }
 
     public Clube.Clube Clube { get; set; }
@@ -27,6 +28,7 @@ public class Equipa: Entity<Identifier>,IAggregateRoot
     public Categoria.Categoria Categoria{ get; set; }
     public Modalidade.Modalidade Modalidade { get; set; }
 
+    public Divisao.Divisao Divisao { get; set; }
     public ICollection<InscricaoProvisoriaClubeEquipa.InscricaoProvisoriaClubeEquipa> InscricaoProvisoriaClubeEquipa { get; set; }
     public ICollection<InscricaoDefinitivaAssociacaoEquipa.InscricaoDefinitivaAssociacaoEquipa> InscricaoDefinitivaAssociacaoEquipa { get; set; }
 
@@ -35,11 +37,11 @@ public class Equipa: Entity<Identifier>,IAggregateRoot
     {
         
     }
-    public Equipa(string divisao, int codClube, string tipoCategoria, string tipoModalidade, string tipoGenero)
+    public Equipa(int id,string divisao, int codClube, string tipoCategoria, string tipoModalidade, string tipoGenero)
     {
         Id = new Identifier(Guid.NewGuid());
-        IdentificadorEquipa = new IdentificadorEquipa(totalEquipas++);
-        Divisao = new Divisao(divisao);
+        IdentificadorEquipa = new IdentificadorEquipa(id);
+        NomeDivisao = new NomeDivisao(divisao);
         CodigoClube = new CodigoClube(codClube);
         TipoCategoria=new TipoCategoria(tipoCategoria);
         TipoModalidade=new TipoModalidade(tipoModalidade);
@@ -55,15 +57,11 @@ public class Equipa: Entity<Identifier>,IAggregateRoot
             throw new NoNullAllowedException("A 'Divisão' da Equipa deve ser preenchida!");
         }
 
-        Divisao = new Divisao(divisao);
+        NomeDivisao = new NomeDivisao(divisao);
     }
 
     public void ChangeCodClube(int codClube)
     {
-        /*if (codClube == null)
-        {
-            throw new NoNullAllowedException("O 'Código do Clube' a qual a Equipa pertence deve ser preenchido!");
-        }*/
 
         CodigoClube = new CodigoClube(codClube);
     }

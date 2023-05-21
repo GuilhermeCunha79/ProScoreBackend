@@ -1,13 +1,26 @@
-﻿using ConsoleApp1.Domain.DocumentoIdentificacao;
+﻿using ConsoleApp1.Domain.Associacao;
+using ConsoleApp1.Domain.Clube;
+using ConsoleApp1.Domain.DocumentoIdentificacao;
 using ConsoleApp1.Domain.Equipa;
+using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoEquipa;
+using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoJogador;
+using ConsoleApp1.Domain.InscricaoProvisoriaClubeJogador;
 using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Domain.Nacionalidade;
 using ConsoleApp1.Domain.Pessoa;
 using ConsoleApp1.Domain.ProcessoInscricao;
+using ConsoleApp1.Domain.Utilizador;
 using ConsoleApp1.Infraestructure;
+using ConsoleApp1.Infraestructure.Associacao;
+using ConsoleApp1.Infraestructure.Clube;
 using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
+using ConsoleApp1.Infraestructure.InscricaoDefinitivaAssociacaoEquipa;
+using ConsoleApp1.Infraestructure.InscricaoDefinitivaAssociacaoJogador;
+using ConsoleApp1.Infraestructure.InscricaoProvisoriaClubeEquipa;
+using ConsoleApp1.Infraestructure.InscricaoProvisoriaClubeJogador;
 using ConsoleApp1.Infraestructure.Jogador;
 using ConsoleApp1.Infraestructure.Nacionalidade;
+using ConsoleApp1.Infraestructure.ProcessoInscricao;
 using ConsoleApp1.Infraestructure.Shared;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Builder;
@@ -115,5 +128,29 @@ namespace ConsoleApp1;
             
             services.AddTransient<INacionalidadeRepository, NacionalidadeRepository>();
             services.AddTransient<INacionalidadeService, NacionalidadeService>();
+            
+            services.AddTransient<IUtilizadorRepository, UtilizadorRepository>();
+            services.AddTransient<IUtilizadorService, UtilizadorService>();
+            
+            services.AddTransient<IDocIdentificacaoRepository, DocIdentificacaoRepository>();
+            services.AddTransient<IDocIdentificacaoService, DocIdentificacaoService>();
+            
+            services.AddTransient<IInscricaoDefinitivaAssociacaoJogadorRepository, InscricaoDefinitivaAssociacaoJogadorRepository>();
+            services.AddTransient<IInscricaoDefinitivaAssociacaoJogadorService, InscricaoDefinitivaAssociacaoJogadorService>();
+            
+            services.AddTransient<IInscricaoDefinitivaAssociacaoEquipaRepository, InscricaoDefinitivaAssociacaoEquipaRepository>();
+            services.AddTransient<IInscricaoDefinitivaAssociacaoEquipaService, InscricaoDefinitivaAssociacaoEquipaService>();
+            
+            services.AddTransient<IInscricaoProvisoriaClubeJogadorRepository, InscricaoProvisoriaClubeJogadorRepository>();
+            services.AddTransient<IInscricaoProvisoriaClubeJogadorService, InscricaoProvisoriaClubeJogadorService>();
+            
+            services.AddTransient<IUtilizadorRepository, UtilizadorRepository>();
+            services.AddTransient<IUtilizadorService, UtilizadorService>();
+            
+            services.AddTransient<IClubeRepository, ClubeRepository>();
+            services.AddTransient<IClubeService, ClubeService>();
+            
+            services.AddTransient<IAssociacaoRepository, AssociacaoRepository>();
+            services.AddTransient<IAssociacaoService, AssociacaoService>();
         }
     }

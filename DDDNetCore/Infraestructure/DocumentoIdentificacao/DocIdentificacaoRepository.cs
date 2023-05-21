@@ -23,7 +23,7 @@ public class DocIdentificacaoRepository : BaseRepository<DocIdentificacao, Ident
         
         var query = @"SELECT TOP(1) [j].[NrIdentificacao], [j].[LetrasDoc], [j].[CheckDigit],[j].[ValidadeDoc],[j].[NrUtente], [j].[Nif], [j].[Active],[j].[Id]
                 FROM [DocumentoIdentificacao] AS [j]
-                WHERE [j].[NrIdentificacao] = @licencaInt  AND [j].[Active] = 1";
+                WHERE [j].[NrIdentificacao] = @licencaInt ";
         
         
         return await _context.DocId.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))

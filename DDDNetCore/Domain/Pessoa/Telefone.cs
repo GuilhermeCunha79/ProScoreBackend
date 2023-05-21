@@ -19,7 +19,7 @@ public Telefone(string? tele)
 
     private string validateTelemovel(string telemovel)
     {
-        if (SharedMethods.onlyNumbers(telemovel).ToString().Length != 0 |
+        if (SharedMethods.onlyNumbers(telemovel).ToString().Length != 0 &
             SharedMethods.onlyNumbers(telemovel).ToString().Length != 9)
         {
             throw new BusinessRuleValidationException("Verfique o preenchimento do campo referente ao 'Telefone'!");
@@ -29,6 +29,6 @@ public Telefone(string? tele)
 
     public override string ToString()
     {
-        return Telemovel.ToString();
+        return Telemovel;
     }
 }

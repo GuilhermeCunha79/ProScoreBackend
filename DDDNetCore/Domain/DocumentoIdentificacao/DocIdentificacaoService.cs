@@ -1,5 +1,7 @@
-﻿using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
+﻿using ConsoleApp1.Domain.Utilizador;
+using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
 using ConsoleApp1.Shared;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ConsoleApp1.Domain.DocumentoIdentificacao;
 
@@ -90,20 +92,51 @@ public class DocIdentificacaoService : IDocIdentificacaoService
     }
 
 
-    public Task<DocIdentificacaoDTO> UpdateAsync(DocIdentificacaoDTO dto)
+    public async Task<DocIdentificacaoDTO> UpdateAsync(DocIdentificacaoDTO dto)
     {
-        throw new NotImplementedException();
-    }
+        var jogador = await _repo.GetByIdAsync(new Identifier(dto.Id));
 
-    public Task<DocIdentificacaoDTO> UpdateByNrIdAsync(DocIdentificacaoDTO dto)
-    {
-        throw new NotImplementedException();
-    }
+        if (jogador == null)
+            return null;
 
-    public Task<DocIdentificacaoDTO> UpdateByJogadorLicencaAsync(DocIdentificacaoDTO dto)
-    {
-        throw new NotImplementedException();
+        // change all fields
+
+     
+
+
+        await _unitOfWork.CommitAsync();
+
+        return new DocIdentificacaoDTO(jogador.Id.AsGuid(), jogador.NrIdentificacao.NumeroId.ToString(),
+            jogador.LetrasDoc.LetrasDocumento,
+            jogador.CheckDigit.CheckDig,
+            jogador.ValidadeDoc.Data, jogador.Nif.NumIdFis, jogador.NrUtente.NumUtente, "true");
     }
+    
+    
+    public async Task<DocIdentificacaoDTO> UpdateByNrIdAsync(DocIdentificacaoDTO dto)
+    {
+        
+        var jogador = await _repo.GetByIdAsync(new Identifier(dto.Id));
+
+        if (jogador == null)
+            return null;
+
+        // change all fields
+
+        
+        jogador.ChangeValidadeDoc(dto.ValidadeDoc);
+        jogador.ChangeNumUtente(dto.NrUtente);
+        jogador.ChangeNrIdentificacao(dto.NrIdentificacao);
+        jogador.ChangeNif(dto.Nif);
+        jogador.ChangeLetrasDoc(dto.LetrasDoc);
+        jogador.ChangeCheckDigit(dto.CheckDigit);
+
+        await _unitOfWork.CommitAsync();
+
+        return new DocIdentificacaoDTO( jogador.Id.AsGuid(),jogador.NrIdentificacao.NumeroId.ToString(),jogador.LetrasDoc.LetrasDocumento, jogador.CheckDigit.CheckDig,
+            jogador.ValidadeDoc.Data,jogador.Nif.NumIdFis,jogador.NrUtente.NumUtente, CheckStatus(jogador.Active));  
+    }
+    
 
     public Task<DocIdentificacaoDTO> InactivateAsync(Identifier id)
     {

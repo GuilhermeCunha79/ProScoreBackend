@@ -1,5 +1,7 @@
 ﻿using ConsoleApp1.Domain.Equipa;
+using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoEquipa;
 using ConsoleApp1.Domain.Jogador;
+using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,12 @@ namespace ConsoleApp1.Controller;
 public class EquipaController : ControllerBase
 {
     private readonly IEquipaService _service;
+    private readonly DDDSample1DbContext _context;
 
-    public EquipaController(IEquipaService service)
+    public EquipaController(IEquipaService service,DDDSample1DbContext _context1)
     {
         _service = service;
+        _context = _context1;
     }
 
     // GET: api/Equipas
@@ -68,6 +72,7 @@ public class EquipaController : ControllerBase
             }
         }
 
+        dto.IdentificadorEquipa = _context.ObterNumeroDeEquipas()+1;
         try
         {
             var jogador = await _service.AddAsync(dto);
@@ -82,7 +87,7 @@ public class EquipaController : ControllerBase
 
 
     // PUT: api/Jogadores/5
-  /*  [HttpPut("{id}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult<EquipaDTO>> Update(int id, EquipaDTO dto)
     {
         // if (id != dto.Id)
@@ -90,7 +95,7 @@ public class EquipaController : ControllerBase
         //     return BadRequest();
         // }
 
-        dto. = new IdentificadorEquipa(id);
+        dto.IdentificadorEquipa = Int32.Parse(new IdentificadorEquipa(id).ToString());
 
         try
         {
@@ -116,7 +121,7 @@ public class EquipaController : ControllerBase
     public async Task<ActionResult<EquipaDTO>> UpdateByLicencaAsync(string licenca,
         EquipaDTO dto)
     {
-        dto.IdentificadorEquipa = new IdentificadorEquipa(Int32.Parse(licenca));
+        dto.IdentificadorEquipa = Int32.Parse(new IdentificadorEquipa(Int32.Parse(licenca)).ToString());
 
         try
         {
@@ -168,6 +173,6 @@ public class EquipaController : ControllerBase
         {
             return BadRequest(new { ex.Message });
         }
-    }*/
+    }
 }
 

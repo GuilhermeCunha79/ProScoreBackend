@@ -1,4 +1,5 @@
-﻿using Azure;
+﻿using System.Text.RegularExpressions;
+using Azure;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
 using Azure.AI.FormRecognizer.Models;
 using ConsoleApp1.Domain.Jogador;
@@ -21,7 +22,7 @@ public class SharedMethods
 
         foreach (Char c in textTrim)
         {
-            if (Char.IsDigit(c) | c.Equals('/'))
+            if (Char.IsNumber(c) | c.Equals('/'))
             {
                 integerString += c;
             }
@@ -34,7 +35,7 @@ public class SharedMethods
             }
         }
 
-        return final;
+        return final+integerString;
     }
 
     public static int onlyNumbers(string epoca)
@@ -52,13 +53,13 @@ public class SharedMethods
             }
             else if (integerString.Length > 0)
             {
-                
+                final += integerString;
                 integerString = "";
 
             }
         }
 
-        return Int32.Parse(integerString);
+        return Int32.Parse(final+integerString);
     }
 
     public static string onlyLetters(string epoca)
@@ -114,11 +115,10 @@ public class SharedMethods
     public static string onlyLettersAndSpace(string epoca)
     {
 
-        string textTrim = epoca.Trim();
         string final = "";
         string integerString = string.Empty;
 
-        foreach (char c in textTrim)
+        foreach (char c in epoca)
         {
             if (char.IsLetter(c) | char.IsWhiteSpace(c))
             {
@@ -133,7 +133,7 @@ public class SharedMethods
             }
         }
 
-        return final;
+        return (final+integerString).TrimEnd().TrimStart();
     }
 
     public static DbContextOptions<DDDSample1DbContext> connection()
@@ -141,6 +141,16 @@ public class SharedMethods
         return new DbContextOptionsBuilder<DDDSample1DbContext>()
             .UseSqlServer("DefaultConnection")
             .Options;
+    }
+    
+    public static bool IsValidEmail(string email)
+    {
+       
+        string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        
+        Regex regex = new Regex(pattern);
+        
+        return regex.IsMatch(email);
     }
 
     

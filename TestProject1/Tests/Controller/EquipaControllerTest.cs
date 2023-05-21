@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1.Controller;
 using ConsoleApp1.Domain.Equipa;
+using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoEquipa;
 using ConsoleApp1.Domain.Jogador;
 using Moq;
 using Xunit;
@@ -34,7 +35,7 @@ public class EquipaControllerTest
         jogadorServiceMock.Setup(_ => _.GetByIdAsync(delivery.Id)).ReturnsAsync(deliveryDto);
         jogadorServiceMock.Setup(_ => _.AddAsync(deliveryDto)).ReturnsAsync(deliveryDto);
 
-        var controller = new EquipaController(jogadorServiceMock.Object);
+        var controller = new EquipaController(jogadorServiceMock.Object, new Mock<IInscricaoDefinitivaAssociacaoEquipaService>().Object);
 
         var actual = await controller.Create(deliveryDto);
         output.WriteLine(actual.ToString());
@@ -58,7 +59,7 @@ public class EquipaControllerTest
 
         deliveryServiceMock.Setup(_ => _.GetByIdentificadorEquipa(licenca)).ReturnsAsync(deliveryDto);
 
-        var controller = new EquipaController(deliveryServiceMock.Object);
+        var controller = new EquipaController(deliveryServiceMock.Object,new Mock<IInscricaoDefinitivaAssociacaoEquipaService>().Object);
 
         var actual = await controller.GetByLicencaJogador("213");
 

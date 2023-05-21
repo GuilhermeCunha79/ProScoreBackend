@@ -28,7 +28,7 @@ public class DocIdentificacao: Entity<Identifier>
         ValidadeDoc = new ValidadeDoc(validade);
         Nif = new Nif(nif) ;
         NrUtente = new NrUtente(nrUtente);
-        Active = true;
+        Active = false;
     }
 
 
@@ -74,7 +74,7 @@ public class DocIdentificacao: Entity<Identifier>
     {
         if (!Active)
         {
-            throw new BusinessRuleValidationException("A Associação já está inativa!");
+            throw new BusinessRuleValidationException("O Documento de Identificação já está inativa!");
         }
 
         Active = false;
@@ -84,7 +84,7 @@ public class DocIdentificacao: Entity<Identifier>
     {
         if (Active)
         {
-            throw new BusinessRuleValidationException("A Associação já está ativa!");
+            throw new BusinessRuleValidationException("O Documento de Identificação já está ativa!");
         }
 
         Active = true;

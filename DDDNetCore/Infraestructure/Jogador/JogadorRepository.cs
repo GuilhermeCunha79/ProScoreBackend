@@ -23,7 +23,7 @@ public class JogadorRepository : BaseRepository<Domain.Jogador.Jogador, Identifi
         
         var query = @"SELECT [j].[Licenca],  [j].[IdentificadorPessoa], [j].[EstatutoFpF], [j].[IdentificadorEquipa], [j].[Active], [j].[Id]
                 FROM [Jogador] AS [j]
-                WHERE [j].[Licenca] = @licencaInt  AND [j].[Active] = 1";
+                WHERE [j].[Licenca] = @licencaInt";
         
         
         return await _context.Jogadores.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
@@ -31,15 +31,20 @@ public class JogadorRepository : BaseRepository<Domain.Jogador.Jogador, Identifi
         
         
     }
-
-
-    public Task<List<JogadorDTO>> GetByIdsAsync(List<Licenca> ids)
+    
+    public async Task<Domain.Jogador.Jogador> GetLicencaByIdPessoaAsync(string licenca)
     {
-        throw new System.NotImplementedException();
+        if (!int.TryParse(licenca, out var licencaInt)) {
+            throw new ArgumentException("licenca parameter must be a valid integer");
+        }
+        
+        var query = @"SELECT [j].[Licenca],  [j].[IdentificadorPessoa], [j].[EstatutoFpF], [j].[IdentificadorEquipa], [j].[Active], [j].[Id]
+                FROM [Jogador] AS [j]
+                WHERE [j].[IdentificadorPessoa] = @licencaInt and [j].[Active]=1";
+        
+        
+        return await _context.Jogadores.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
+            .FirstOrDefaultAsync();
     }
-
-    public Task<JogadorDTO> AddAsync(JogadorDTO obj)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

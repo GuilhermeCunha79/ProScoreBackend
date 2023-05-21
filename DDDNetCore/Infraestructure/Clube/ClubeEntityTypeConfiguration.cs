@@ -42,11 +42,7 @@ internal class ClubeEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Cl
             .HasConversion(
                 v => v.CodClube,
                 v => new CodigoClube(v)).IsRequired();
-
-        builder.Property(b => b.Id)
-            .HasConversion(
-                v => v.ToString(),
-                v => new Identifier(Guid.Parse(v)));
+        
 
         //builder.Property<bool>("_active").HasColumnName("Active");
         builder
@@ -66,9 +62,16 @@ internal class ClubeEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Cl
             .WithOne(j => j.Clube)
             .HasForeignKey(e => e.CodigoClube)
             .OnDelete(DeleteBehavior.Restrict);
+        
         builder.Property(b => b.NomeAssociacao)
             .HasConversion(
                 v => v.NomeAss,
                 v => new NomeAssociacao(v.ToString()));
+        
+        builder
+            .HasMany(e => e.Utilizadores)
+            .WithOne(j => j.Clube)
+            .HasForeignKey(e=>e.CodigoClube)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

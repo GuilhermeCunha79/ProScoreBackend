@@ -13,10 +13,5 @@ internal class InscricaoDefinitivaAssociacaoJogadorEntityTypeConfiguration : IEn
         builder.HasKey( b=> new {b.CodOperacao,b.Licenca,b.NomeAssociacao});
         
         //builder.Property<bool>("_active").HasColumnName("Active");
-        
-        builder.Property(b => b.NomeAssociacao)
-            .HasConversion(
-                v => v.NomeAss,
-                v => new NomeAssociacao(v.ToString()));
     }
 }

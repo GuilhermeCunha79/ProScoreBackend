@@ -23,9 +23,26 @@ public class PessoaRepository : BaseRepository<Pessoa, Identifier>, IPessoaRepos
         }
 
         var query =
-            @"SELECT TOP(1) [j].[IdentificadorPessoa], [j].[Nome], [j].[DataNascimento],[j].[Telefone],[j].[Email], [j].[ConcelhoResidência], [j].[TipoGenero],[j].[Active],[j].[NrIdentificacao],[j].[NascencaPais],[j].[NacionalidadePais],[j].[Id]
+            @"SELECT  [j].[IdentificadorPessoa], [j].[Nome], [j].[DataNascimento],[j].[Telefone],[j].[Email], [j].[ConcelhoResidência], [j].[TipoGenero],[j].[Active],[j].[NrIdentificacao],[j].[NascencaPais],[j].[NacionalidadePais],[j].[Id]
                 FROM [Pessoa] AS [j]
-                WHERE [j].[IdentificadorPessoa] = @licencaInt  AND [j].[Active] = 1";
+                WHERE [j].[IdentificadorPessoa] = @licencaInt ";
+
+
+        return await _context.Pessoas.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
+            .FirstOrDefaultAsync();
+    }
+    
+    public async Task<Pessoa> GetByNrIdentificacaoAsync(string licenca)
+    {
+        if (!int.TryParse(licenca, out var licencaInt))
+        {
+            throw new ArgumentException("licenca parameter must be a valid integer");
+        }
+
+        var query =
+            @"SELECT  [j].[IdentificadorPessoa], [j].[Nome], [j].[DataNascimento],[j].[Telefone],[j].[Email], [j].[ConcelhoResidência], [j].[TipoGenero],[j].[Active],[j].[NrIdentificacao],[j].[NascencaPais],[j].[NacionalidadePais],[j].[Id]
+                FROM [Pessoa] AS [j]
+                WHERE [j].[NrIdentificacao] = @licencaInt and [j].[Active]=1";
 
 
         return await _context.Pessoas.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))

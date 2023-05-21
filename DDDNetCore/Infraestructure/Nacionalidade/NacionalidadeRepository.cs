@@ -23,7 +23,7 @@ public class NacionalidadeRepository : BaseRepository<Domain.Nacionalidade.Nacio
         var query =
             @"SELECT [j].[NacionalidadePais],[j].[NomePais],[j].[CodPaises],[j].[Id]
                 FROM [Nacionalidade] AS [j]
-                WHERE [j].[CodPaises] ='@licencaInt'";
+                WHERE [j].[CodPaises] =@licencaInt";
 
 
         return await _context.Nacionalidades.FromSqlRaw(query, new SqlParameter("licencaInt", licenca))

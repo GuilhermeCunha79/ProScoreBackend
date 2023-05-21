@@ -16,7 +16,7 @@ public class NacionalidadePais:IValueObject
 
     public NacionalidadePais(string pais)
     {
-        NacionalidadePaiss = pais;
+        NacionalidadePaiss = SharedMethods.onlyLettersAndSpace(pais);
     }
 
     
