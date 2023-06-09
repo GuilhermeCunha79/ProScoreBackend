@@ -14,7 +14,7 @@ public class ValidadeDoc: IValueObject
     
     public ValidadeDoc(string data)
     {
-        Data=String.Concat(GetYear(validateValidadeDoc(data)),GetMonth(validateValidadeDoc(data)),GetDay(validateValidadeDoc(data)));
+        Data=String.Concat(GetMonth(validateValidadeDoc(data)),'/',GetDay(validateValidadeDoc(data)),'/',GetYear(validateValidadeDoc(data)));
         
     }
 

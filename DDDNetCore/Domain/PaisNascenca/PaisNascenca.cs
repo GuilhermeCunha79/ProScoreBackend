@@ -5,7 +5,7 @@ using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.PaisNascenca;
 
-public class PaisNascenca
+public class PaisNascenca:Entity<Identifier>
 {
 
     public PaisCodigo.PaisCodigo PaisCodigo { get; set; }
@@ -20,9 +20,9 @@ public class PaisNascenca
         
     }
 
-    public PaisNascenca(string pais)
+    public PaisNascenca(string pais,List<PaisNascenca> lista)
     {
-        NascencaPais = new NascencaPais(pais);
+        NascencaPais = new NascencaPais(FindMostSimilarCountry(pais,lista));
         NomePais = new NomePais(pais);
         CodPaises = new CodPaises(pais);
     }
@@ -64,19 +64,20 @@ public class PaisNascenca
 
     
     
-    public static string FindMostSimilarCountry(string input, List<string> countries)
+    public static string FindMostSimilarCountry(string input, List<PaisNascenca> countries)
     {
+        
 
         int minDistance = int.MaxValue;
         string mostSimilarCountry = "";
 
-        foreach (string country in countries)
+        foreach (PaisNascenca country in countries)
         {
-            int distance = LevenshteinDistance(input, country);
+            int distance = LevenshteinDistance(input, country.NomePais.Nome);
             if (distance < minDistance)
             {
                 minDistance = distance;
-                mostSimilarCountry = country;
+                mostSimilarCountry = country.NomePais.Nome;
             }
         }
         return mostSimilarCountry;
@@ -108,25 +109,5 @@ public class PaisNascenca
         return d[s.Length, t.Length];
     }
     
-    public static List<string> carregaListaPaises()
-    {
-        //cria uma lista de paises
-        List<string> CulturaLista = new List<string>();
-        //Obtem a cultura especifica a partir da classe CultureInfo
-        CultureInfo[] getCultureInfo = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
-        foreach (CultureInfo getCulture in getCultureInfo)
-        {
-            //cria um objeto da classe RegionInfo
-            RegionInfo GetRegionInfo = new RegionInfo(getCulture.LCID);
-            //Incluir cada nome de pais no arraylist
-            if (!(CulturaLista.Contains(GetRegionInfo.DisplayName)))
-            {
-                CulturaLista.Add(GetRegionInfo.DisplayName);
-            }
-        }
-        //ordena o array usando o método sort para obter os paises em ordem alfabética
-        CulturaLista.Sort();
-        //retorna a lista de paises
-        return CulturaLista;
-    }
+    
 }

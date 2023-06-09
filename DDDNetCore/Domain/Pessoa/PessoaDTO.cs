@@ -31,7 +31,5 @@ public class PessoaDTO
         Telefone = telefone;
         ConcelhoResidencia = concelho;
 
-    }
-
-
+    } 
 }

@@ -6,6 +6,7 @@ using ConsoleApp1.Infraestructure.Associacao;
 using ConsoleApp1.Infraestructure.Categoria;
 using ConsoleApp1.Infraestructure.Clube;
 using ConsoleApp1.Infraestructure.CodigoPaises;
+using ConsoleApp1.Infraestructure.Divisao;
 using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
 using ConsoleApp1.Infraestructure.DocumentosProcesso;
 using ConsoleApp1.Infraestructure.Equipa;
@@ -22,6 +23,7 @@ using ConsoleApp1.Infraestructure.PaisCodigo;
 using ConsoleApp1.Infraestructure.PaisNascenca;
 using ConsoleApp1.Infraestructure.Pessoa;
 using ConsoleApp1.Infraestructure.ProcessoInscricao;
+using ConsoleApp1.Infraestructure.Utilizador;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsoleApp1.Infraestructure;
@@ -34,6 +36,8 @@ public class DDDSample1DbContext : DbContext
     public DbSet<Domain.Associacao.Associacao> Associacoes { get; set; }
     
     public DbSet<Domain.Nacionalidade.Nacionalidade> Nacionalidades { get; set; }
+    
+    public DbSet<Domain.PaisNascenca.PaisNascenca> PaisNascenca { get; set; }
     public DbSet<Domain.InscricaoDefinitivaAssociacaoEquipa.InscricaoDefinitivaAssociacaoEquipa> InscricaoDefinitivaAssociacaoEquipas { get; set; }
     public DbSet<Domain.InscricaoDefinitivaAssociacaoJogador.InscricaoDefinitivaAssociacaoJogador> InscricaoDefinitivaAssociacaoJogador { get; set; }
     
@@ -45,7 +49,7 @@ public class DDDSample1DbContext : DbContext
     public DbSet<Domain.ProcessoInscricao.ProcessoInscricao> Processos { get; set; }
     public DbSet<Domain.Pessoa.Pessoa> Pessoas { get; set; }
 
-    public DbSet<Utilizador> Utilizadores { get; set; }
+    public DbSet<Domain.Utilizador.Utilizador> Utilizadores { get; set; }
 
     public int ObterNumeroDeJogadores()
     {

@@ -37,22 +37,22 @@ public class TipoCategoria : IValueObject
             return "Benjamim";
         }
 
-        if (cat.Equals("JUNIORD", StringComparison.OrdinalIgnoreCase))
+        if (cat.Equals("JUNIORD", StringComparison.OrdinalIgnoreCase)| cat.Equals("JÚNIOR D", StringComparison.OrdinalIgnoreCase))
         {
             return "JuniorD";
         }
 
-        if (cat.Equals("JUNIORC", StringComparison.OrdinalIgnoreCase))
+        if (cat.Equals("JUNIORC", StringComparison.OrdinalIgnoreCase)| cat.Equals("JÚNIOR C", StringComparison.OrdinalIgnoreCase))
         {
             return "JuniorC";
         }
 
-        if (cat.Equals("JUNIORB", StringComparison.OrdinalIgnoreCase))
+        if (cat.Equals("JUNIORB", StringComparison.OrdinalIgnoreCase)| cat.Equals("JÚNIOR B", StringComparison.OrdinalIgnoreCase))
         {
             return "JuniorB";
         }
 
-        if (cat.Equals("JUNIORA", StringComparison.OrdinalIgnoreCase))
+        if (cat.Equals("JUNIORA", StringComparison.OrdinalIgnoreCase) | cat.Equals("JÚNIOR A", StringComparison.OrdinalIgnoreCase))
         {
             return "JuniorA";
         }

@@ -24,5 +24,13 @@ public class DocIdentificacaoDTO
         Status = status;
     }
     
-  
+    public DocIdentificacaoDTO(Guid id, string nrId, string check, string validadeDoc, string nif,string status)
+    {
+        Id = id;
+        NrIdentificacao = nrId;
+        CheckDigit = check;
+        ValidadeDoc = validadeDoc;
+        Nif = nif;
+        Status = status;
+    }
 }

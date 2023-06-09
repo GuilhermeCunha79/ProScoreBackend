@@ -20,7 +20,6 @@ public class DocIdentificacao: Entity<Identifier>
     }
     public DocIdentificacao(string nrId, string letrasId, string checkDigit, string validade, string nif, string nrUtente)
     {
-
         Id = new Identifier(Guid.NewGuid());
         NrIdentificacao = new NrIdentificacao(nrId);
         LetrasDoc = new LetrasDoc(letrasId);
@@ -28,6 +27,30 @@ public class DocIdentificacao: Entity<Identifier>
         ValidadeDoc = new ValidadeDoc(validade);
         Nif = new Nif(nif) ;
         NrUtente = new NrUtente(nrUtente);
+        Active = false;
+    }
+    
+    public DocIdentificacao(string nrId,  string checkDigit, string validade, string nif)
+    {
+        Id = new Identifier(Guid.NewGuid());
+        NrIdentificacao = new NrIdentificacao(nrId);
+        LetrasDoc = new LetrasDoc("---");
+        CheckDigit = new CheckDigit(checkDigit);
+        ValidadeDoc = new ValidadeDoc(validade);
+        Nif = new Nif(nif) ;
+        NrUtente = new NrUtente("-------");
+        Active = false;
+    }
+    
+    public DocIdentificacao(string nrId,  string checkDigit, string validade)
+    {
+        Id = new Identifier(Guid.NewGuid());
+        NrIdentificacao = new NrIdentificacao(nrId);
+        LetrasDoc = new LetrasDoc("-------");
+        CheckDigit = new CheckDigit(checkDigit);
+        ValidadeDoc = new ValidadeDoc(validade);
+        Nif = new Nif("-------") ;
+        NrUtente = new NrUtente("-------");
         Active = false;
     }
 

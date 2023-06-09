@@ -78,8 +78,8 @@ public class DocIdentificacaoService : IDocIdentificacaoService
 
     public async Task<DocIdentificacaoDTO> AddAsync(DocIdentificacaoDTO dto)
     {
-        var jogador = new DocIdentificacao(dto.NrIdentificacao.ToString(), dto.LetrasDoc, dto.CheckDigit.ToString(),
-            dto.ValidadeDoc, dto.Nif, dto.NrUtente);
+        var jogador = new DocIdentificacao(dto.NrIdentificacao.ToString(), "1",
+            dto.ValidadeDoc, dto.Nif);
 
         await _repo.AddAsync(jogador);
 

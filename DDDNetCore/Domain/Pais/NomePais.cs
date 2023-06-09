@@ -14,36 +14,10 @@ public class NomePais: IValueObject
     }
     public NomePais(string nomePais)
     {
-        Nome = validatePais(nomePais);
-    }
-    
-    private string validatePais(string pais)
-    {
-        if (pais == null)
-        {
-            throw new BusinessRuleValidationException("Preencha o campo referente ao 'Pais de Nascença'!");
-        }
-        return FindMostSimilarCountry(pais, carregaListaPaises());
-    }
-    
-    public static string FindMostSimilarCountry(string input, List<string> countries)
-    {
+        Nome = nomePais;
 
-        int minDistance = int.MaxValue;
-        string mostSimilarCountry = null;
-
-        foreach (string country in countries)
-        {
-            int distance = LevenshteinDistance(input, country);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                mostSimilarCountry = country;
-            }
-        }
-
-        return mostSimilarCountry;
     }
+  
 
     public static int LevenshteinDistance(string s, string t)
     {

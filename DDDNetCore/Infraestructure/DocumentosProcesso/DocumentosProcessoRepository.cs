@@ -19,7 +19,7 @@ public class DocumentosProcessoRepository : BaseRepository<Domain.DocumentosProc
     {
 
         var query =
-            @"SELECT TOP(1) [j].[CapturaBoletim], [j].[CapturaDocIdentificacao], [j].[CodOperacao]
+            @"SELECT TOP(1) [j].[DocumentosProcessoId],[j].[CapturaBoletim], [j].[CapturaDocIdentificacao], [j].[CodOperacao],[j].[Id]
                 FROM [DocumentosProcesso] AS [j]
                 WHERE [j].[Id] = @licencaInt ";
 

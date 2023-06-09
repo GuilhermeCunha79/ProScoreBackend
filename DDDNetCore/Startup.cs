@@ -1,12 +1,14 @@
 ﻿using ConsoleApp1.Domain.Associacao;
 using ConsoleApp1.Domain.Clube;
 using ConsoleApp1.Domain.DocumentoIdentificacao;
+using ConsoleApp1.Domain.DocumentosProcesso;
 using ConsoleApp1.Domain.Equipa;
 using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoEquipa;
 using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoJogador;
 using ConsoleApp1.Domain.InscricaoProvisoriaClubeJogador;
 using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Domain.Nacionalidade;
+using ConsoleApp1.Domain.PaisNascenca;
 using ConsoleApp1.Domain.Pessoa;
 using ConsoleApp1.Domain.ProcessoInscricao;
 using ConsoleApp1.Domain.Utilizador;
@@ -14,14 +16,19 @@ using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Infraestructure.Associacao;
 using ConsoleApp1.Infraestructure.Clube;
 using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
+using ConsoleApp1.Infraestructure.DocumentosProcesso;
+using ConsoleApp1.Infraestructure.Equipa;
 using ConsoleApp1.Infraestructure.InscricaoDefinitivaAssociacaoEquipa;
 using ConsoleApp1.Infraestructure.InscricaoDefinitivaAssociacaoJogador;
 using ConsoleApp1.Infraestructure.InscricaoProvisoriaClubeEquipa;
 using ConsoleApp1.Infraestructure.InscricaoProvisoriaClubeJogador;
 using ConsoleApp1.Infraestructure.Jogador;
 using ConsoleApp1.Infraestructure.Nacionalidade;
+using ConsoleApp1.Infraestructure.PaisNascenca;
+using ConsoleApp1.Infraestructure.Pessoa;
 using ConsoleApp1.Infraestructure.ProcessoInscricao;
 using ConsoleApp1.Infraestructure.Shared;
+using ConsoleApp1.Infraestructure.Utilizador;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +37,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NacionalidadeService = ConsoleApp1.Domain.Nacionalidade.NacionalidadeService;
 
 namespace ConsoleApp1;
 
@@ -135,6 +143,9 @@ namespace ConsoleApp1;
             services.AddTransient<IDocIdentificacaoRepository, DocIdentificacaoRepository>();
             services.AddTransient<IDocIdentificacaoService, DocIdentificacaoService>();
             
+            services.AddTransient<IDocumentosProcessoRepository, DocumentosProcessoRepository>();
+            services.AddTransient<IDocumentosProcessoService, DocumentosProcessoService>();
+            
             services.AddTransient<IInscricaoDefinitivaAssociacaoJogadorRepository, InscricaoDefinitivaAssociacaoJogadorRepository>();
             services.AddTransient<IInscricaoDefinitivaAssociacaoJogadorService, InscricaoDefinitivaAssociacaoJogadorService>();
             
@@ -152,5 +163,8 @@ namespace ConsoleApp1;
             
             services.AddTransient<IAssociacaoRepository, AssociacaoRepository>();
             services.AddTransient<IAssociacaoService, AssociacaoService>();
+            
+            services.AddTransient<IPaisNascencaRepository, PaisNascencaRepository>();
+            services.AddTransient<IPaisNascencaService, PaisNascencaService>();
         }
     }

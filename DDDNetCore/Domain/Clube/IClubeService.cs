@@ -11,6 +11,8 @@ public interface IClubeService
     Task<ClubeDTO> GetByIdAsync(Identifier id);
     Task<ClubeDTO> GetByCodClube(string licenca);
     
+    Task<ClubeDTO> GetByNome(string licenca);
+
     Task<ClubeDTO> AddAsync(ClubeDTO obj);
 
     Task<ClubeDTO> UpdateAsync(ClubeDTO dto);

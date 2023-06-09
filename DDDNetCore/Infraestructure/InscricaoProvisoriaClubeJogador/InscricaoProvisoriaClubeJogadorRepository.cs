@@ -36,4 +36,23 @@ public class InscricaoProvisoriaClubeJogadorRepository :
 
 
     }
+    
+    public async Task<Domain.InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador> GetByCodOperacao(string licenca)
+    {
+        if (!int.TryParse(licenca, out var licencaInt))
+        {
+            throw new ArgumentException("licenca parameter must be a valid integer");
+        }
+
+        var query =
+            @"SELECT [j].[CodOperacao],  [j].[CodigoClube], [j].[Licenca],[j].[Active],[j].[Id]
+                FROM [InscricaoProvisoriaClubeJogador] AS [j]
+                WHERE [j].[CodOperacao] = @licencaInt";
+
+
+        return await _context.InscricaoProvisoriaClubeJogador.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
+            .FirstOrDefaultAsync();
+
+
+    }
 }

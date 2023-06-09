@@ -58,7 +58,7 @@ public class DocumentosProcessoService : IDocumentosProcessoService
 
     public async Task<DocumentosProcessoDTO> AddAsync(DocumentosProcessoDTO dto)
     {
-        var jogador = new DocumentosProcesso(dto.CaminhoBoletim,dto.CaminhoDocidentificacao,dto.CodOperacao);
+        var jogador = new DocumentosProcesso(dto.CaminhoBoletim,dto.CaminhoDocIdentificacao,dto.CodOperacao);
 
         await _repo.AddAsync(jogador);
 

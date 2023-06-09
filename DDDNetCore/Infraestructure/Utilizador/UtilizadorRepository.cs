@@ -1,15 +1,13 @@
-﻿using ConsoleApp1.Domain.Genero;
-using ConsoleApp1.Infraestructure;
+﻿using ConsoleApp1.Domain.Utilizador;
 using ConsoleApp1.Infraestructure.Shared;
 using ConsoleApp1.Shared;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ConsoleApp1.Domain.Utilizador;
+namespace ConsoleApp1.Infraestructure.Utilizador;
 
 
-public class UtilizadorRepository : BaseRepository<Utilizador, Identifier>, IUtilizadorRepository
+public class UtilizadorRepository : BaseRepository<Domain.Utilizador.Utilizador, Identifier>, IUtilizadorRepository
 {
     private readonly DDDSample1DbContext _context;
 
@@ -18,12 +16,12 @@ public class UtilizadorRepository : BaseRepository<Utilizador, Identifier>, IUti
         _context = context;
     }
 
-    public async Task<Utilizador> GetByEmailAsync(string licenca)
+    public async Task<Domain.Utilizador.Utilizador> GetByEmailAsync(string licenca)
     {
 
 
         var query =
-            @"SELECT *
+            @"SELECT [j].[EmailUtilizador], [j].[Role], [j].[Password], [j].[NomeAssociacao], [j].[CodigoClube], [j].[Active], [j].[Id]
                 FROM [Utilizador] AS [j]
                 WHERE [j].[EmailUtilizador] = @licencaInt  AND [j].[Active] = 1";
 

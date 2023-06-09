@@ -13,15 +13,15 @@ public class NrUtente: IValueObject
     
     private string validateNumUtente(string nrId)
     {
-        int nr = SharedMethods.onlyNumbers(nrId);
+      //  int nr = SharedMethods.onlyNumbers(nrId);
 
-        if (nr.ToString().Length != 9)
+        /*if (nr.ToString().Length != 9)
         {
             throw new BusinessRuleValidationException(
                 "O 'Números de Utente' deve ter exatamente 9 digitos!");
-        }
+        }*/
 
-        return nr.ToString();
+        return nrId;
     }
     
 }

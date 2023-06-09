@@ -1,14 +1,13 @@
 ﻿using ConsoleApp1.Domain.Divisao;
-using ConsoleApp1.Domain.Nacionalidade;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ConsoleApp1.Infraestructure;
+namespace ConsoleApp1.Infraestructure.Divisao;
 
 
-internal class DivisaoEntityTypeConfigurationType : IEntityTypeConfiguration<Divisao>
+internal class DivisaoEntityTypeConfigurationType : IEntityTypeConfiguration<Domain.Divisao.Divisao>
 {
-    public void Configure(EntityTypeBuilder<Divisao> builder)
+    public void Configure(EntityTypeBuilder<Domain.Divisao.Divisao> builder)
     {
         builder.ToTable("Divisao", SchemaNames.DDDSample1);
         builder.HasKey(b => b.NomeDivisao);

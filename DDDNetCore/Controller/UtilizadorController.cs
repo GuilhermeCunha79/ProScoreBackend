@@ -2,6 +2,7 @@
 using ConsoleApp1.Domain.Utilizador;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace ConsoleApp1.Controller;
 
@@ -53,8 +54,36 @@ public class UtilizadorController : ControllerBase
     }
 
     // POST: api/Jogadores
-    [HttpPost]
-    public async Task<ActionResult<UtilizadorDTO>> Create(UtilizadorDTO dto)
+    [HttpGet("authenticate/{emailPass}")]
+    public async Task<ActionResult<UtilizadorDTO>> Create(string emailPass)
+    {
+        var list = await _service.GetAllAsync();
+        if (list != null)
+        {
+            foreach (var jogadorDto in list)
+            {
+                string email = emailPass.Substring(0, emailPass.LastIndexOf('|'));
+                if (emailPass.Substring(emailPass.LastIndexOf('|') + 1).Equals(jogadorDto.Password) &
+                    email.Equals(jogadorDto.EmailUtilizador))
+                {
+                    try
+                    {
+                        var jogador = await _service.GetByEmail(email);
+                        return jogador;
+                    }
+                    catch (BusinessRuleValidationException ex)
+                    {
+                        return BadRequest(new { ex.Message });
+                    }
+                }
+            }
+        }
+
+        return BadRequest("Email ou Password errados!");
+    }
+
+    [HttpPost("registration")]
+    public async Task<ActionResult<UtilizadorDTO>> Registration(UtilizadorDTO dto)
     {
         var list = await _service.GetAllAsync();
         if (list != null)

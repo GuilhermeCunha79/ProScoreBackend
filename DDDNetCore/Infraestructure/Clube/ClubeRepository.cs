@@ -24,14 +24,29 @@ public class ClubeRepository : BaseRepository<Domain.Clube.Clube, Identifier>, I
         }
 
         var query =
-            @"SELECT [j].[Licenca],  [j].[IdentificadorPessoa], [j].[EstatutoFpF], [j].[IdentificadorEquipa], [j].[Active], [j].[Id]
-                FROM [Jogador] AS [j]
-                WHERE [j].[Licenca] = @licencaInt";
+            @"SELECT [j].[CodigoClube],  [j].[NomeClube], [j].[NomeAssociacao], [j].[Morada], [j].[TelefoneClube],[j].[NrEquipas],[j].[NifClube],[j].[Active], [j].[Id]
+                FROM [Clube] AS [j]
+                WHERE [j].[CodigoClube] = @licencaInt";
 
 
         return await _context.Clubes.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
             .FirstOrDefaultAsync();
 
+    }
+    
+
+    public async Task<Domain.Clube.Clube> GetByNomeAsync(string licenca)
+    {
+
+
+        var query =
+            @"SELECT [j].[CodigoClube],  [j].[NomeClube], [j].[NomeAssociacao], [j].[Morada], [j].[TelefoneClube],[j].[NrEquipas],[j].[NifClube],[j].[Active], [j].[Id]
+                FROM [Clube] AS [j]
+                WHERE [j].[NomeClube] = @licencaInt";
+
+
+        return await _context.Clubes.FromSqlRaw(query, new SqlParameter("licencaInt", licenca))
+            .FirstOrDefaultAsync();
 
     }
 }

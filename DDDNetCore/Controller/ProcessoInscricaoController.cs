@@ -7,6 +7,7 @@ using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Domain.PaisNascenca;
 using ConsoleApp1.Domain.Pessoa;
 using ConsoleApp1.Domain.ProcessoInscricao;
+using ConsoleApp1.Domain.VisualizacaoJogador;
 using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Infraestructure.DocumentoIdentificacao;
 using ConsoleApp1.Shared;
@@ -53,6 +54,12 @@ public class ProcessoInscricaoController : ControllerBase
         DDDSample1DbContext = context;
         _service_doc_proc = _service_doc_proc1;
         _repo_doc_proc = _repo_doc_proc1;
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<ProcessoJogadorVisualizacaoDTO>>> GetAll()
+    {
+        return await _service.GetAllAsync1();
     }
 
     [HttpGet("{id}")]

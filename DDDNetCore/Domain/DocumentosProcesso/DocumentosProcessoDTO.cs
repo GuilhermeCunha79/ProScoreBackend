@@ -5,17 +5,17 @@ public class DocumentosProcessoDTO
 
     public string CaminhoBoletim { get; set; }
 
-    public string CaminhoDocidentificacao { get; set; }
+    public string CaminhoDocIdentificacao { get; set; }
 
     public Guid Id { get; set; }
 
     public string CodOperacao { get; set; }
 
-    public DocumentosProcessoDTO(Guid id, string caminhoBoletim, string caminhoDocidentificacao, string codOperacao)
+    public DocumentosProcessoDTO(Guid id, string caminhoBoletim, string caminhoDocIdentificacao, string codOperacao)
     {
         Id = id;
         CaminhoBoletim = caminhoBoletim;
-        CaminhoDocidentificacao = caminhoDocidentificacao;
+        CaminhoDocIdentificacao = caminhoDocIdentificacao;
         CodOperacao = codOperacao;
     }
 }

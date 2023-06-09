@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using ConsoleApp1.Domain.Pessoa;
 using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.Utilizador;
@@ -48,6 +49,7 @@ public class UtilizadorService : IUtilizadorService
 
     public async Task<UtilizadorDTO> GetByEmail(string licenca)
     {
+
         var jogador = await _repo.GetByEmailAsync(licenca);
 
         if (jogador == null)

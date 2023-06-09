@@ -54,6 +54,19 @@ public class ClubeController : ControllerBase
 
         return jogador;
     }
+    
+    [HttpGet("NomeClube/{licenca}")]
+    public async Task<ActionResult<ClubeDTO>> GetByNomeClube(string licenca)
+    {
+        var jogador = await _service.GetByCodClube(licenca);
+
+        if (jogador == null)
+        {
+            return NotFound();
+        }
+
+        return jogador;
+    }
 
     // POST: api/Jogadores
     [HttpPost]

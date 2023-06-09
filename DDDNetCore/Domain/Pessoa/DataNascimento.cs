@@ -14,8 +14,7 @@ public class DataNascimento : IValueObject
     
     public DataNascimento(string data)
     {
-        DataNasc=String.Concat(GetYear(validateValidadeDoc(data)),GetMonth(validateValidadeDoc(data)),GetDay(validateValidadeDoc(data)));
-        
+        DataNasc=String.Concat(GetDay(validateValidadeDoc(data)),'/',GetMonth(validateValidadeDoc(data)),'/',GetYear(validateValidadeDoc(data)));
     }
 
     private string validateValidadeDoc(string data)

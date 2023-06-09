@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Domain.VisualizacaoJogador;
+using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.ProcessoInscricao;
 
@@ -6,7 +7,7 @@ public interface IProcessoInscricaoService
 {
 
     Task<List<ProcessoInscricaoDTO>> GetAllAsync();
-
+    Task<List<ProcessoJogadorVisualizacaoDTO>> GetAllAsync1();
     Task<ProcessoInscricaoDTO> GetByIdAsync(Identifier id);
     Task<ProcessoInscricaoDTO> GetByCodOperacao(string licenca);
     

@@ -9,11 +9,11 @@ public class Telefone: IValueObject
 
     public Telefone()
     {
-        
+        Telemovel = "---------";
     }
-public Telefone(string? tele)
+public Telefone(string tele)
     {
-        Telemovel = validateTelemovel(tele) != null ? tele:" ";
+        Telemovel = validateTelemovel(tele);
     }
 
 

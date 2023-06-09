@@ -54,6 +54,22 @@ public class ClubeService : IClubeService
             jogador.Morada.Morad, jogador.TelefoneClube.TelefoneClub, jogador.NrEquipas.NumeroEquipas,
             jogador.NifClube.ClubeNif, CheckStatus(jogador.Active));
     }
+    
+    public async Task<ClubeDTO> GetByNome(string licenca)
+    {
+        var jogador = await this._repo.GetByNomeAsync(licenca);
+
+        if (jogador == null)
+        {
+            return null;
+        }
+
+        return new ClubeDTO(jogador.Id.AsGuid(), jogador.NomeAssociacao.NomeAss, jogador.NomeClube.NomeClub,
+            jogador.CodigoClube.CodClube,
+            jogador.Morada.Morad, jogador.TelefoneClube.TelefoneClub, jogador.NrEquipas.NumeroEquipas,
+            jogador.NifClube.ClubeNif, CheckStatus(jogador.Active));
+    }
+
 
     public async Task<ClubeDTO> GetByIdAsync(Identifier id)
     {

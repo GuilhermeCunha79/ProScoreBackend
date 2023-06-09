@@ -1,15 +1,13 @@
-﻿using ConsoleApp1.Domain.Associacao;
-using ConsoleApp1.Infraestructure;
-using ConsoleApp1.Shared;
+﻿using ConsoleApp1.Domain.Utilizador;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ConsoleApp1.Domain.Utilizador;
+namespace ConsoleApp1.Infraestructure.Utilizador;
 
 
-internal class UtilizadorEntityTypeConfiguration : IEntityTypeConfiguration<Utilizador>
+internal class UtilizadorEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Utilizador.Utilizador>
 {
-    public void Configure(EntityTypeBuilder<Utilizador> builder)
+    public void Configure(EntityTypeBuilder<Domain.Utilizador.Utilizador> builder)
     {
         builder.ToTable("Utilizador", SchemaNames.DDDSample1);
         builder.HasKey(b => b.EmailUtilizador);

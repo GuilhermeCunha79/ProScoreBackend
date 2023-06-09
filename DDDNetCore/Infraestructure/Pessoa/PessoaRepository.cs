@@ -1,12 +1,12 @@
-﻿using ConsoleApp1.Infraestructure;
+﻿using ConsoleApp1.Domain.Pessoa;
 using ConsoleApp1.Infraestructure.Shared;
 using ConsoleApp1.Shared;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConsoleApp1.Domain.Pessoa;
+namespace ConsoleApp1.Infraestructure.Pessoa;
 
-public class PessoaRepository : BaseRepository<Pessoa, Identifier>, IPessoaRepository
+public class PessoaRepository : BaseRepository<Domain.Pessoa.Pessoa, Identifier>, IPessoaRepository
 {
     private readonly DDDSample1DbContext _context;
 
@@ -15,7 +15,7 @@ public class PessoaRepository : BaseRepository<Pessoa, Identifier>, IPessoaRepos
         _context = context;
     }
 
-    public async Task<Pessoa> GetByIdPessoaAsync(string licenca)
+    public async Task<Domain.Pessoa.Pessoa> GetByIdPessoaAsync(string licenca)
     {
         if (!int.TryParse(licenca, out var licencaInt))
         {
@@ -32,7 +32,7 @@ public class PessoaRepository : BaseRepository<Pessoa, Identifier>, IPessoaRepos
             .FirstOrDefaultAsync();
     }
     
-    public async Task<Pessoa> GetByNrIdentificacaoAsync(string licenca)
+    public async Task<Domain.Pessoa.Pessoa> GetByNrIdentificacaoAsync(string licenca)
     {
         if (!int.TryParse(licenca, out var licencaInt))
         {

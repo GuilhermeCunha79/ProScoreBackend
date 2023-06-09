@@ -56,12 +56,24 @@ public class EquipaService:IEquipaService
         if (jogador == null)
             return null;
 
-        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.Categoria.TipoCategoria.Categoria,jogador.Genero.TipoGenero.Genero,jogador.Modalidade.TipoModalidade.Modalidade);
+        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade);
     }
 
     public Task<EquipaDTO> GetByLicencaJogador(string licenca)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<EquipaDTO> GetByCatModAsync(string codClube,string categoria, string modalidade,
+        string genero)
+    {
+        var jogador = await _repo.GetByCatModAsync(codClube,categoria,modalidade,genero);
+        
+        if (jogador == null)
+            return null;
+
+        return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade);
+        
     }
 
     public async Task<EquipaDTO> AddAsync(EquipaDTO dto)
