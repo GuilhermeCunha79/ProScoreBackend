@@ -6,7 +6,7 @@ public interface IPessoaService
 {
 
     Task<List<PessoaDTO>> GetAllAsync();
-
+    Task<PessoaDTO> GetByNrId(string licenca);
     Task<PessoaDTO> GetByIdAsync(Identifier id);
     Task<PessoaDTO> GetByIdPessoa(string licenca);
     

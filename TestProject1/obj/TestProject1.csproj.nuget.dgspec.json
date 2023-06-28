@@ -78,9 +78,29 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "PDFsharp": {
+              "target": "Package",
+              "version": "[6.0.0-preview-2, )"
+            },
+            "PDFtoImage": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "PdfiumViewer": {
+              "target": "Package",
+              "version": "[2.13.0, )"
+            },
             "Pomelo.EntityFrameworkCore.Lolita.SqlServer": {
               "target": "Package",
               "version": "[6.0.5, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[8.0.0-preview.2.23128.3, )"
             }
           },
           "imports": [

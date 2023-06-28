@@ -26,7 +26,7 @@ internal class ClubeEntityTypeConfiguration : IEntityTypeConfiguration<Domain.Cl
         builder.Property(b => b.NrEquipas)
             .HasConversion(
                 v => v.NumeroEquipas,
-                v => new NrEquipas()).IsRequired();
+                v => new NrEquipas(v)).IsRequired();
 
         builder.Property(b => b.NifClube)
             .HasConversion(

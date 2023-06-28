@@ -22,8 +22,13 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.3.23174.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-preview.3.23174.8" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="PdfiumViewer" Version="2.13.0" />
+        <PackageReference Include="PDFsharp" Version="6.0.0-preview-2" />
+        <PackageReference Include="PDFtoImage" Version="2.2.0" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.Lolita.SqlServer" Version="6.0.5" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.0-preview.2.23128.3" />
     </ItemGroup>
 
     <ItemGroup>

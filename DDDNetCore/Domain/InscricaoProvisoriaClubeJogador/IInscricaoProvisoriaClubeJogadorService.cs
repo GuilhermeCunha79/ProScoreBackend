@@ -5,7 +5,8 @@ namespace ConsoleApp1.Domain.InscricaoProvisoriaClubeJogador;
 
 public interface IInscricaoProvisoriaClubeJogadorService
 {
-
+    Task<InscricaoProvisoriaClubeJogadorDTO> GetByCodOperacao(string licenca);
+    Task<InscricaoProvisoriaClubeJogadorDTO> UpdateByCodOperacaoAsync(InscricaoProvisoriaClubeJogadorDTO dto);
     Task<List<InscricaoProvisoriaClubeJogadorDTO>> GetAllAsync();
 
     Task<InscricaoProvisoriaClubeJogadorDTO> GetByIdAsync(Identifier id);

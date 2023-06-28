@@ -61,7 +61,7 @@ public class Pessoa : Entity<Identifier>, IAggregateRoot
         NrIdentificacao = new NrIdentificacao(docId);
         NascencaPais = new NascencaPais(paisNascenca);
         NacionalidadePais = new NacionalidadePais(nacionalidade);
-        Active = true;
+        Active = false;
     }
 
     public void ChangeNome(string nome)

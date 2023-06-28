@@ -46,6 +46,16 @@ public class InscricaoProvisoriaClubeJogadorService : IInscricaoProvisoriaClubeJ
 
         return  new InscricaoProvisoriaClubeJogadorDTO(associacao.Id.AsGuid(),associacao.CodOperacao.CodOpe,associacao.CodigoClube.CodClube,associacao.Licenca.Lic,CheckStatus(associacao.Active));
     }
+    
+    public async Task<InscricaoProvisoriaClubeJogadorDTO> GetByCodOperacao(string licenca)
+    {
+        var associacao = await this._repo.GetByCodOperacao(licenca);
+
+        if (associacao == null)
+            return null;
+
+        return  new InscricaoProvisoriaClubeJogadorDTO(associacao.Id.AsGuid(),associacao.CodOperacao.CodOpe,associacao.CodigoClube.CodClube,associacao.Licenca.Lic,CheckStatus(associacao.Active));
+    }
 
 
     public async Task<InscricaoProvisoriaClubeJogadorDTO> GetByIdAsync(Identifier id)
@@ -71,7 +81,7 @@ public class InscricaoProvisoriaClubeJogadorService : IInscricaoProvisoriaClubeJ
 
         await _unitOfWork.CommitAsync();
 
-        return new InscricaoProvisoriaClubeJogadorDTO(associacao.Id.AsGuid(),associacao.CodOperacao.CodOpe,associacao.CodigoClube.CodClube,CheckStatus(associacao.Active));
+        return new InscricaoProvisoriaClubeJogadorDTO(associacao.Id.AsGuid(),associacao.CodOperacao.CodOpe,associacao.CodigoClube.CodClube,associacao.Licenca.Lic,CheckStatus(associacao.Active));
     }
     
     
@@ -91,12 +101,28 @@ public class InscricaoProvisoriaClubeJogadorService : IInscricaoProvisoriaClubeJ
 
         await _unitOfWork.CommitAsync();
 
-        return new InscricaoProvisoriaClubeJogadorDTO(jogador.Id.AsGuid(),jogador.CodOperacao.CodOpe,jogador.CodigoClube.CodClube,CheckStatus(jogador.Active));
+        return new InscricaoProvisoriaClubeJogadorDTO(jogador.Id.AsGuid(),jogador.CodOperacao.CodOpe,jogador.CodigoClube.CodClube,jogador.Licenca.Lic,CheckStatus(jogador.Active));
     }
 
     public Task<InscricaoProvisoriaClubeJogadorDTO> UpdateByLicencaJogadorAsync(InscricaoProvisoriaClubeJogadorDTO dto)
     {
         throw new NotImplementedException();
+    }
+    
+    public async Task<InscricaoProvisoriaClubeJogadorDTO> UpdateByCodOperacaoAsync(InscricaoProvisoriaClubeJogadorDTO dto)
+    {
+        var jogador = await _repo.GetByCodOperacao(dto.CodOperacao.ToString());
+
+        if (jogador == null)
+            return null;
+
+        // change  fields
+
+        jogador.ChangeEstadoAprovado();
+
+        await _unitOfWork.CommitAsync();
+
+        return new InscricaoProvisoriaClubeJogadorDTO(jogador.Id.AsGuid(),jogador.CodOperacao.CodOpe,jogador.CodigoClube.CodClube,jogador.Licenca.Lic,CheckStatus(jogador.Active));
     }
     
 

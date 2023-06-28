@@ -1,4 +1,6 @@
-﻿using ConsoleApp1.Domain.Clube;
+﻿using Azure;
+using Azure.AI.FormRecognizer.DocumentAnalysis;
+using ConsoleApp1.Domain.Clube;
 using ConsoleApp1.Domain.Equipa;
 using ConsoleApp1.Domain.InscricaoProvisoriaClubeJogador;
 using ConsoleApp1.Domain.Jogador;
@@ -49,7 +51,7 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
 
     public async Task<List<ProcessoJogadorVisualizacaoDTO>> GetAllAsync1()
     {
-        var list = await _repo.GetAllAsync();
+        var list = await _repo.GetProcessosPendentesAsync();
 
         List<ProcessoInscricaoDTO> listDto = list.ConvertAll(jogador =>
             new ProcessoInscricaoDTO(jogador.Id.AsGuid(), jogador.CodOperacao.CodOpe.ToString(), jogador.Estado.Status,
@@ -65,7 +67,7 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
                     InscricaoProvisoriaClubeJogadorMapper.toDto(_repo_clube_jogador.GetByCodOperacao(dto.CodOperacao)
                         .Result);
                 JogadorDTO jogadorDto =
-                    JogadorMapper.toDto(_repo_jogador.GetByLicencaAsync(clubeJogadorDto.Licenca.Lic.ToString()).Result);
+                    JogadorMapper.toDto(_repo_jogador.GetByLicencaAsync(clubeJogadorDto.Licenca.ToString()).Result);
                 PessoaDTO pessoaDto =
                     PessoaMapper.toDto(
                         _repo_pessoa.GetByIdPessoaAsync(jogadorDto.IdentificadorPessoa.ToString()).Result);
@@ -76,7 +78,7 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
 
                 listFinal.Add(new ProcessoJogadorVisualizacaoDTO(dto.CodOperacao, pessoaDto.Nome,
                     jogadorDto.Licenca.ToString(), dto.TipoProcesso, clubeDto.NomeClube,
-                    equipaDto.Modalidade, equipaDto.Categoria, equipaDto.Divisao, "----", dto.DataSubscricao,
+                    equipaDto.Modalidade, equipaDto.Categoria, equipaDto.Divisao, "Amador", dto.DataSubscricao,
                     dto.DataRegisto, dto.Estado));
             }
         }
@@ -180,6 +182,29 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
             processo.DataSubscricao.DataSubs);
     }
 
+    public async Task<AnalyzeResult> AnalyseImage(string caminho, string modelIdDocId)
+    {
+        string endpoint = "https://cogniteveservices.cognitiveservices.azure.com/";
+        string apiKey = "e4d7376d96d8471cba771af20e6d9110";
+        var credential = new AzureKeyCredential(apiKey);
+        var client = new DocumentAnalysisClient(new Uri(endpoint), credential);
+        byte[] imageBytes = Convert.FromBase64String(ConvertTo64(caminho));
+        using var stream = new MemoryStream(imageBytes);
+        AnalyzeDocumentOperation operation =
+            await client.AnalyzeDocumentAsync(WaitUntil.Completed, modelIdDocId, stream);
+        AnalyzeResult result = operation.Value;
+        stream.Close();
+        return result;
+    }
+    
+    private string ConvertTo64(string s)
+    {
+        string keyword = "base64,";
+        int startIndex = s.IndexOf(keyword);
+        string result = s.Substring(startIndex + keyword.Length);
+        return result;
+    }
+
     public Task<ProcessoInscricaoDTO> InactivateAsync(Identifier id)
     {
         throw new NotImplementedException();
@@ -190,8 +215,21 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
         throw new NotImplementedException();
     }
 
-    public Task<ProcessoInscricaoDTO> DeleteAsync(Identifier id)
+   
+    public async Task<ProcessoInscricaoDTO> DeleteAsync(string id)
     {
-        throw new NotImplementedException();
+        var processo = await _repo.GetByCodOperacaoAsync(id);
+
+        if (processo == null)
+            return null;
+        
+
+        _repo.Remove(processo);
+        await _unitOfWork.CommitAsync();
+
+        return new ProcessoInscricaoDTO(processo.Id.AsGuid(), processo.CodOperacao.CodOpe.ToString(),
+            processo.TipoProcesso.ProcessoTipo,
+            processo.Estado.Status, processo.EpocaDesportiva.EpocaDesp, processo.DataRegisto.DataReg,
+            processo.DataSubscricao.DataSubs);
     }
 }

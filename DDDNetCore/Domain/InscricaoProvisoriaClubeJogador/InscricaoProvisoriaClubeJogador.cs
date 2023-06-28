@@ -74,5 +74,10 @@ public class InscricaoProvisoriaClubeJogador : Entity<Identifier>
         CodigoClube = new CodigoClube(codClube);
     }
     
+    public void ChangeEstadoAprovado()
+    {
+        Active = true;
+    }
+    
  
 }

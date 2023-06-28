@@ -19,8 +19,9 @@ public class NacionalidadeService : INacionalidadeService
     {
         var list = await _repo.GetAllAsync();
 
-        List<NacionalidadeDTO> listDto = list.ConvertAll(jogador =>
-             new NacionalidadeDTO(jogador.NacionalidadePais.NacionalidadePaiss,jogador.NomePais.Nome,jogador.CodPaises.CodigoPais));
+        var listDto = list.ConvertAll(jogador =>
+             new NacionalidadeDTO(jogador.NacionalidadePais.NacionalidadePaiss,jogador.NomePais.Nome,
+                 jogador.CodPaises.CodigoPais));
 
         return listDto;
     }

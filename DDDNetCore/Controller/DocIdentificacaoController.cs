@@ -37,7 +37,7 @@ public class DocIdentificacaoController : ControllerBase
     }
 
     // GET: api/Warehouses/ById/5M4
-    [HttpGet("ByIdentifier/{licenca}")]
+    [HttpGet("NrIdCivil/{licenca}")]
     public async Task<ActionResult<DocIdentificacaoDTO>> GetByNrId(string licenca)
     {
         var jogador = await _service.GetByNrId(licenca);

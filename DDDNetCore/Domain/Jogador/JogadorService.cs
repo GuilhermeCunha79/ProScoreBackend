@@ -58,7 +58,7 @@ public class JogadorService:IJogadorService
 
     public async Task<JogadorDTO> AddAsync(JogadorDTO dto)
     {
-        var jogador = new Jogador(dto.EstatutoFpF, dto.IdentificadorPessoa, dto.IdentificadorEquipa);
+        var jogador = new Jogador(dto.Licenca,dto.EstatutoFpF, dto.IdentificadorPessoa, dto.IdentificadorEquipa);
 
         await _repo.AddAsync(jogador);
 
@@ -107,12 +107,7 @@ public class JogadorService:IJogadorService
         if (jogador == null)
             return null;
 
-        // change all fields
-
-        
-        //delivery.ChangeDeliveryMass(new DeliveryMass(dto.Mass));
-        //delivery.ChangeDeliveryTime(new DeliveryTime(dto.PlacingTime, dto.WithdrawalTime));
-        //delivery.ChangeStoreId(new WarehouseId(dto.StoreId));
+        jogador.MarkAsAtive();
 
         await _unitOfWork.CommitAsync();
 

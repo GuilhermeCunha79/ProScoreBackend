@@ -8,25 +8,18 @@ public class InscricaoProvisoriaClubeJogadorDTO
 {
     public Guid Id { get; set; }
     public int CodOperacao { get; set; }
-    public Licenca Licenca { get; set; }
+    public int Licenca { get; set; }
     public int CodigoClube { get; set; }
 
     public string Status { get; set; }
 
-    public InscricaoProvisoriaClubeJogadorDTO(Guid id, int codOperacao, int codigoClube,string status)
-    {
-        Id = id;
-        CodOperacao = codOperacao;
-        Licenca = new Licenca();
-        CodigoClube = codigoClube;
-        Status = status;
-    }
+
     
     public InscricaoProvisoriaClubeJogadorDTO(Guid id, int codOperacao, int codigoClube,int licenca,string status)
     {
         Id = id;
         CodOperacao = codOperacao;
-        Licenca = new Licenca(licenca.ToString());
+        Licenca =licenca;
         CodigoClube = codigoClube;
         Status = status;
     }

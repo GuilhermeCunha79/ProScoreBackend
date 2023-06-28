@@ -19,7 +19,7 @@ public class PaisNascencaService : IPaisNascencaService
     {
         var list = await _repo.GetAllAsync();
 
-        List<PaisNascencaDTO> listDto = list.ConvertAll(jogador =>
+        var listDto = list.ConvertAll(jogador =>
             new PaisNascencaDTO(jogador.NascencaPais.PaisNascenca, jogador.NomePais.Nome,
                 jogador.CodPaises.CodigoPais));
 

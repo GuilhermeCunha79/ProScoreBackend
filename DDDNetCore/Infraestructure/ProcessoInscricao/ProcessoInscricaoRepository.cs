@@ -27,7 +27,7 @@ public class ProcessoInscricaoRepository :
         var query =
             @"SELECT [j].[CodOperacao],  [j].[TipoProcesso], [j].[Estado],[j].[EpocaDesportiva],[j].[DataRegisto],[j].[DataSubscricao],[j].[Id]
                 FROM [ProcessoInscricao] AS [j]
-                WHERE [j].[Licenca] = @licencaInt";
+                WHERE [j].[CodOperacao] = @licencaInt";
 
 
         return await _context.Processos.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
@@ -76,6 +76,21 @@ public class ProcessoInscricaoRepository :
 
         return await _context.Processos
             .FromSqlRaw(query, new SqlParameter("licencaInt", licenca))
+            .ToListAsync();
+    }
+    
+    public async Task<List<Domain.ProcessoInscricao.ProcessoInscricao>>
+        GetProcessosPendentesAsync()
+    {
+
+
+        var query =
+            @"SELECT [j].[CodOperacao],  [j].[TipoProcesso], [j].[Estado],[j].[EpocaDesportiva],[j].[DataRegisto],[j].[DataSubscricao],[j].[Id]
+                FROM [ProcessoInscricao] AS [j]
+                WHERE [j].[Estado] = 'AGUARDAR_APROVACAO_ASSOCIACAO'";
+
+
+        return await _context.Processos.FromSqlRaw(query)
             .ToListAsync();
     }
 }

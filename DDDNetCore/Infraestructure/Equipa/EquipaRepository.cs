@@ -32,6 +32,23 @@ public class EquipaRepository : BaseRepository<Domain.Equipa.Equipa, Identifier>
         return await _context.Equipas.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
             .FirstOrDefaultAsync();
     }
+    
+    
+    public async Task<List<Domain.Equipa.Equipa>> GetByCodClubeAsync(string licenca)
+    {
+        if (!int.TryParse(licenca, out var licencaInt))
+        {
+            throw new ArgumentException("licenca parameter must be a valid integer");
+        }
+
+        var query =
+            @"SELECT [j].[IdentificadorEquipa], [j].[NomeDivisao], [j].[CodigoClube],[j].[TipoCategoria],[j].[TipoModalidade], [j].[TipoGenero], [j].[Active],[j].[Id]
+            FROM [Equipa] AS [j]
+            WHERE [j].[CodigoClube] = @licencaInt  AND [j].[Active] = 1";
+
+        return await _context.Equipas.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
+            .ToListAsync();
+    }
 
 
     public async Task<Domain.Equipa.Equipa> GetByCatModAsync(string codClube,string categoria, string modalidade,

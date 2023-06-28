@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Domain.Clube;
+using ConsoleApp1.Domain.Equipa;
 using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Shared;
@@ -11,10 +12,10 @@ namespace ConsoleApp1.Controller;
 public class ClubeController : ControllerBase
 {
     private readonly IClubeService _service;
-
+    private readonly IEquipaService _service_equipa;
     private readonly DDDSample1DbContext _context;
 
-    public ClubeController(IClubeService service,DDDSample1DbContext _context1)
+    public ClubeController(IClubeService service, DDDSample1DbContext _context1)
     {
         _service = service;
         _context = _context1;
@@ -54,7 +55,7 @@ public class ClubeController : ControllerBase
 
         return jogador;
     }
-    
+
     [HttpGet("NomeClube/{licenca}")]
     public async Task<ActionResult<ClubeDTO>> GetByNomeClube(string licenca)
     {
@@ -73,6 +74,7 @@ public class ClubeController : ControllerBase
     public async Task<ActionResult<ClubeDTO>> Create(ClubeDTO dto)
     {
         var list = await _service.GetAllAsync();
+
         if (list != null)
         {
             foreach (var jogadorDto in list)

@@ -124,12 +124,14 @@ public class DocIdentificacaoService : IDocIdentificacaoService
         // change all fields
 
         
-        jogador.ChangeValidadeDoc(dto.ValidadeDoc);
+ /*       jogador.ChangeValidadeDoc(dto.ValidadeDoc);
         jogador.ChangeNumUtente(dto.NrUtente);
         jogador.ChangeNrIdentificacao(dto.NrIdentificacao);
         jogador.ChangeNif(dto.Nif);
         jogador.ChangeLetrasDoc(dto.LetrasDoc);
-        jogador.ChangeCheckDigit(dto.CheckDigit);
+        jogador.ChangeCheckDigit(dto.CheckDigit);*/
+ 
+ jogador.MarkAsAtive();
 
         await _unitOfWork.CommitAsync();
 

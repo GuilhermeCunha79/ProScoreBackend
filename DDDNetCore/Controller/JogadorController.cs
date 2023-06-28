@@ -1,6 +1,7 @@
-﻿
-using ConsoleApp1.Domain.DocumentoIdentificacao;
+﻿using ConsoleApp1.Domain.DocumentoIdentificacao;
 using ConsoleApp1.Domain.Jogador;
+using ConsoleApp1.Domain.JogadorVisualizacao;
+using ConsoleApp1.Domain.Pessoa;
 using ConsoleApp1.Infraestructure;
 using ConsoleApp1.Shared;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +13,15 @@ namespace ConsoleApp1.Controller
     public class JogadorController : ControllerBase
     {
         private readonly IJogadorService _service;
+        private readonly IPessoaService _service_pessoa;
         private readonly DDDSample1DbContext _context;
 
-        public JogadorController(IJogadorService service,DDDSample1DbContext _context1)
+        public JogadorController(IJogadorService service, DDDSample1DbContext _context1,
+            IPessoaService _service_pessoa1)
         {
             _service = service;
             _context = _context1;
+            _service_pessoa = _service_pessoa1;
         }
 
         // GET: api/Jogadores
@@ -42,17 +46,19 @@ namespace ConsoleApp1.Controller
         }
 
         // GET: api/Warehouses/ById/5M4
-        [HttpGet("ByIdentifier/{licenca}")]
-        public async Task<ActionResult<JogadorDTO>> GetByLicencaJogador(string licenca)
+        [HttpGet("Licenca/{licenca}")]
+        public async Task<ActionResult<JogadorVisualizacaoDTO>> GetByLicencaJogador(string licenca)
         {
             var jogador = await _service.GetByLicencaJogador(licenca);
-
+            var pessoa = await _service_pessoa.GetByIdPessoa(jogador.IdentificadorPessoa.ToString());
+            var jogador1 = new JogadorVisualizacaoDTO(pessoa.Nome,jogador.Licenca.ToString(),pessoa.NrIdentificacao,pessoa.DataNascimento,pessoa.TipoGenero,
+                pessoa.NacionalidadePais,pessoa.NascencaPais,jogador.EstatutoFpF);
             if (jogador == null)
             {
                 return NotFound();
             }
 
-            return jogador;
+            return jogador1;
         }
 
         // POST: api/Jogadores
@@ -85,9 +91,7 @@ namespace ConsoleApp1.Controller
                 return BadRequest(new { ex.Message });
             }
         }
-        
-       
-        
+
 
         // PUT: api/Jogadores/5
         [HttpPut("{id}")]

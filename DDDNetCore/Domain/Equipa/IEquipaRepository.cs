@@ -8,4 +8,6 @@ public interface IEquipaRepository : IRepository<Equipa, Identifier>
 
     Task<Equipa> GetByCatModAsync(string codClube,string categoria, string modalidade,
         string genero);
+
+    Task<List<Equipa>> GetByCodClubeAsync(string licenca);
 }

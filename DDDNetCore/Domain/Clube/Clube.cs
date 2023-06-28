@@ -28,14 +28,14 @@ public class Clube: Entity<Identifier>,IAggregateRoot
         
     }
 
-    public Clube(string nomeAss,string nomeClube, string nifClube, string? morada, string telefoneClube)
+    public Clube(string nomeAss,string nomeClube, string nifClube, string? morada, string telefoneClube,int nr)
     {
         Id = new Identifier(Guid.NewGuid());
         NomeAssociacao = new NomeAssociacao(nomeAss);
         CodigoClube = new CodigoClube(totalEquipas++);
         NomeClube = new NomeClube(nomeClube);
         Morada = new Morada(morada);
-        NrEquipas = new NrEquipas();
+        NrEquipas = new NrEquipas(nr);
         TelefoneClube = new TelefoneClube(telefoneClube);
         NifClube = new NifClube(nifClube);
         Active = true;
@@ -66,6 +66,11 @@ public class Clube: Entity<Identifier>,IAggregateRoot
         TelefoneClube = new TelefoneClube(s);
     }
 
+    public void ChangeNrEquipa(int nr)
+    {
+        NrEquipas = new NrEquipas(nr);
+    }
+    
     public void ChangeNifClube(string s)
     {
         NifClube = new NifClube(s);

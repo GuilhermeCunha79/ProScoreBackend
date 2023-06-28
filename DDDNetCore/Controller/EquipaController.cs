@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Domain.Equipa;
+﻿using ConsoleApp1.Domain.Clube;
+using ConsoleApp1.Domain.Equipa;
 using ConsoleApp1.Domain.InscricaoDefinitivaAssociacaoEquipa;
 using ConsoleApp1.Domain.Jogador;
 using ConsoleApp1.Infraestructure;
@@ -12,12 +13,14 @@ namespace ConsoleApp1.Controller;
 public class EquipaController : ControllerBase
 {
     private readonly IEquipaService _service;
+    private readonly IClubeService _service_clube;
     private readonly DDDSample1DbContext _context;
 
-    public EquipaController(IEquipaService service,DDDSample1DbContext _context1)
+    public EquipaController(IEquipaService service,DDDSample1DbContext _context1,IClubeService _service_clube1)
     {
         _service = service;
         _context = _context1;
+        _service_clube = _service_clube1;
     }
 
     // GET: api/Equipas
@@ -76,7 +79,6 @@ public class EquipaController : ControllerBase
         try
         {
             var jogador = await _service.AddAsync(dto);
-
             return CreatedAtAction(nameof(GetById), new { id = jogador.Id }, jogador);
         }
         catch (BusinessRuleValidationException ex)

@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Domain.VisualizacaoJogador;
+﻿using Azure.AI.FormRecognizer.DocumentAnalysis;
+using ConsoleApp1.Domain.VisualizacaoJogador;
 using ConsoleApp1.Shared;
 
 namespace ConsoleApp1.Domain.ProcessoInscricao;
@@ -19,9 +20,9 @@ public interface IProcessoInscricaoService
 
     Task<ProcessoInscricaoDTO> UpdateByCodOperacaoAsync(ProcessoInscricaoDTO dto);
     Task<ProcessoInscricaoDTO> InactivateAsync(Identifier id);
-    
+    Task<AnalyzeResult> AnalyseImage(string caminho, string modelIdDocId);
     Task<ProcessoInscricaoDTO> ActivateAsync(string id);
 
-    Task<ProcessoInscricaoDTO> DeleteAsync(Identifier id);
+    Task<ProcessoInscricaoDTO> DeleteAsync(string id);
 
 }

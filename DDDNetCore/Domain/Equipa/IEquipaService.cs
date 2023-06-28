@@ -10,7 +10,7 @@ public interface IEquipaService
     Task<EquipaDTO> GetByIdentificadorEquipa(string licenca);
 
     Task<EquipaDTO> AddAsync(EquipaDTO obj);
-
+    Task<List<EquipaDTO>> GetByCodClubeAsync(string licenca);
     Task<EquipaDTO> UpdateAsync(EquipaDTO dto);
 
     Task<EquipaDTO> UpdateByIdentificadorEquipaAsync(EquipaDTO dto);

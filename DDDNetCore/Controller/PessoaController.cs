@@ -51,6 +51,20 @@ public class PessoaController : ControllerBase
 
         return jogador;
     }
+    
+    
+    [HttpGet("NrIdentificacao/{licenca}")]
+    public async Task<ActionResult<PessoaDTO>> GetByNrId(string licenca)
+    {
+        var jogador = await _service.GetByNrId(licenca);
+
+        if (jogador == null)
+        {
+            return NotFound();
+        }
+
+        return jogador;
+    }
 
     // POST: api/Jogadores
     [HttpPost]

@@ -57,7 +57,7 @@ public class ProcessoInscricaoController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProcessoJogadorVisualizacaoDTO>>> GetAll()
+    public async Task<ActionResult<IEnumerable<ProcessoJogadorVisualizacaoDTO>>> GetAllProcessos()
     {
         return await _service.GetAllAsync1();
     }
@@ -117,11 +117,56 @@ public class ProcessoInscricaoController : ControllerBase
 
 
     // PUT: api/Jogadores/5
-    [HttpPut("ByIdentifier/{licenca}")]
-    public async Task<ActionResult<(DocIdentificacaoDTO, PessoaDTO, JogadorDTO, InscricaoProvisoriaClubeJogadorDTO)>> Update(string licenca,DocumentosProcessoDTO dto)
+    [HttpPut("CodOperacao1/{licenca}")]
+    public async Task<ActionResult<ProcessoInscricaoDTO>> UpdateByLicencaAsync(string licenca)
     {
-       //if(Estado==recusado delete)
 
-        return null;
+        var dto = await _service.GetByCodOperacao(licenca);
+        try
+        {
+            var jogador = await _service.UpdateByCodOperacaoAsync(dto);
+           var processo= await _service1.UpdateByCodOperacaoAsync(_service1.GetByCodOperacao(licenca).Result);
+           var jogador1 =
+               await _service_jogador.UpdateByJogadorLicencaAsync(_service_jogador
+                   .GetByLicencaJogador(processo.Licenca.ToString()).Result);
+           var pessoa =
+               await _service_pessoa.UpdateByIdPessoaAsync(_service_pessoa
+                   .GetByIdPessoa(jogador1.IdentificadorPessoa.ToString()).Result);
+           await _service_doc.UpdateByNrIdAsync(_service_doc.GetByNrId(pessoa.NrIdentificacao).Result);
+           if (jogador == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(jogador);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
+    }
+    
+    
+    
+    
+    // DELETE: api/Deliveries/5
+    [HttpDelete("{id}/hard")]
+    public async Task<ActionResult<ProcessoInscricaoDTO>> HardDelete(string id)
+    {
+        try
+        {
+            var delivery = await _service.DeleteAsync(id);
+
+            if (delivery == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(delivery);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return BadRequest(new { ex.Message });
+        }
     }
 }

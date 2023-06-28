@@ -75,12 +75,29 @@ public class EquipaService:IEquipaService
         return new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade);
         
     }
+    
+    
+    public async  Task<List<EquipaDTO>> GetByCodClubeAsync(string licenca)
+    {
+        var list = await _repo.GetByCodClubeAsync(licenca);
+        
+        if (list == null)
+            return null;
+
+        List<EquipaDTO> listDto = list.ConvertAll(jogador =>
+            new EquipaDTO(jogador.Id.AsGuid(),jogador.IdentificadorEquipa.IdEquipa,jogador.NomeDivisao.Divisao,jogador.CodigoClube.CodClube,jogador.TipoCategoria.Categoria,jogador.TipoGenero.Genero,jogador.TipoModalidade.Modalidade));
+
+        return listDto;
+        
+    }
 
     public async Task<EquipaDTO> AddAsync(EquipaDTO dto)
     {
         var jogador = new Equipa(dto.IdentificadorEquipa,dto.Divisao, dto.CodigoClube,dto.Categoria,dto.Modalidade,dto.Genero);
 
         await _repo.AddAsync(jogador);
+        
+        
 
         await _unitOfWork.CommitAsync();
 

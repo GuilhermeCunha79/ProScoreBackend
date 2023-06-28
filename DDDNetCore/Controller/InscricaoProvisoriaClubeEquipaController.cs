@@ -16,14 +16,16 @@ public class InscricaoProvisoriaClubeEquipaController : ControllerBase
 {
     private readonly IInscricaoProvisoriaClubeEquipaService _service;
     private readonly IEquipaService _equipaService;
+    private readonly IClubeService _clubeService;
     private readonly DDDSample1DbContext _context;
 
     public InscricaoProvisoriaClubeEquipaController(IInscricaoProvisoriaClubeEquipaService service,
-        IEquipaService service1,DDDSample1DbContext _context1)
+        IEquipaService service1,DDDSample1DbContext _context1,IClubeService _clubeService1)
     {
         _service = service;
         _equipaService = service1;
         _context = _context1;
+        _clubeService = _clubeService1;
     }
 
     // GET: api/Jogadores
@@ -90,6 +92,11 @@ public class InscricaoProvisoriaClubeEquipaController : ControllerBase
             var jogador = await _service.AddAsync(inscricao);
             dtoEquipa.Status = false;
             var equipa = await _equipaService.AddAsync(dtoEquipa);
+            
+            var clube=await _clubeService.GetByCodClube(equipa.CodigoClube.ToString());
+            clube.NrEquipas = _equipaService.GetByCodClubeAsync(equipa.CodigoClube.ToString()).Result
+                .Count;
+            await _clubeService.UpdateByCodClubeAsync(clube);
 
             return (CreatedAtAction(nameof(GetById), new { id = jogador.Id }, jogador),CreatedAtAction(nameof(GetById), new { id = equipa.Id },equipa));
         }

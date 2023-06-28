@@ -7,10 +7,10 @@ public class NrEquipas: IValueObject
 {
     public int NumeroEquipas { get; set; }
 
-    public NrEquipas()
+    public NrEquipas(int nr)
     {
 
-            NumeroEquipas =1;
+            NumeroEquipas =nr;
         
     }
 

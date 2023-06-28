@@ -42,7 +42,7 @@ public class PessoaRepository : BaseRepository<Domain.Pessoa.Pessoa, Identifier>
         var query =
             @"SELECT  [j].[IdentificadorPessoa], [j].[Nome], [j].[DataNascimento],[j].[Telefone],[j].[Email], [j].[ConcelhoResidência], [j].[TipoGenero],[j].[Active],[j].[NrIdentificacao],[j].[NascencaPais],[j].[NacionalidadePais],[j].[Id]
                 FROM [Pessoa] AS [j]
-                WHERE [j].[NrIdentificacao] = @licencaInt and [j].[Active]=1";
+                WHERE [j].[NrIdentificacao] = @licencaInt";
 
 
         return await _context.Pessoas.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))

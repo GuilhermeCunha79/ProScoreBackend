@@ -88,7 +88,7 @@ public class ClubeService : IClubeService
     public async Task<ClubeDTO> AddAsync(ClubeDTO dto)
     {
         var jogador = new Clube(dto.NomeAssociacao, dto.NomeClube, dto.NifClube.ToString(), dto.Morada,
-            dto.TelefoneClube);
+            dto.TelefoneClube,dto.NrEquipas);
 
         await _repo.AddAsync(jogador);
 
@@ -151,11 +151,11 @@ public class ClubeService : IClubeService
             return null;
 
         jogador.ChangeNomeClube(dto.NomeClube);
-        jogador.ChangeMorada(dto.Morada);
-        jogador.ChangeCodigoClube(dto.CodigoClube);
+        jogador.ChangeMorada("-------");
         jogador.ChangeNomeAssociacao(dto.NomeAssociacao);
         jogador.ChangeTelefone(dto.TelefoneClube);
         jogador.ChangeNifClube(dto.NifClube.ToString());
+        jogador.ChangeNrEquipa(dto.NrEquipas);
         await this._unitOfWork.CommitAsync();
 
         return new ClubeDTO(jogador.Id.AsGuid(), jogador.NomeAssociacao.NomeAss, jogador.NomeClube.NomeClub,

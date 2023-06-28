@@ -9,4 +9,6 @@ public interface IProcessoInscricaoRepository : IRepository<ProcessoInscricao, I
     Task<InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador> GetByInfoCodOperacaoAsync(string licenca);
     
     Task<List<ProcessoInscricao>> GetProcessosAssociacaoByNomeAssociacaoAsync(string licenca);
+
+    Task<List<ProcessoInscricao>> GetProcessosPendentesAsync();
 }
