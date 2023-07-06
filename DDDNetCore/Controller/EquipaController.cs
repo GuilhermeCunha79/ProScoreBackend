@@ -14,12 +14,11 @@ public class EquipaController : ControllerBase
 {
     private readonly IEquipaService _service;
     private readonly IClubeService _service_clube;
-    private readonly DDDSample1DbContext _context;
 
-    public EquipaController(IEquipaService service,DDDSample1DbContext _context1,IClubeService _service_clube1)
+
+    public EquipaController(IEquipaService service,IClubeService _service_clube1)
     {
         _service = service;
-        _context = _context1;
         _service_clube = _service_clube1;
     }
 
@@ -75,7 +74,7 @@ public class EquipaController : ControllerBase
             }
         }
 
-        dto.IdentificadorEquipa = _context.ObterNumeroDeEquipas()+1;
+        dto.IdentificadorEquipa = _service.GetAllAsync().Result.Count+1;
         try
         {
             var jogador = await _service.AddAsync(dto);

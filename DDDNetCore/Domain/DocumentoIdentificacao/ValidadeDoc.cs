@@ -28,17 +28,17 @@ public class ValidadeDoc: IValueObject
         return data;
     }
 
-    private int GetDay(string date)
+    public static int GetDay(string date)
     {
         return SharedMethods.onlyNumbers(date.Substring(0 , 2));
     }
    
-    private int GetYear(string date)
+    public static int GetYear(string date)
     {
         return SharedMethods.onlyNumbers(date.Substring(date.Length - 4, 4));
     }
    
-    private int GetMonth(string date)
+    public static int GetMonth(string date)
     {
         return SharedMethods.onlyNumbers(date.Substring(date.Length - 7, 2));
     }

@@ -13,12 +13,10 @@ public class ClubeController : ControllerBase
 {
     private readonly IClubeService _service;
     private readonly IEquipaService _service_equipa;
-    private readonly DDDSample1DbContext _context;
 
-    public ClubeController(IClubeService service, DDDSample1DbContext _context1)
+    public ClubeController(IClubeService service)
     {
         _service = service;
-        _context = _context1;
     }
 
     // GET: api/Jogadores
@@ -87,7 +85,7 @@ public class ClubeController : ControllerBase
             }
         }
 
-        dto.CodigoClube = _context.ObterNumeroDeClubes();
+        dto.CodigoClube = _service.GetAllAsync().Result.Count+1;
         try
         {
             var jogador = await _service.AddAsync(dto);

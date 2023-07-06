@@ -16,11 +16,9 @@ namespace ConsoleApp1.Controller
         private readonly IPessoaService _service_pessoa;
         private readonly DDDSample1DbContext _context;
 
-        public JogadorController(IJogadorService service, DDDSample1DbContext _context1,
-            IPessoaService _service_pessoa1)
+        public JogadorController(IJogadorService service, IPessoaService _service_pessoa1)
         {
             _service = service;
-            _context = _context1;
             _service_pessoa = _service_pessoa1;
         }
 
@@ -51,7 +49,8 @@ namespace ConsoleApp1.Controller
         {
             var jogador = await _service.GetByLicencaJogador(licenca);
             var pessoa = await _service_pessoa.GetByIdPessoa(jogador.IdentificadorPessoa.ToString());
-            var jogador1 = new JogadorVisualizacaoDTO(pessoa.Nome,jogador.Licenca.ToString(),pessoa.NrIdentificacao,pessoa.DataNascimento,pessoa.TipoGenero,
+            var jogador1 = new JogadorVisualizacaoDTO(pessoa.Nome,jogador.Licenca.ToString(),pessoa.NrIdentificacao,
+                pessoa.DataNascimento,pessoa.TipoGenero,
                 pessoa.NacionalidadePais,pessoa.NascencaPais,jogador.EstatutoFpF);
             if (jogador == null)
             {
@@ -59,6 +58,17 @@ namespace ConsoleApp1.Controller
             }
 
             return jogador1;
+        }
+        
+        public async Task<ActionResult<JogadorDTO>> GetByLicencaJog(string licenca)
+        {
+            var jogador = await _service.GetByLicencaJogador(licenca);
+            if (jogador == null)
+            {
+                return NotFound();
+            }
+
+            return jogador;
         }
 
         // POST: api/Jogadores
@@ -70,16 +80,20 @@ namespace ConsoleApp1.Controller
             {
                 foreach (var jogadorDto in list)
                 {
-                    if (jogadorDto.Licenca.Equals(dto.Licenca) |
-                        jogadorDto.IdentificadorPessoa.Equals(dto.IdentificadorPessoa))
+                    if (jogadorDto.Licenca.Equals(dto.Licenca))
                     {
                         return BadRequest(new
                             { Message = "Já existe um 'Jogador' registado com esta 'Licenca'." });
                     }
+                    if (jogadorDto.IdentificadorPessoa.Equals(dto.IdentificadorPessoa))
+                    {
+                        return BadRequest(new
+                            { Message = "Já existe um 'Jogador' registado com este 'Identificador de Pessoa'." });
+                    }
                 }
             }
 
-            dto.Licenca = _context.ObterNumeroDeJogadores();
+            dto.Licenca = _service.GetAllAsync().Result.Count+1;
             try
             {
                 var jogador = await _service.AddAsync(dto);

@@ -17,16 +17,14 @@ public class InscricaoDefinitivaAssociacaoEquipaController : ControllerBase
     private readonly IEquipaService _equipaService;
     private readonly IProcessoInscricaoService _processoInscricaoService;
     private readonly IAssociacaoService _associacaoService;
-    private readonly DDDSample1DbContext _context;
 
     public InscricaoDefinitivaAssociacaoEquipaController(IInscricaoDefinitivaAssociacaoEquipaService service,
-        IEquipaService service1,DDDSample1DbContext _context1,IProcessoInscricaoService _processoInscricaoService1,IAssociacaoService _associacaoService1)
+        IEquipaService service1,IProcessoInscricaoService _processoInscricaoService1,IAssociacaoService _associacaoService1)
     {
         _service = service;
         _equipaService = service1;
         _processoInscricaoService = _processoInscricaoService1;
         _associacaoService = _associacaoService1;
-        _context = _context1;
     }
 
     // GET: api/Jogadores
@@ -83,9 +81,9 @@ public class InscricaoDefinitivaAssociacaoEquipaController : ControllerBase
         }
 
         var associacao = _associacaoService.GetNomeAssociacaoByCodClube(dtoEquipa.CodigoClube.ToString()).Result.NomeAssociacao;
-        dtoEquipa.IdentificadorEquipa = _context.ObterNumeroDeEquipas();
+        dtoEquipa.IdentificadorEquipa = _equipaService.GetAllAsync().Result.Count+1;
         var processo = new ProcessoInscricaoDTO(Guid.NewGuid(),
-            _context.ObterNumeroDeProcessos().ToString(), "APROVADO",
+            _processoInscricaoService.GetAllAsync().Result.Count+1.ToString(), "APROVADO",
             String.Concat(DateTime.Today.ToShortDateString(), " ", DateTime.Today.ToLongTimeString()),
             String.Concat(DateTime.Today.ToShortDateString(), " ", DateTime.Today.ToLongTimeString()),
             "Inscrição de Equipa", new EpocaDesportiva().EpocaDesp);

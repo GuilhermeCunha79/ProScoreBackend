@@ -64,8 +64,8 @@ public class JogadorService:IJogadorService
 
         await _unitOfWork.CommitAsync();
 
-        return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, jogador.IdentificadorPessoa.IdPessoa,
-            jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
+        return new JogadorDTO( jogador.Id.AsGuid(),jogador.Licenca.Lic,jogador.EstatutoFpF.Estatuto, 
+            jogador.IdentificadorPessoa.IdPessoa, jogador.IdentificadorEquipa.IdEquipa, CheckStatus(jogador.Active));
     }
     
     /*public async Task<JogadorDTO> AddAsync1(JogadorDTO dto)

@@ -10,11 +10,9 @@ namespace ConsoleApp1.Controller;
 public class PessoaController : ControllerBase
 {
     private readonly IPessoaService _service;
-    private readonly DDDSample1DbContext _context;
-    public PessoaController(IPessoaService service,DDDSample1DbContext _context1)
+    public PessoaController(IPessoaService service)
     {
         _service = service;
-        _context = _context1;
     }
 
     // GET: api/Equipas
@@ -82,7 +80,7 @@ public class PessoaController : ControllerBase
                 }
             }
         }*/
-        dto.IdentificadorPessoa = _context.ObterNumeroDePessoas();
+        dto.IdentificadorPessoa = _service.GetAllAsync().Result.Count+1;
         try
         {
             var jogador = await _service.AddAsync(dto);

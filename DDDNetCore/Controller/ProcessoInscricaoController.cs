@@ -27,7 +27,7 @@ public class ProcessoInscricaoController : ControllerBase
     private readonly IPessoaService _service_pessoa;
     private readonly IJogadorService _service_jogador;
     private readonly IDocumentosProcessoService _service_doc_proc;
-    private readonly DDDSample1DbContext DDDSample1DbContext;
+
 
     private readonly IProcessoInscricaoRepository _repo;
     private readonly IPessoaRepository _repo_pessoa;
@@ -39,8 +39,8 @@ public class ProcessoInscricaoController : ControllerBase
     public ProcessoInscricaoController(IProcessoInscricaoService service,
         IInscricaoProvisoriaClubeJogadorService _service11, IJogadorRepository _repo_jogador1,
         IPessoaRepository _repo_pessoa1, IDocIdentificacaoRepository _repo_doc1, IProcessoInscricaoRepository _repo1,
-        DDDSample1DbContext context, IDocIdentificacaoService service1, IPessoaService service3,
-        IJogadorService service4,IDocumentosProcessoService _service_doc_proc1,IDocumentosProcessoRepository _repo_doc_proc1)
+     IDocIdentificacaoService service1, IPessoaService service3, IJogadorService service4,
+        IDocumentosProcessoService _service_doc_proc1,IDocumentosProcessoRepository _repo_doc_proc1)
     {
         _service = service;
         _service1 = _service11;
@@ -51,7 +51,6 @@ public class ProcessoInscricaoController : ControllerBase
         _service_doc = service1;
         _service_pessoa = service3;
         _service_jogador = service4;
-        DDDSample1DbContext = context;
         _service_doc_proc = _service_doc_proc1;
         _repo_doc_proc = _repo_doc_proc1;
     }
@@ -92,7 +91,7 @@ public class ProcessoInscricaoController : ControllerBase
     public async Task<ActionResult<ProcessoInscricaoDTO>> Create(ProcessoInscricaoDTO dto)
     {
 
-        dto.CodOperacao = DDDSample1DbContext.ObterNumeroDeProcessos().ToString();
+        dto.CodOperacao = _service.GetAllAsync().Result.Count+1.ToString();
         try
         {
             var jogador = await _service.AddAsync(dto);

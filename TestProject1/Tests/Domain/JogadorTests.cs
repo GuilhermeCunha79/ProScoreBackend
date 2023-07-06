@@ -7,7 +7,7 @@ namespace TestProject1.Tests.Domain;
 
 public class JogadorTests
 {
-   /* [Fact]
+    [Fact]
     public void ValidDelivery()
     {
         string licenca = "2";
@@ -20,11 +20,10 @@ public class JogadorTests
         string idPessoa1= "132";
         string idEquipa1 = "2342";
         string status1 = "Active";
-        var delivery = new Jogador(estatuto, idPessoa,idEquipa);
+        var jogador = new Jogador(estatuto, idPessoa,idEquipa);
 
-       // Assert.True(delivery.GetType() == new Jogador().GetType());
-        //Assert.True(jogador.GetType() == new Jogador().GetType());
+       Assert.True(jogador.GetType() == new Jogador().GetType());
     }
     
-    */
+    
 }

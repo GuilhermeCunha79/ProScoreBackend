@@ -199,10 +199,15 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
     
     private string ConvertTo64(string s)
     {
-        string keyword = "base64,";
-        int startIndex = s.IndexOf(keyword);
-        string result = s.Substring(startIndex + keyword.Length);
-        return result;
+        if (s.Contains("base64"))
+        {
+            string keyword = "base64,";
+            int startIndex = s.IndexOf(keyword);
+            string result = s.Substring(startIndex + keyword.Length);
+            return result;
+        }
+
+        return s;
     }
 
     public Task<ProcessoInscricaoDTO> InactivateAsync(Identifier id)

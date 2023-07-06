@@ -37,16 +37,16 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
     private readonly IJogadorService _service_jogador;
     private readonly INacionalidadeService _service_nacionalidade;
 
+    private readonly DDDSample1DbContext _context;
     // private readonly IDocumentosProcessoService _service_doc_proc;
-    private readonly DDDSample1DbContext DDDSample1DbContext;
+   
 
     private readonly IAssociacaoService _service_associacao;
 
 
     public InscricaoProvisoriaClubeJogadorController(IInscricaoProvisoriaClubeJogadorService service,
-        IProcessoInscricaoService _service11,
-        DDDSample1DbContext context, IDocIdentificacaoService service1, IPessoaService service3,
-        IEquipaService _service_equipa1,
+        IProcessoInscricaoService _service11, IDocIdentificacaoService service1, IPessoaService service3,
+        IEquipaService _service_equipa1,DDDSample1DbContext _context1,
         IJogadorService service4, IClubeService _service_clube1,
         IAssociacaoService _service_associacao1,INacionalidadeService _service_nacionalidade1 /*,IDocumentosProcessoService _service_doc_proc1,
         IDocumentosProcessoRepository _repo_doc_proc1*/)
@@ -56,7 +56,7 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
         _service_doc = service1;
         _service_pessoa = service3;
         _service_jogador = service4;
-        DDDSample1DbContext = context;
+        _context = _context1;
         _service_associacao = _service_associacao1;
         //  _service_doc_proc = _service_doc_proc1;
         // _repo_doc_proc = _repo_doc_proc1;
@@ -107,21 +107,21 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
         Create([FromBody] PessoaVisualizacaoDTO dto)
     {
         var processo = new ProcessoInscricaoDTO(Guid.NewGuid(),
-            DDDSample1DbContext.ObterNumeroDeProcessos().ToString(), "AGUARDAR_APROVACAO_ASSOCIACAO", "-----",
+            _service1.GetAllAsync().Result.Count+1.ToString(), "AGUARDAR_APROVACAO_ASSOCIACAO", "-----",
             DateTime.Today.ToString(), "Primeira Inscrição", new EpocaDesportiva().EpocaDesp);
 
         var docId = new DocIdentificacaoDTO(Guid.NewGuid(), dto.NrIdentificacao, dto.CheckDigit,
             dto.ValidadeDocId,
             dto.Nif, CheckStatus(false));
 
-        var pessoa = new PessoaDTO(Guid.NewGuid(), DDDSample1DbContext.ObterNumeroDePessoas(),
+        var pessoa = new PessoaDTO(Guid.NewGuid(), _service_pessoa.GetAllAsync().Result.Count+1,
             dto.Nome,
             dto.DataNascimento,
             dto.Sexo, dto.Email, docId.NrIdentificacao, dto.PaisNascenca, dto.Nacionalidade, CheckStatus(false),
             dto.Telefone,
             dto.ConcelhoResidencia);
 
-        var jogador1 = new JogadorDTO(Guid.NewGuid(), DDDSample1DbContext.ObterNumeroDeJogadores(), dto.Nacionalidade,
+        var jogador1 = new JogadorDTO(Guid.NewGuid(), _service_jogador.GetAllAsync().Result.Count+1, dto.Nacionalidade,
             pessoa.IdentificadorPessoa,
             _service_equipa.GetByCatModAsync(dto.CodClube, dto.Categoria, dto.Modalidade, pessoa.TipoGenero).Result
                 .IdentificadorEquipa,
@@ -178,6 +178,10 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
         foreach (AnalyzedDocument document in _service1.AnalyseImage(Base64(dto.CaminhoBoletim),
                      modelIdBoletim).Result.Documents)
         {
+           if (document.Confidence < 0.3)
+            {
+                return StatusCode(500, "O boletim de Modelo2 submetido não corresponde a um documento válido. Verifique a qualidade da imagem.");
+            }
             //TIPO PROCESSO
             if (document.Fields["primeiraInscricao"].Content.Trim().Equals(selected))
             {
@@ -262,6 +266,11 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
         foreach (AnalyzeDoc document1 in _service1.AnalyseImage(Base64(dto.CaminhoDocIdentificacao),
                      modelIdDocId).Result.Documents)
         {
+            if (document1.Confidence < 0.3)
+            {
+                return StatusCode(500, "O 'Documento de Identificação' submetido não corresponde a um documento válido. Verifique a qualidade da imagem.");
+            }
+            
             nrId = document1.Fields["nic"].Content;
             nome1 = document1.Fields["primeirosNomes"].Content;
             nome2 = document1.Fields["UltimosNomes"].Content;
@@ -278,10 +287,7 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
            return StatusCode(500, "O boletim de Modelo2 submetido não corresponde a uma 'Primeira Inscrição.");
        }
 
-       if (!_service_clube.GetAllAsync().Result.Any(o => o.CodigoClube.ToString() == codClube))
-       {
-           return StatusCode(500, "O 'Código de Clube' do boletim não coincide com nenhum clube registado.");
-       }
+    
        
            if (nrDocIdBoletim != nrId)
        {
@@ -290,6 +296,11 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
        }
        
        */
+        
+        if (!_service_clube.GetAllAsync().Result.Any(o => o.CodigoClube.ToString() == codClube))
+        {
+            return StatusCode(500, "O 'Código de Clube' do boletim não coincide com nenhum clube registado.");
+        }
        
         if (_service_doc.GetAllAsync().Result.Any(o => o.NrIdentificacao == nrId))
        {
@@ -297,6 +308,14 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
        }
 
 
+        DateTime dataValidade = new DateTime(ValidadeDoc.GetYear(validade), ValidadeDoc.GetMonth(validade),
+            ValidadeDoc.GetDay(validade));
+        
+        if (dataValidade < DateTime.Now)
+        {
+            return StatusCode(500, "O 'Documento de Identificação' submetido encontra-se expirado.");
+        }
+        
 
         try
         {
@@ -304,7 +323,7 @@ public class InscricaoProvisoriaClubeJogadorController : ControllerBase
                 "Número de identificação civil", nrId, new CheckDigit(letrasCheckDocId).CheckDig, 
                 new ValidadeDoc(validade).Data,
                 new EstatutoFpF(nacionalidade).Estatuto, nif, genero, new DataNascimento(dataNascimento).DataNasc,
-                new PaisNascenca(nascencaPais, DDDSample1DbContext.PaisNascenca.ToList()).NomePais.Nome,
+                new PaisNascenca(nascencaPais, _context.PaisNascenca.ToList()).NomePais.Nome,
                 new NacionalidadePais(nacionalidade).NacionalidadePaiss,
                 new ConcelhoResidência().Concelho, telefone, email, nrUtente, codClube,
                 _service_associacao.GetNomeAssociacaoByCodClube(codClube).Result.NomeAssociacao, nomeClube, modalidade, 
