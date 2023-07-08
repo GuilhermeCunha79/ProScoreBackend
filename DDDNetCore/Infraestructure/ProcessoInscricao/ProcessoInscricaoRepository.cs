@@ -33,7 +33,7 @@ public class ProcessoInscricaoRepository :
         return await _context.Processos.FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
             .FirstOrDefaultAsync();
     }
-    
+
 
     public async Task<Domain.InscricaoProvisoriaClubeJogador.InscricaoProvisoriaClubeJogador>
         GetByInfoCodOperacaoAsync(string licenca)
@@ -55,35 +55,24 @@ public class ProcessoInscricaoRepository :
             .FromSqlRaw(query, new SqlParameter("licencaInt", licencaInt))
             .FirstOrDefaultAsync();
     }
-    
-    public async Task<List<Domain.ProcessoInscricao.ProcessoInscricao>>
-        GetProcessosAssociacaoByNomeAssociacaoAsync(string licenca)
+
+    public async Task<List<Domain.ProcessoInscricao.ProcessoInscricao>> GetProcessosAssociacaoByNomeAssociacaoAsync(
+        string nomeAss)
     {
-
-
-        var query =
-            @"SELECT * FROM ProcessoInscricao
-                    WHERE codOperacao IN (
-                        SELECT codOperacao
-                        FROM InscricaoProvisoriaClubeJogador
-                        WHERE CodigoClube = (
-                            SELECT CodigoClube
-                            FROM Clube
-                            WHERE NomeAssociacao = @licencaInt
-                        )
-                    );";
-
+        var query = @"SELECT pi.* FROM ProcessoInscricao pi
+                            INNER JOIN InscricaoProvisoriaClubeJogador ipcj ON pi.codOperacao = ipcj.codOperacao
+                            INNER JOIN Clube c ON ipcj.CodigoClube = c.CodigoClube
+                      WHERE c.NomeAssociacao = @nomeAss AND pi.Estado = 'AGUARDAR_APROVACAO_ASSOCIACAO';
+        ";
 
         return await _context.Processos
-            .FromSqlRaw(query, new SqlParameter("licencaInt", licenca))
+            .FromSqlRaw(query, new SqlParameter("nomeAss", nomeAss))
             .ToListAsync();
     }
-    
+
     public async Task<List<Domain.ProcessoInscricao.ProcessoInscricao>>
         GetProcessosPendentesAsync()
     {
-
-
         var query =
             @"SELECT [j].[CodOperacao],  [j].[TipoProcesso], [j].[Estado],[j].[EpocaDesportiva],[j].[DataRegisto],[j].[DataSubscricao],[j].[Id]
                 FROM [ProcessoInscricao] AS [j]

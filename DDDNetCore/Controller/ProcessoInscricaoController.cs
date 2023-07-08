@@ -55,10 +55,11 @@ public class ProcessoInscricaoController : ControllerBase
         _repo_doc_proc = _repo_doc_proc1;
     }
     
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProcessoJogadorVisualizacaoDTO>>> GetAllProcessos()
-    {
-        return await _service.GetAllAsync1();
+    [HttpGet("ByAssociacao/{nomeAssociacao}")]
+    
+    public async Task<ActionResult<IEnumerable<ProcessoJogadorVisualizacaoDTO>>> 
+        GetProcessosPendentesByNomeAssociacaoAsync(string nomeAssociacao) {
+        return await _service.GetProcessosPendentesByNomeAssociacaoAsync(nomeAssociacao);
     }
 
     [HttpGet("{id}")]
@@ -73,21 +74,9 @@ public class ProcessoInscricaoController : ControllerBase
 
         return jogador;
     }
-    
-    [HttpGet("ByAssociacao/{nomeAssociacao}")]
-    public async Task<ActionResult<IEnumerable<ProcessoInscricaoDTO>>>  GetProcessosAssociacaoByNomeAssociacaoAsync(string nomeAssociacao)
-    {
-        var jogador = await _service.GetProcessosAssociacaoByNomeAssociacaoAsync(nomeAssociacao);
 
-        if (jogador == null)
-        {
-            return NotFound();
-        }
 
-        return jogador;
-    }
 
-    
     public async Task<ActionResult<ProcessoInscricaoDTO>> Create(ProcessoInscricaoDTO dto)
     {
 

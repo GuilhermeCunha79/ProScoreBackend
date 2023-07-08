@@ -49,9 +49,9 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
         return listDto;
     }
 
-    public async Task<List<ProcessoJogadorVisualizacaoDTO>> GetAllAsync1()
+    public async Task<List<ProcessoJogadorVisualizacaoDTO>> GetProcessosPendentesByNomeAssociacaoAsync(string nomeAss)
     {
-        var list = await _repo.GetProcessosPendentesAsync();
+        var list = await _repo.GetProcessosAssociacaoByNomeAssociacaoAsync(nomeAss);
 
         List<ProcessoInscricaoDTO> listDto = list.ConvertAll(jogador =>
             new ProcessoInscricaoDTO(jogador.Id.AsGuid(), jogador.CodOperacao.CodOpe.ToString(), jogador.Estado.Status,
@@ -59,31 +59,30 @@ public class ProcessoInscricaoService : IProcessoInscricaoService
                 jogador.EpocaDesportiva.EpocaDesp));
 
         List<ProcessoJogadorVisualizacaoDTO> listFinal= new List<ProcessoJogadorVisualizacaoDTO>();
+        
         foreach (ProcessoInscricaoDTO dto in listDto)
         {
             if (!dto.TipoProcesso.Contains("Equipa"))
             {
                 InscricaoProvisoriaClubeJogadorDTO clubeJogadorDto =
-                    InscricaoProvisoriaClubeJogadorMapper.toDto(_repo_clube_jogador.GetByCodOperacao(dto.CodOperacao)
+                    InscricaoProvisoriaClubeJogadorMapper.toDto(_repo_clube_jogador.GetByCodOperacao(dto.CodOperacao) 
                         .Result);
                 JogadorDTO jogadorDto =
                     JogadorMapper.toDto(_repo_jogador.GetByLicencaAsync(clubeJogadorDto.Licenca.ToString()).Result);
                 PessoaDTO pessoaDto =
                     PessoaMapper.toDto(
                         _repo_pessoa.GetByIdPessoaAsync(jogadorDto.IdentificadorPessoa.ToString()).Result);
-                ClubeDTO clubeDto =
-                    ClubeMapper.toDto(_repo_clube.GetByCodClubeAsync(clubeJogadorDto.CodigoClube.ToString()).Result);
+                ClubeDTO clubeDto = ClubeMapper.toDto(_repo_clube.GetByCodClubeAsync(clubeJogadorDto.CodigoClube
+                        .ToString()).Result);
                 EquipaDTO equipaDto = EquipaMapper.toDto(_repo_equipa
                     .GetByIdentificadorEquipaAsync(jogadorDto.IdentificadorEquipa.ToString()).Result);
 
                 listFinal.Add(new ProcessoJogadorVisualizacaoDTO(dto.CodOperacao, pessoaDto.Nome,
                     jogadorDto.Licenca.ToString(), dto.TipoProcesso, clubeDto.NomeClube,
-                    equipaDto.Modalidade, equipaDto.Categoria, equipaDto.Divisao, "Amador", dto.DataSubscricao,
-                    dto.DataRegisto, dto.Estado));
+                    equipaDto.Modalidade, equipaDto.Categoria, equipaDto.Divisao, "Amador", 
+                    dto.DataSubscricao, dto.DataRegisto, dto.Estado));
             }
         }
-
-       
         return listFinal;
     }
 

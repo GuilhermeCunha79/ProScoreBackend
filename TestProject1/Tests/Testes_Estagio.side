@@ -1,0 +1,659 @@
+{
+  "id": "c932c1de-c923-4181-ad5c-a78e2455d118",
+  "version": "2.0",
+  "name": "Testes_Estágio",
+  "url": "http://localhost:4200",
+  "tests": [{
+    "id": "c2cd3e86-776e-46e2-a13c-cc1d807d8e6c",
+    "name": "Login",
+    "commands": [{
+      "id": "def5fe2b-00f7-4537-a33c-b5a9f44fff07",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7fd501d6-f7dc-4fda-ba72-2edf0f03293d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "43f9a2a1-6550-4262-a816-4b05ea54ed6f",
+      "comment": "",
+      "command": "click",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5938bf1d-a0b9-450f-9035-8bf87a01e980",
+      "comment": "",
+      "command": "type",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "sportclubeolivas@fpf.pt"
+    }, {
+      "id": "4793382c-e71a-4e43-856f-f02721df1b69",
+      "comment": "",
+      "command": "click",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "93087bd9-3900-45f7-8be8-7d450d77376d",
+      "comment": "",
+      "command": "type",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "0039a569-257d-4af5-bbac-b22051fbb299",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ui-button-text",
+      "targets": [
+        ["css=.ui-button-text", "css:finder"],
+        ["xpath=//div[@id='loginForm']/div/div[5]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "8947c8cb-ec67-4019-8fcb-a379ea5b4035",
+    "name": "Registar Jogador",
+    "commands": [{
+      "id": "6f97683b-1e53-4d4d-a0bb-31012123d24c",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "014ac304-2ba3-4493-a2fe-d782fb889ca0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a12561d-9f93-477a-b9ef-d368376c9554",
+      "comment": "",
+      "command": "click",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4e6e0245-b40e-43c5-b678-ac3711f1d930",
+      "comment": "",
+      "command": "type",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "sportclubeolivas@fpf.pt"
+    }, {
+      "id": "68d793fd-1534-4283-ad45-190a6c8914ef",
+      "comment": "",
+      "command": "click",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "71ef323e-f508-4af5-a43b-6a4cfb2a3cf2",
+      "comment": "",
+      "command": "type",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "78bd86b8-b289-415c-b636-a298c3c1cb76",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ui-button-text",
+      "targets": [
+        ["css=.ui-button-text", "css:finder"],
+        ["xpath=//div[@id='loginForm']/div/div[5]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4acf712-20d9-4b13-bf8e-c94bb7b0e939",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Inscrições jogadores",
+      "targets": [
+        ["linkText=Inscrições jogadores", "linkText"],
+        ["css=.module-player-registration", "css:finder"],
+        ["xpath=//a[contains(text(),'Inscrições jogadores')]", "xpath:link"],
+        ["xpath=//div[@id='moduleMenuContainer']/div/div/div[2]/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/inscricaoProvisoriaClubeJogador')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Inscrições jogadores')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2de8b054-6e62-4395-a6a8-9361740288b3",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) .bx",
+      "targets": [
+        ["css=tr:nth-child(1) .bx", "css:finder"],
+        ["xpath=//table[@id='processGrid']/tbody/tr/td[4]/label/i", "xpath:idRelative"],
+        ["xpath=//i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b13f88dd-f2ff-4c27-aa9c-23036c901e60",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) .bx",
+      "targets": [
+        ["css=tr:nth-child(2) .bx", "css:finder"],
+        ["xpath=//table[@id='processGrid']/tbody/tr[2]/td[4]/label/i", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/label/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a19168d1-2511-4d41-bcad-aef8e06b33cf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.button",
+      "targets": [
+        ["css=.button", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='wizardButtons1']/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submeter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "821b4e52-9e19-4257-8b77-db21d0607998",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnNext",
+      "targets": [
+        ["id=btnNext", "id"],
+        ["name=btnNext", "name"],
+        ["css=#btnNext", "css:finder"],
+        ["xpath=//button[@id='btnNext']", "xpath:attributes"],
+        ["xpath=//div[@id='wizardButtons']/button[3]", "xpath:idRelative"],
+        ["xpath=//button[3]", "xpath:position"],
+        ["xpath=//button[contains(.,'Próximo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c243ad5-4e3f-44d4-ae5c-a4984a64ce90",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1049c9e7-e99f-41e0-be28-1aff83c54c00",
+      "comment": "",
+      "command": "click",
+      "target": "css=#btnNext > .ui-button-text",
+      "targets": [
+        ["css=#btnNext > .ui-button-text", "css:finder"],
+        ["xpath=//button[@id='btnNext']/span", "xpath:idRelative"],
+        ["xpath=//button[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Próximo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "abec3b84-ab5e-4cab-a5d1-237e31629ee3",
+      "comment": "",
+      "command": "click",
+      "target": "css=#btnNext > .ui-button-text",
+      "targets": [
+        ["css=#btnNext > .ui-button-text", "css:finder"],
+        ["xpath=//button[@id='btnNext']/span", "xpath:idRelative"],
+        ["xpath=//button[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Próximo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab70386a-823b-4aeb-a92d-dc6bfdcfd451",
+      "comment": "",
+      "command": "click",
+      "target": "css=#btnNext > .ui-button-text",
+      "targets": [
+        ["css=#btnNext > .ui-button-text", "css:finder"],
+        ["xpath=//button[@id='btnNext']/span", "xpath:idRelative"],
+        ["xpath=//button[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Submeter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4bcf50cb-1d4e-4fe9-802e-05c7e4923e38",
+      "comment": "",
+      "command": "click",
+      "target": "css=#btnNext > .ui-button-text",
+      "targets": [
+        ["css=#btnNext > .ui-button-text", "css:finder"],
+        ["xpath=//button[@id='btnNext']/span", "xpath:idRelative"],
+        ["xpath=//button[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Submeter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "61bd93ff-3752-41db-aa3d-c6647709e1e6",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "ad2be541-0416-4ffc-9604-7e68b201cf30",
+    "name": "Ver Processos e aprovar",
+    "commands": [{
+      "id": "6b0126a6-61d4-4454-bfc1-d5ff1d5f99be",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "65267c8e-0088-4629-9880-a45e1ad0db18",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55e7a8ac-690b-4b9a-9ee4-8a12b12b52f2",
+      "comment": "",
+      "command": "click",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9929d681-036f-4605-b5b1-837347ab5ce4",
+      "comment": "",
+      "command": "type",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "sportclubeolivas@fpf.pt"
+    }, {
+      "id": "de12ac54-74bc-4a63-af40-7fc94082323e",
+      "comment": "",
+      "command": "click",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df4bb69f-4a2a-4ca9-94b7-1f1d96c29432",
+      "comment": "",
+      "command": "type",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "12230bd5-0072-40a2-862c-ac9a742f3cdc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ui-button-text",
+      "targets": [
+        ["css=.ui-button-text", "css:finder"],
+        ["xpath=//div[@id='loginForm']/div/div[5]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "357d4b60-c2a3-411d-a61b-516e739f4015",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Inscrições jogadores",
+      "targets": [
+        ["linkText=Inscrições jogadores", "linkText"],
+        ["css=.module-player-registration", "css:finder"],
+        ["xpath=//a[contains(text(),'Inscrições jogadores')]", "xpath:link"],
+        ["xpath=//div[@id='moduleMenuContainer']/div/div/div[2]/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/inscricaoProvisoriaClubeJogador')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Inscrições jogadores')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad632231-61a6-44a6-88fd-05dc0573c4dd",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Processos",
+      "targets": [
+        ["linkText=Processos", "linkText"],
+        ["css=.vertical-menu:nth-child(5) > .menu-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Processos')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/processoInscricao')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Processos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e92aabc-9743-4459-99a8-b9337e62d972",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnSearc1h",
+      "targets": [
+        ["id=btnSearc1h", "id"],
+        ["name=btnSearch", "name"],
+        ["css=tr:nth-child(1) #btnSearc1h", "css:finder"],
+        ["xpath=//button[@id='btnSearc1h']", "xpath:attributes"],
+        ["xpath=//table[@id='processGrid']/tbody/tr/td[13]/button", "xpath:idRelative"],
+        ["xpath=//td[13]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b27c9345-75f2-45cb-a313-163802acb1e3",
+      "comment": "",
+      "command": "click",
+      "target": "css=#btnNext2 > .ui-button-text",
+      "targets": [
+        ["css=#btnNext2 > .ui-button-text", "css:finder"],
+        ["xpath=//button[@id='btnNext2']/span", "xpath:idRelative"],
+        ["xpath=//button[3]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Aprovar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f171230-16b9-476a-88c1-f74311107d9d",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnNext2",
+      "targets": [
+        ["id=btnNext2", "id"],
+        ["css=#btnNext2", "css:finder"],
+        ["xpath=//button[@id='btnNext2']", "xpath:attributes"],
+        ["xpath=//div[@id='wizardButtons']/button[3]", "xpath:idRelative"],
+        ["xpath=//button[3]", "xpath:position"],
+        ["xpath=//button[contains(.,'Aprovar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6f09ec6-287e-42d5-bd9d-6404c6c95a6e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "3b590fca-21c1-4391-8e11-d268ff154a67",
+    "name": "Ver informação de jogador",
+    "commands": [{
+      "id": "bae42712-79b0-4a15-8324-61e3fe64be2f",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ced3935f-c298-41ec-9b4b-3b70d7d6d82e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fbc0b99d-ac93-4082-aaec-5d902e2d4da3",
+      "comment": "",
+      "command": "click",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e09063f-bca1-4377-b88a-94dc6e4bf158",
+      "comment": "",
+      "command": "type",
+      "target": "id=Username_Txt",
+      "targets": [
+        ["id=Username_Txt", "id"],
+        ["name=Username.Txt", "name"],
+        ["css=#Username_Txt", "css:finder"],
+        ["xpath=//input[@id='Username_Txt']", "xpath:attributes"],
+        ["xpath=//div[@id='Username_container']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "sportclubeolivas@fpf.pt"
+    }, {
+      "id": "3017b275-b49b-49e1-84a9-08101a51999b",
+      "comment": "",
+      "command": "click",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bff3f7c2-0225-45ac-84fa-10c61f26ec3e",
+      "comment": "",
+      "command": "type",
+      "target": "id=Password",
+      "targets": [
+        ["id=Password", "id"],
+        ["name=Password", "name"],
+        ["css=#Password", "css:finder"],
+        ["xpath=//input[@id='Password']", "xpath:attributes"],
+        ["xpath=//div[@id='loginForm']/div/div[4]/div/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "9f40708d-6de7-4046-80a9-68f2db881f53",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ui-button-text",
+      "targets": [
+        ["css=.ui-button-text", "css:finder"],
+        ["xpath=//div[@id='loginForm']/div/div[5]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7cf58fc1-1d9f-4fe4-a50f-34e7895e4433",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Inscrições jogadores",
+      "targets": [
+        ["linkText=Inscrições jogadores", "linkText"],
+        ["css=.module-player-registration", "css:finder"],
+        ["xpath=//a[contains(text(),'Inscrições jogadores')]", "xpath:link"],
+        ["xpath=//div[@id='moduleMenuContainer']/div/div/div[2]/div[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/inscricaoProvisoriaClubeJogador')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Inscrições jogadores')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3fab6e5d-4976-4925-afa5-db26dbd66a52",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Jogadores",
+      "targets": [
+        ["linkText=Jogadores", "linkText"],
+        ["css=.vertical-menu:nth-child(4) > .menu-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Jogadores')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/consultarJogador')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Jogadores')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f5d0ae0-4be0-4dbc-909e-7309feda44c9",
+      "comment": "",
+      "command": "click",
+      "target": "css=select",
+      "targets": [
+        ["css=select", "css:finder"],
+        ["xpath=//div[@id='PlayerCurrentInfo']/div/div/div/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "617c0e1c-1bf7-44e7-abd8-76b1035e8b57",
+      "comment": "",
+      "command": "select",
+      "target": "css=select",
+      "targets": [],
+      "value": "label=Licenca"
+    }, {
+      "id": "900d0ea2-aa81-4dae-84bd-ee3231270172",
+      "comment": "",
+      "command": "click",
+      "target": "id=nrIdentificacao",
+      "targets": [
+        ["id=nrIdentificacao", "id"],
+        ["name=nrIdentificacao", "name"],
+        ["css=#nrIdentificacao", "css:finder"],
+        ["xpath=//input[@id='nrIdentificacao']", "xpath:attributes"],
+        ["xpath=//div[@id='PlayerCurrentInfo']/div/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ec840928-6e01-4f85-b221-3ab94f740fab",
+      "comment": "",
+      "command": "type",
+      "target": "id=nrIdentificacao",
+      "targets": [
+        ["id=nrIdentificacao", "id"],
+        ["name=nrIdentificacao", "name"],
+        ["css=#nrIdentificacao", "css:finder"],
+        ["xpath=//input[@id='nrIdentificacao']", "xpath:attributes"],
+        ["xpath=//div[@id='PlayerCurrentInfo']/div/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "424079df-e0d2-4698-84a7-91fea55b50ae",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='PlayerCurrentInfo']/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Submeter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad0f9a41-7cc2-413f-8190-0d9ba1d0f335",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "ab982963-761e-45f8-ad44-67367563232d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c2cd3e86-776e-46e2-a13c-cc1d807d8e6c"]
+  }],
+  "urls": ["http://localhost:4200/"],
+  "plugins": []
+}

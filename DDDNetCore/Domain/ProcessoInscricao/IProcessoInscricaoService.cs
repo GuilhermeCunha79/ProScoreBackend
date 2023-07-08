@@ -8,7 +8,7 @@ public interface IProcessoInscricaoService
 {
 
     Task<List<ProcessoInscricaoDTO>> GetAllAsync();
-    Task<List<ProcessoJogadorVisualizacaoDTO>> GetAllAsync1();
+    Task<List<ProcessoJogadorVisualizacaoDTO>> GetProcessosPendentesByNomeAssociacaoAsync(string licenca);
     Task<ProcessoInscricaoDTO> GetByIdAsync(Identifier id);
     Task<ProcessoInscricaoDTO> GetByCodOperacao(string licenca);
     
