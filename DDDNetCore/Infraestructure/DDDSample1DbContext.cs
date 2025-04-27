@@ -82,8 +82,7 @@ public class DDDSample1DbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            "Server=192.168.1.72\\FPFSCOREDEV;Database=EstagioGuilherme;User Id=ads;Password=ads;TrustServerCertificate=True;");
+        optionsBuilder.UseSqlServer();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
